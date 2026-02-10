@@ -1,5 +1,13 @@
 import 'package:dart_tefip/src/core/base/tefip_client_base.dart';
+import 'package:dart_tefip/src/instance/ask/tef_ip_ask.dart';
 import 'package:dart_tefip/src/instance/headers/tef_ip_headers_builder.dart';
+import 'package:dart_tefip/src/instance/info/tef_ip_info.dart';
+import 'package:dart_tefip/src/instance/print/tef_ip_print_image.dart';
+import 'package:dart_tefip/src/instance/print/tef_ip_print_text.dart';
+import 'package:dart_tefip/src/instance/print/tef_ip_print_xml.dart';
+import 'package:dart_tefip/src/instance/reversal/tef_ip_reversal.dart';
+import 'package:dart_tefip/src/instance/status/tef_ip_status.dart';
+import 'package:dart_tefip/src/instance/transaction/tef_ip_transaction.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -25,4 +33,20 @@ final class TefIP extends TefIPClientBase {
   static set password(String password) {
     TefIPHeadersBuilder.password = password;
   }
+
+  TefIPAsk get ask => TefIPAsk();
+
+  TefIPInfo get info => TefIPInfo();
+
+  TefIpPrintImage get printImage => TefIpPrintImage();
+
+  TefIpPrintText get printText => TefIpPrintText();
+
+  TefIpPrintXml get printXml => TefIpPrintXml();
+
+  TefIPReversal get reversal => TefIPReversal();
+
+  TefIPStatus get status => TefIPStatus();
+
+  TefIPTransaction get traTefIPTransaction => TefIPTransaction();
 }

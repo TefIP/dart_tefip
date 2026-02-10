@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 @protected
-interface class TefIpReversal implements EndpointParamInterface {
+interface class TefIPReversal implements EndpointParamInterface {
   @override
   String Function(String?) get endpoint => TefIPEndpoints.reversal;
 }
