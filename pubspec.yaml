@@ -1,0 +1,23 @@
+name: dart_tefip
+description: "Dart SDK for TefIP API"
+version: 1.0.0
+homepage: https://www.tefip.com.br
+repository: https://github.com/DJSYSTEMWEB/dart_tefip
+issue_tracker: https://github.com/DJSYSTEMWEB/dart_tefip/issues
+
+
+environment:
+  sdk: ^3.9.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  fetch_client: ^1.2.0
+  flutter:
+    sdk: flutter
+  http: ^1.6.0
+  meta: ^1.17.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
