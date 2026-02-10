@@ -16,8 +16,14 @@ dependencies:
     sdk: flutter
   http: ^1.6.0
   meta: ^1.17.0
+  freezed: ^3.2.3
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  build_runner: ^2.7.2
+  json_serializable: ^6.11.1
+

@@ -7,4 +7,6 @@ import 'package:meta/meta.dart';
 interface class TefIPInfo implements EndpointInterface {
   @override
   String get endpoint => TefIPEndpoints.info;
+
+  
 }
