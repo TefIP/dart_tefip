@@ -1,5 +1,4 @@
 import 'package:dart_tefip/src/core/base/tefip_client_base.dart';
-import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/instance/ask/tef_ip_ask.dart';
 import 'package:dart_tefip/src/core/builders/headers/tef_ip_headers_builder.dart';
 import 'package:dart_tefip/src/instance/configs/tefip_configs.dart';

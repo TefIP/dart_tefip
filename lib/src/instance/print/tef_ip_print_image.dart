@@ -1,10 +1,8 @@
 import 'dart:typed_data';
-
 import 'package:dart_tefip/dart_tefip.dart';
 import 'package:dart_tefip/src/core/base/interfaces/endpoint_interface.dart';
 import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/core/constants/tef_ip_endpoints.dart';
-import 'package:dart_tefip/src/core/models/success_response/success_response_model.dart';
 import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
