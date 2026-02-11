@@ -59,6 +59,50 @@ abstract class TefIPNetworkingClient {
     return onSuccess(decoded);
   }
 
+  static Future<List<T>> getList<T>({
+    required String url,
+    bool returnRawResponse = false,
+    List<T> Function(List<dynamic> json)? onSuccess,
+    Map<String, String>? headers,
+    http.Client? client,
+    Duration? timeout,
+  }) async {
+    client ??= _streamingHttpClient();
+
+    final uri = Uri.parse(url);
+
+    final response = await client.get(uri, headers: headers);
+
+    if (returnRawResponse) {
+      return response.body as List<T>;
+    }
+
+    final body = utf8.decode(response.bodyBytes);
+    final decoded = jsonDecode(body);
+
+    if (response.statusCode < 200 || response.statusCode >= 300) {
+      throw TefIPRequestException(
+        message: decoded is Map && decoded['message'] != null
+            ? decoded['message'].toString()
+            : 'Request failed',
+        statusCode: response.statusCode,
+        rawBody: body,
+      );
+    }
+
+    if (decoded is! List) {
+      throw const FormatException('Response is not a JSON array');
+    }
+
+    if (onSuccess == null) {
+      throw ArgumentError(
+        'onSuccess is required when returnRawResponse = false',
+      );
+    }
+
+    return onSuccess(decoded);
+  }
+
   static Future<T> post<T>({
     required String url,
     Object? body,

@@ -10,9 +10,9 @@ _TransactionRequestModel _$TransactionRequestModelFromJson(
   Map<String, dynamic> json,
 ) => _TransactionRequestModel(
   referenceId: json['referenceId'] as String? ?? null,
-  type:
-      $enumDecodeNullable(_$TefIPTransactionTypeEnumMap, json['type']) ??
-      TefIPTransactionType.unknown,
+  type: json['type'] == null
+      ? TefIPTransactionType.unknown
+      : const TefIPTransactionTypeConverter().fromJson(json['type'] as String),
   amount: (json['amount'] as num?)?.toDouble() ?? 0,
   installments: (json['installments'] as num?)?.toInt() ?? 1,
   installmentType:
@@ -21,25 +21,18 @@ _TransactionRequestModel _$TransactionRequestModelFromJson(
         json['installmentType'],
       ) ??
       TefIPInstallmentType.single,
-  details: json['details'] as Map<String, dynamic>?,
+  details: const TefIPDetailsConverter().fromJson(json['details']),
 );
 
 Map<String, dynamic> _$TransactionRequestModelToJson(
   _TransactionRequestModel instance,
 ) => <String, dynamic>{
   'referenceId': instance.referenceId,
-  'type': _$TefIPTransactionTypeEnumMap[instance.type]!,
+  'type': const TefIPTransactionTypeConverter().toJson(instance.type),
   'amount': instance.amount,
   'installments': instance.installments,
   'installmentType': _$TefIPInstallmentTypeEnumMap[instance.installmentType]!,
-  'details': instance.details,
-};
-
-const _$TefIPTransactionTypeEnumMap = {
-  TefIPTransactionType.credit: 'CC',
-  TefIPTransactionType.debit: 'CD',
-  TefIPTransactionType.pix: 'PX',
-  TefIPTransactionType.unknown: 'XX',
+  'details': const TefIPDetailsConverter().toJson(instance.details),
 };
 
 const _$TefIPInstallmentTypeEnumMap = {

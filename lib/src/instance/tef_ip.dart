@@ -1,6 +1,6 @@
 import 'package:dart_tefip/src/core/base/tefip_client_base.dart';
 import 'package:dart_tefip/src/instance/ask/tef_ip_ask.dart';
-import 'package:dart_tefip/src/instance/headers/tef_ip_headers_builder.dart';
+import 'package:dart_tefip/src/core/builders/headers/tef_ip_headers_builder.dart';
 import 'package:dart_tefip/src/instance/info/tef_ip_info.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_image.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_text.dart';
@@ -48,5 +48,5 @@ final class TefIP extends TefIPClientBase {
 
   TefIPStatus get status => TefIPStatus();
 
-  TefIPTransaction get traTefIPTransaction => TefIPTransaction();
+  TefIPTransaction get transaction => TefIPTransaction();
 }

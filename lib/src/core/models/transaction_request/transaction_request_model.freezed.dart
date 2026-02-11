@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransactionRequestModel {
 
- String? get referenceId; TefIPTransactionType get type; double get amount; int get installments; TefIPInstallmentType get installmentType; Map<String, dynamic>? get details;
+ String? get referenceId;@TefIPTransactionTypeConverter() TefIPTransactionType get type; double get amount; int get installments; TefIPInstallmentType get installmentType;@TefIPDetailsConverter() Map<String, dynamic>? get details;
 /// Create a copy of TransactionRequestModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $TransactionRequestModelCopyWith<$Res>  {
   factory $TransactionRequestModelCopyWith(TransactionRequestModel value, $Res Function(TransactionRequestModel) _then) = _$TransactionRequestModelCopyWithImpl;
 @useResult
 $Res call({
- String? referenceId, TefIPTransactionType type, double amount, int installments, TefIPInstallmentType installmentType, Map<String, dynamic>? details
+ String? referenceId,@TefIPTransactionTypeConverter() TefIPTransactionType type, double amount, int installments, TefIPInstallmentType installmentType,@TefIPDetailsConverter() Map<String, dynamic>? details
 });
 
 
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? referenceId,  TefIPTransactionType type,  double amount,  int installments,  TefIPInstallmentType installmentType,  Map<String, dynamic>? details)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? referenceId, @TefIPTransactionTypeConverter()  TefIPTransactionType type,  double amount,  int installments,  TefIPInstallmentType installmentType, @TefIPDetailsConverter()  Map<String, dynamic>? details)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransactionRequestModel() when $default != null:
 return $default(_that.referenceId,_that.type,_that.amount,_that.installments,_that.installmentType,_that.details);case _:
@@ -179,7 +179,7 @@ return $default(_that.referenceId,_that.type,_that.amount,_that.installments,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? referenceId,  TefIPTransactionType type,  double amount,  int installments,  TefIPInstallmentType installmentType,  Map<String, dynamic>? details)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? referenceId, @TefIPTransactionTypeConverter()  TefIPTransactionType type,  double amount,  int installments,  TefIPInstallmentType installmentType, @TefIPDetailsConverter()  Map<String, dynamic>? details)  $default,) {final _that = this;
 switch (_that) {
 case _TransactionRequestModel():
 return $default(_that.referenceId,_that.type,_that.amount,_that.installments,_that.installmentType,_that.details);case _:
@@ -199,7 +199,7 @@ return $default(_that.referenceId,_that.type,_that.amount,_that.installments,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? referenceId,  TefIPTransactionType type,  double amount,  int installments,  TefIPInstallmentType installmentType,  Map<String, dynamic>? details)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? referenceId, @TefIPTransactionTypeConverter()  TefIPTransactionType type,  double amount,  int installments,  TefIPInstallmentType installmentType, @TefIPDetailsConverter()  Map<String, dynamic>? details)?  $default,) {final _that = this;
 switch (_that) {
 case _TransactionRequestModel() when $default != null:
 return $default(_that.referenceId,_that.type,_that.amount,_that.installments,_that.installmentType,_that.details);case _:
@@ -214,16 +214,16 @@ return $default(_that.referenceId,_that.type,_that.amount,_that.installments,_th
 @JsonSerializable()
 
 class _TransactionRequestModel implements TransactionRequestModel {
-  const _TransactionRequestModel({this.referenceId = null, this.type = TefIPTransactionType.unknown, this.amount = 0, this.installments = 1, this.installmentType = TefIPInstallmentType.single, final  Map<String, dynamic>? details}): _details = details;
+  const _TransactionRequestModel({this.referenceId = null, @TefIPTransactionTypeConverter() this.type = TefIPTransactionType.unknown, this.amount = 0, this.installments = 1, this.installmentType = TefIPInstallmentType.single, @TefIPDetailsConverter() final  Map<String, dynamic>? details}): _details = details;
   factory _TransactionRequestModel.fromJson(Map<String, dynamic> json) => _$TransactionRequestModelFromJson(json);
 
 @override@JsonKey() final  String? referenceId;
-@override@JsonKey() final  TefIPTransactionType type;
+@override@JsonKey()@TefIPTransactionTypeConverter() final  TefIPTransactionType type;
 @override@JsonKey() final  double amount;
 @override@JsonKey() final  int installments;
 @override@JsonKey() final  TefIPInstallmentType installmentType;
  final  Map<String, dynamic>? _details;
-@override Map<String, dynamic>? get details {
+@override@TefIPDetailsConverter() Map<String, dynamic>? get details {
   final value = _details;
   if (value == null) return null;
   if (_details is EqualUnmodifiableMapView) return _details;
@@ -265,7 +265,7 @@ abstract mixin class _$TransactionRequestModelCopyWith<$Res> implements $Transac
   factory _$TransactionRequestModelCopyWith(_TransactionRequestModel value, $Res Function(_TransactionRequestModel) _then) = __$TransactionRequestModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? referenceId, TefIPTransactionType type, double amount, int installments, TefIPInstallmentType installmentType, Map<String, dynamic>? details
+ String? referenceId,@TefIPTransactionTypeConverter() TefIPTransactionType type, double amount, int installments, TefIPInstallmentType installmentType,@TefIPDetailsConverter() Map<String, dynamic>? details
 });
 
 
