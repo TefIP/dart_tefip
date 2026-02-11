@@ -5,7 +5,7 @@ export 'question_option/question_option_model.dart';
 export 'question_request/question_request_model.dart';
 export 'question_response/question_response_model.dart';
 export 'status/status_model.dart';
+export 'success_response/success_response_model.dart';
 export 'transaction_model/transaction_model.dart';
 export 'transaction_request/transaction_request_model.dart';
 export 'transaction_response/transaction_response_model.dart';
-

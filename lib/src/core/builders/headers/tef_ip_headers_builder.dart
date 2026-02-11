@@ -24,13 +24,17 @@ abstract class TefIPHeadersBuilder {
   static String get password => _password ?? '';
 
   @internal
-  static Map<String, String> build() {
+  static Map<String, String> build({Map<String, dynamic>? additionalHeader}) {
     Map<String, String> headers = <String, String>{
       'Content-Type': 'application/json',
       'Authorization': 'Basic $username:$password',
     };
 
-    headers = {...headers, ..._additionalHeadersToRequests};
+    headers = {
+      ...headers,
+      ..._additionalHeadersToRequests,
+      ...?additionalHeader,
+    };
 
     return headers;
   }

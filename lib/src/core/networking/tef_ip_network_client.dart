@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dart_tefip/src/core/builders/headers/tef_ip_headers_builder.dart';
 import 'package:dart_tefip/src/core/exceptions/tef_ip_request_exception.dart';
 import 'package:meta/meta.dart';
 
@@ -24,6 +25,7 @@ abstract class TefIPNetworkingClient {
     Duration? timeout,
   }) async {
     client ??= _streamingHttpClient();
+    headers = TefIPHeadersBuilder.build(additionalHeader: headers);
 
     final uri = Uri.parse(url);
 
@@ -68,6 +70,7 @@ abstract class TefIPNetworkingClient {
     Duration? timeout,
   }) async {
     client ??= _streamingHttpClient();
+    headers = TefIPHeadersBuilder.build(additionalHeader: headers);
 
     final uri = Uri.parse(url);
 
@@ -114,6 +117,7 @@ abstract class TefIPNetworkingClient {
     Duration? timeout,
   }) async {
     client ??= _streamingHttpClient();
+    headers = TefIPHeadersBuilder.build(additionalHeader: headers);
 
     final uri = Uri.parse(url);
 
