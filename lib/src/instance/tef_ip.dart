@@ -1,6 +1,8 @@
 import 'package:dart_tefip/src/core/base/tefip_client_base.dart';
+import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/instance/ask/tef_ip_ask.dart';
 import 'package:dart_tefip/src/core/builders/headers/tef_ip_headers_builder.dart';
+import 'package:dart_tefip/src/instance/configs/tefip_configs.dart';
 import 'package:dart_tefip/src/instance/info/tef_ip_info.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_image.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_text.dart';
@@ -19,7 +21,7 @@ final class TefIP extends TefIPClientBase {
   static TefIP get instance => _instance;
 
   static set baseUrl(String baseUrl) {
-    TefIP.baseUrl = baseUrl;
+    TefIPConfigs.baseUrl = baseUrl;
   }
 
   static String? get username => TefIPHeadersBuilder.username;
