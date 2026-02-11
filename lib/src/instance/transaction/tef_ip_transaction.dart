@@ -23,6 +23,8 @@ interface class TefIPTransaction implements EndpointInterface {
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
+    } on TefIPRequestException catch (_) {
+      rethrow;
     } catch (e) {
       throw TefIPUnexpectedException(exception: e);
     }
@@ -36,6 +38,8 @@ interface class TefIPTransaction implements EndpointInterface {
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
+    } on TefIPRequestException catch (_) {
+      rethrow;
     } catch (e) {
       throw TefIPUnexpectedException(exception: e);
     }
@@ -52,6 +56,8 @@ interface class TefIPTransaction implements EndpointInterface {
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
+    } on TefIPRequestException catch (_) {
+      rethrow;
     } catch (e) {
       throw TefIPUnexpectedException(exception: e);
     }
