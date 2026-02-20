@@ -6,6 +6,7 @@ import 'package:dart_tefip/src/instance/info/tef_ip_info.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_image.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_text.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_xml.dart';
+import 'package:dart_tefip/src/instance/restart/tef_ip_restart.dart';
 import 'package:dart_tefip/src/instance/reversal/tef_ip_reversal.dart';
 import 'package:dart_tefip/src/instance/status/tef_ip_status.dart';
 import 'package:dart_tefip/src/instance/transaction/tef_ip_transaction.dart';
@@ -45,9 +46,12 @@ final class TefIP extends TefIPClientBase {
 
   TefIpPrintXml get printXml => TefIpPrintXml();
 
+  TefIPRestart get restart => TefIPRestart();
+
   TefIPReversal get reversal => TefIPReversal();
 
   TefIPStatus get status => TefIPStatus();
+  
 
   TefIPTransaction get transaction => TefIPTransaction();
 }

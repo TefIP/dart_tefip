@@ -1,6 +1,7 @@
 name: example
-description: A simple command-line application.
+description: Exemplo de implementação do dart_tefip
 version: 1.0.0
+publish_to: none
 
 environment:
   sdk: ^3.9.0
