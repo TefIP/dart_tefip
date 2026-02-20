@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DisplayTextRequestModel {
 
- List<dynamic> get content; String get backgroundColor; bool? get showCloseButton;
+ List<Map<String, dynamic>> get content; String get backgroundColor; bool? get showCloseButton;
 /// Create a copy of DisplayTextRequestModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $DisplayTextRequestModelCopyWith<$Res>  {
   factory $DisplayTextRequestModelCopyWith(DisplayTextRequestModel value, $Res Function(DisplayTextRequestModel) _then) = _$DisplayTextRequestModelCopyWithImpl;
 @useResult
 $Res call({
- List<dynamic> content, String backgroundColor, bool? showCloseButton
+ List<Map<String, dynamic>> content, String backgroundColor, bool? showCloseButton
 });
 
 
@@ -68,7 +68,7 @@ class _$DisplayTextRequestModelCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? content = null,Object? backgroundColor = null,Object? showCloseButton = freezed,}) {
   return _then(_self.copyWith(
 content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
-as List<dynamic>,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
+as List<Map<String, dynamic>>,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
 as String,showCloseButton: freezed == showCloseButton ? _self.showCloseButton : showCloseButton // ignore: cast_nullable_to_non_nullable
 as bool?,
   ));
@@ -155,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<dynamic> content,  String backgroundColor,  bool? showCloseButton)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Map<String, dynamic>> content,  String backgroundColor,  bool? showCloseButton)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DisplayTextRequestModel() when $default != null:
 return $default(_that.content,_that.backgroundColor,_that.showCloseButton);case _:
@@ -176,7 +176,7 @@ return $default(_that.content,_that.backgroundColor,_that.showCloseButton);case 
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<dynamic> content,  String backgroundColor,  bool? showCloseButton)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Map<String, dynamic>> content,  String backgroundColor,  bool? showCloseButton)  $default,) {final _that = this;
 switch (_that) {
 case _DisplayTextRequestModel():
 return $default(_that.content,_that.backgroundColor,_that.showCloseButton);case _:
@@ -196,7 +196,7 @@ return $default(_that.content,_that.backgroundColor,_that.showCloseButton);case 
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<dynamic> content,  String backgroundColor,  bool? showCloseButton)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Map<String, dynamic>> content,  String backgroundColor,  bool? showCloseButton)?  $default,) {final _that = this;
 switch (_that) {
 case _DisplayTextRequestModel() when $default != null:
 return $default(_that.content,_that.backgroundColor,_that.showCloseButton);case _:
@@ -211,11 +211,11 @@ return $default(_that.content,_that.backgroundColor,_that.showCloseButton);case 
 @JsonSerializable()
 
 class _DisplayTextRequestModel implements DisplayTextRequestModel {
-  const _DisplayTextRequestModel({required final  List<dynamic> content, required this.backgroundColor, this.showCloseButton}): _content = content;
+  const _DisplayTextRequestModel({required final  List<Map<String, dynamic>> content, required this.backgroundColor, this.showCloseButton}): _content = content;
   factory _DisplayTextRequestModel.fromJson(Map<String, dynamic> json) => _$DisplayTextRequestModelFromJson(json);
 
- final  List<dynamic> _content;
-@override List<dynamic> get content {
+ final  List<Map<String, dynamic>> _content;
+@override List<Map<String, dynamic>> get content {
   if (_content is EqualUnmodifiableListView) return _content;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_content);
@@ -257,7 +257,7 @@ abstract mixin class _$DisplayTextRequestModelCopyWith<$Res> implements $Display
   factory _$DisplayTextRequestModelCopyWith(_DisplayTextRequestModel value, $Res Function(_DisplayTextRequestModel) _then) = __$DisplayTextRequestModelCopyWithImpl;
 @override @useResult
 $Res call({
- List<dynamic> content, String backgroundColor, bool? showCloseButton
+ List<Map<String, dynamic>> content, String backgroundColor, bool? showCloseButton
 });
 
 
@@ -277,7 +277,7 @@ class __$DisplayTextRequestModelCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? content = null,Object? backgroundColor = null,Object? showCloseButton = freezed,}) {
   return _then(_DisplayTextRequestModel(
 content: null == content ? _self._content : content // ignore: cast_nullable_to_non_nullable
-as List<dynamic>,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
+as List<Map<String, dynamic>>,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
 as String,showCloseButton: freezed == showCloseButton ? _self.showCloseButton : showCloseButton // ignore: cast_nullable_to_non_nullable
 as bool?,
   ));

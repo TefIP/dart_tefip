@@ -6,7 +6,7 @@ part 'display_text_request_model.g.dart';
 @freezed
 abstract class DisplayTextRequestModel with _$DisplayTextRequestModel {
   const factory DisplayTextRequestModel({
-    required List<dynamic> content,
+    required List<Map<String, dynamic>> content,
     required String backgroundColor,
     bool? showCloseButton,
   }) = _DisplayTextRequestModel;

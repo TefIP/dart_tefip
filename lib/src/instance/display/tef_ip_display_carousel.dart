@@ -1,4 +1,5 @@
-import 'dart:typed_data';
+import 'dart:convert';
+
 import 'package:dart_tefip/dart_tefip.dart';
 import 'package:dart_tefip/src/core/base/interfaces/endpoint_interface.dart';
 import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
@@ -9,16 +10,15 @@ import 'package:meta/meta.dart';
 
 @immutable
 @protected
-interface class TefIPPrintImage implements EndpointInterface {
+interface class TefIPDisplayCarousel implements EndpointInterface {
   @override
-  String get endpoint => TefIPEndpoints.printImage;
+  String get endpoint => TefIPEndpoints.displayCarousel;
 
-  Future<SuccessResponseModel> post({required Uint8List imageData}) async {
+  Future<SuccessResponseModel> post({required DisplayCarouselRequestModel displayCarouselRequest}) async {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
         url: TefIpUrlBuilder.build(endpoint),
-        body: imageData,
-        headers: {'Content-Type': 'application/octet-stream'},
+        body: jsonEncode(displayCarouselRequest.toJson()),
         onSuccess: (json) => SuccessResponseModel.fromJson(json),
       );
     } on ClientException catch (e) {

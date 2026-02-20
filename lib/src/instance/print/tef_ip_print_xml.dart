@@ -9,7 +9,7 @@ import '../../core/networking/tef_ip_network_client.dart';
 
 @immutable
 @protected
-interface class TefIpPrintXml implements EndpointInterface {
+interface class TefIPPrintXml implements EndpointInterface {
   @override
   String get endpoint => TefIPEndpoints.printXml;
 

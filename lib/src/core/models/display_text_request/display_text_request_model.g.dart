@@ -9,7 +9,9 @@ part of 'display_text_request_model.dart';
 _DisplayTextRequestModel _$DisplayTextRequestModelFromJson(
   Map<String, dynamic> json,
 ) => _DisplayTextRequestModel(
-  content: json['content'] as List<dynamic>,
+  content: (json['content'] as List<dynamic>)
+      .map((e) => e as Map<String, dynamic>)
+      .toList(),
   backgroundColor: json['backgroundColor'] as String,
   showCloseButton: json['showCloseButton'] as bool?,
 );

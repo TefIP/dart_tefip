@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 @protected
-interface class TefIpPrintText implements EndpointInterface {
+interface class TefIPPrintText implements EndpointInterface {
   @override
   String get endpoint => TefIPEndpoints.printText;
 

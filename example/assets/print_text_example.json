@@ -1,0 +1,512 @@
+[
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": true,
+                    "italic": false
+                },
+                "font_size": 18,
+                "alignment": 1
+            },
+            "content": "TefIP"
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 1
+            },
+            "content": "05.481.336/0001-37"
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 1
+            },
+            "content": "Rua Onze de Agosto, 682 - Piso Superior - Centro - Tatuí - SP"
+        }
+    },
+    {
+        "line": {
+            "divider": true
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": true,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 1
+            },
+            "content": "Nota fiscal Eletronica - NFC-e"
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 0
+            },
+            "content": "CPF/CNPJ do consumidor"
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 0
+            },
+            "content": "Nota: 1234"
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 0
+            },
+            "content": "Data:2026-01-23 16:38:45"
+        }
+    },
+    {
+        "line": {
+            "divider": true
+        }
+    },
+    {
+        "line": {
+            "column": [
+                {
+                    "header": [
+                        {
+                            "row": {
+                                "customization": {
+                                    "font_size": 12,
+                                    "alignment": 0,
+                                    "font_style": {
+                                        "bold": true,
+                                        "italic": false
+                                    }
+                                },
+                                "content": "DESCRICAO",
+                                "size": 50
+                            }
+                        },
+                        {
+                            "row": {
+                                "customization": {
+                                    "font_size": 12,
+                                    "alignment": 2,
+                                    "font_style": {
+                                        "bold": true,
+                                        "italic": false
+                                    }
+                                },
+                                "content": "QTD",
+                                "size": 14
+                            }
+                        },
+                        {
+                            "row": {
+                                "customization": {
+                                    "font_size": 12,
+                                    "alignment": 2,
+                                    "font_style": {
+                                        "bold": true,
+                                        "italic": false
+                                    }
+                                },
+                                "content": "VLUN",
+                                "size": 20
+                            }
+                        },
+                        {
+                            "row": {
+                                "customization": {
+                                    "font_size": 12,
+                                    "alignment": 2,
+                                    "font_style": {
+                                        "bold": true,
+                                        "italic": false
+                                    }
+                                },
+                                "content": "VLTOT",
+                                "size": 20
+                            }
+                        }
+                    ],
+                    "items": [
+                        [
+                            {
+                                "row": {
+                                    "customization": {
+                                        "font_size": 12,
+                                        "alignment": 0,
+                                        "font_style": {
+                                            "bold": false,
+                                            "italic": false
+                                        }
+                                    },
+                                    "content": "PRODUTO 1",
+                                    "size": null
+                                }
+                            },
+                            {
+                                "row": {
+                                    "customization": {
+                                        "font_size": 12,
+                                        "alignment": 2,
+                                        "font_style": {
+                                            "bold": false,
+                                            "italic": false
+                                        }
+                                    },
+                                    "content": "1",
+                                    "size": null
+                                }
+                            },
+                            {
+                                "row": {
+                                    "customization": {
+                                        "font_size": 12,
+                                        "alignment": 2,
+                                        "font_style": {
+                                            "bold": false,
+                                            "italic": false
+                                        }
+                                    },
+                                    "content": "9,90",
+                                    "size": null
+                                }
+                            },
+                            {
+                                "row": {
+                                    "customization": {
+                                        "font_size": 12,
+                                        "alignment": 2,
+                                        "font_style": {
+                                            "bold": false,
+                                            "italic": false
+                                        }
+                                    },
+                                    "content": "9,90",
+                                    "size": null
+                                }
+                            }
+                        ],
+                        [
+                            {
+                                "row": {
+                                    "customization": {
+                                        "font_size": 12,
+                                        "alignment": 0,
+                                        "font_style": {
+                                            "bold": false,
+                                            "italic": false
+                                        }
+                                    },
+                                    "content": "PRODUTO 2",
+                                    "size": null
+                                }
+                            },
+                            {
+                                "row": {
+                                    "customization": {
+                                        "font_size": 12,
+                                        "alignment": 2,
+                                        "font_style": {
+                                            "bold": false,
+                                            "italic": false
+                                        }
+                                    },
+                                    "content": "1",
+                                    "size": null
+                                }
+                            },
+                            {
+                                "row": {
+                                    "customization": {
+                                        "font_size": 12,
+                                        "alignment": 2,
+                                        "font_style": {
+                                            "bold": false,
+                                            "italic": false
+                                        }
+                                    },
+                                    "content": "7,90",
+                                    "size": null
+                                }
+                            },
+                            {
+                                "row": {
+                                    "customization": {
+                                        "font_size": 12,
+                                        "alignment": 2,
+                                        "font_style": {
+                                            "bold": false,
+                                            "italic": false
+                                        }
+                                    },
+                                    "content": "7,90",
+                                    "size": null
+                                }
+                            }
+                        ]
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "line": {
+            "divider": true
+        }
+    },
+    {
+        "line": {
+            "column": [
+                {
+                    "row": {
+                        "customization": {
+                            "font_size": 12,
+                            "alignment": 0,
+                            "font_style": {
+                                "bold": false,
+                                "italic": false
+                            }
+                        },
+                        "content": "QTD de itens",
+                        "size": null
+                    }
+                },
+                {
+                    "row": {
+                        "customization": {
+                            "font_size": 12,
+                            "alignment": 2,
+                            "font_style": {
+                                "bold": false,
+                                "italic": false
+                            }
+                        },
+                        "content": "2",
+                        "size": null
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "line": {
+            "column": [
+                {
+                    "row": {
+                        "customization": {
+                            "font_size": 10,
+                            "alignment": 0,
+                            "font_style": {
+                                "bold": false,
+                                "italic": false
+                            }
+                        },
+                        "content": "Total",
+                        "size": null
+                    }
+                },
+                {
+                    "row": {
+                        "customization": {
+                            "font_size": 12,
+                            "alignment": 2,
+                            "font_style": {
+                                "bold": false,
+                                "italic": false
+                            }
+                        },
+                        "content": "17,80",
+                        "size": 10
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "line": {
+            "divider": true
+        }
+    },
+    {
+        "line": {
+            "column": [
+                {
+                    "row": {
+                        "customization": {
+                            "font_size": 10,
+                            "alignment": 0,
+                            "font_style": {
+                                "bold": true,
+                                "italic": false
+                            }
+                        },
+                        "content": "Formas de pagamento",
+                        "size": null
+                    }
+                },
+                {
+                    "row": {
+                        "customization": {
+                            "font_size": 12,
+                            "alignment": 2,
+                            "font_style": {
+                                "bold": true,
+                                "italic": false
+                            }
+                        },
+                        "content": "Valor pago",
+                        "size": 10
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "line": {
+            "column": [
+                {
+                    "row": {
+                        "customization": {
+                            "font_size": 10,
+                            "alignment": 0,
+                            "font_style": {
+                                "bold": false,
+                                "italic": false
+                            }
+                        },
+                        "content": "Dinheiro",
+                        "size": null
+                    }
+                },
+                {
+                    "row": {
+                        "customization": {
+                            "font_size": 12,
+                            "alignment": 2,
+                            "font_style": {
+                                "bold": false,
+                                "italic": false
+                            }
+                        },
+                        "content": "20,00",
+                        "size": 10
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "line": {
+            "divider": true
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 1
+            },
+            "content": "CHAVE DE ACESSO DA NOTA"
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 1
+            },
+            "content": "3525 1205 4813 3600 0137 6525 4000 0011 1610 0001 2380"
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 1
+            },
+            "content": "Acesse a nota em"
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 1
+            },
+            "content": "https://www.tefip.com.br"
+        }
+    },
+    {
+        "line": {
+            "qrcode": {
+                "size": 150,
+                "content": "https://www.tefip.com.br",
+                "level": "L"
+            }
+        }
+    },
+    {
+        "line": {
+            "customization": {
+                "font_style": {
+                    "bold": false,
+                    "italic": false
+                },
+                "font_size": 12,
+                "alignment": 1
+            },
+            "content": "Obrigado pela compra e volte sempre!"
+        }
+    }
+]

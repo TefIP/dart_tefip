@@ -9,9 +9,9 @@ import 'package:meta/meta.dart';
 
 @immutable
 @protected
-interface class TefIPPrintImage implements EndpointInterface {
+interface class TefIPDisplayImage implements EndpointInterface {
   @override
-  String get endpoint => TefIPEndpoints.printImage;
+  String get endpoint => TefIPEndpoints.displayImage;
 
   Future<SuccessResponseModel> post({required Uint8List imageData}) async {
     try {
