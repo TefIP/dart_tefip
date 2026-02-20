@@ -7,12 +7,27 @@ import 'package:meta/meta.dart';
 
 import '../../core/networking/tef_ip_network_client.dart';
 
+/// Endpoint responsible for printing XML content on the terminal printer.
+///
+/// Performs an HTTP `POST` request to `/print/xml`
+/// with raw XML content and returns a [SuccessResponseModel].
+///
+/// The request uses `Content-Type: application/text`.
+///
+/// Parameters:
+/// - [xml]: XML string to be processed and printed.
+///
+/// Errors:
+/// - [TefIPRequestException] for request failures.
+/// - [TefIPUnexpectedException] for unexpected errors.
 @immutable
 @protected
 interface class TefIPPrintXml implements EndpointInterface {
+  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.printXml;
 
+  /// Sends XML content to be printed by the terminal.
   Future<SuccessResponseModel> post({required String xml}) async {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
@@ -23,7 +38,7 @@ interface class TefIPPrintXml implements EndpointInterface {
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
-    } on TefIPRequestException catch (_) {
+    } on TefIPRequestException {
       rethrow;
     } catch (e) {
       throw TefIPUnexpectedException(exception: e);

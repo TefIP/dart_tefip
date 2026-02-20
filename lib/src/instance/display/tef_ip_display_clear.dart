@@ -6,12 +6,22 @@ import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 
+/// Endpoint responsible for clearing the terminal display.
+///
+/// Performs an HTTP `POST` request to `/display/clear`
+/// and returns a [SuccessResponseModel].
+///
+/// Errors:
+/// - [TefIPRequestException] for request failures.
+/// - [TefIPUnexpectedException] for unexpected errors.
 @immutable
 @protected
 interface class TefIPDisplayClear implements EndpointInterface {
+  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.displayClear;
 
+  /// Sends a clear display command to the terminal.
   Future<SuccessResponseModel> post() async {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
@@ -20,7 +30,7 @@ interface class TefIPDisplayClear implements EndpointInterface {
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
-    } on TefIPRequestException catch (_) {
+    } on TefIPRequestException {
       rethrow;
     } catch (e) {
       throw TefIPUnexpectedException(exception: e);

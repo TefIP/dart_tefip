@@ -7,12 +7,26 @@ import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 
+/// Endpoint responsible for sending an image to the terminal display.
+///
+/// Performs an HTTP `POST` request to `/display/image`
+/// with raw binary data (`application/octet-stream`)
+/// and returns a [SuccessResponseModel].
+///
+/// Parameters:
+/// - [imageData]: Raw bytes of the image to be displayed.
+///
+/// Errors:
+/// - [TefIPRequestException] for request failures.
+/// - [TefIPUnexpectedException] for unexpected errors.
 @immutable
 @protected
 interface class TefIPDisplayImage implements EndpointInterface {
+  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.displayImage;
 
+  /// Sends a binary image to be rendered on the terminal display.
   Future<SuccessResponseModel> post({required Uint8List imageData}) async {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
@@ -23,7 +37,7 @@ interface class TefIPDisplayImage implements EndpointInterface {
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
-    } on TefIPRequestException catch (_) {
+    } on TefIPRequestException {
       rethrow;
     } catch (e) {
       throw TefIPUnexpectedException(exception: e);

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dart_tefip/dart_tefip.dart';
 import 'package:dart_tefip/src/core/base/interfaces/endpoint_interface.dart';
 import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
@@ -8,12 +7,22 @@ import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 
+/// Endpoint responsible for managing terminal transactions.
+///
+/// Provides methods to retrieve, query, and create transactions
+/// via HTTP requests to `/transaction`.
+///
+/// Errors:
+/// - [TefIPRequestException] for request failures.
+/// - [TefIPUnexpectedException] for unexpected errors.
 @immutable
 @protected
 interface class TefIPTransaction implements EndpointInterface {
+  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.transaction;
 
+  /// Retrieves all transactions as a list of [TransactionModel].
   Future<List<TransactionModel>> getAll() async {
     try {
       return await TefIPNetworkingClient.getList<TransactionModel>(
@@ -23,13 +32,14 @@ interface class TefIPTransaction implements EndpointInterface {
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
-    } on TefIPRequestException catch (_) {
+    } on TefIPRequestException {
       rethrow;
     } catch (e) {
       throw TefIPUnexpectedException(exception: e);
     }
   }
 
+  /// Retrieves a specific transaction by [referenceId].
   Future<TransactionModel> get({String? referenceId}) async {
     try {
       return await TefIPNetworkingClient.get<TransactionModel>(
@@ -38,13 +48,17 @@ interface class TefIPTransaction implements EndpointInterface {
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
-    } on TefIPRequestException catch (_) {
+    } on TefIPRequestException {
       rethrow;
     } catch (e) {
       throw TefIPUnexpectedException(exception: e);
     }
   }
 
+  /// Creates a new transaction on the terminal.
+  ///
+  /// Parameters:
+  /// - [transactionRequest]: Transaction data to be processed.
   Future<TransactionResponseModel> post({
     required TransactionRequestModel transactionRequest,
   }) async {
@@ -56,7 +70,7 @@ interface class TefIPTransaction implements EndpointInterface {
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
-    } on TefIPRequestException catch (_) {
+    } on TefIPRequestException {
       rethrow;
     } catch (e) {
       throw TefIPUnexpectedException(exception: e);
