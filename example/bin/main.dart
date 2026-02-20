@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:dart_tefip/dart_tefip.dart';
 import 'dart:typed_data';
-import 'package:http/http.dart' as http;
 
 void main(List<String> arguments) async {
   final tefIP = TefIP.instance;
@@ -48,8 +47,8 @@ void main(List<String> arguments) async {
 
   print(revertedTransaction);
 
-  final printImageResult = await printImageFromUrl(
-    'https://www.djsystem.com.br/wp-content/uploads/2025/03/banner-inicial-997x1024.png',
+  final printImageResult = await tefIP.printImage.post(
+    imageData: await _image(),
   );
 
   print(printImageResult);
@@ -84,16 +83,9 @@ void main(List<String> arguments) async {
   }
 }
 
-Future<SuccessResponseModel> printImageFromUrl(String imageUrl) async {
-  final response = await http.get(Uri.parse(imageUrl));
-
-  if (response.statusCode != 200) {
-    throw Exception();
-  }
-
-  final Uint8List imageBytes = response.bodyBytes;
-
-  return await TefIP.instance.printImage.post(imageData: imageBytes);
+Future<Uint8List> _image() async {
+  final file = File('assets/example.png');
+  return await file.readAsBytes();
 }
 
 Future<String> _xml() async {
