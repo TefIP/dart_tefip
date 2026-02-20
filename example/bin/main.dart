@@ -108,6 +108,11 @@ void main(List<String> arguments) async {
 
   print(displayClearResult);
 
+  final askResult = await tefIP.ask.post(
+    questionRequest: QuestionRequestModel(type: TefIPQuestionType.cpfOrcnpj),
+  );
+
+  print(askResult);
 
   try {
     final restartResult = await tefIP.restart.post();
