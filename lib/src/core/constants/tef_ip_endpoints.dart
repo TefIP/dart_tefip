@@ -11,11 +11,8 @@ abstract final class TefIPEndpoints {
   static final String displayCarousel = '/display/carousel';
 
   static final String displayClear = '/display/clear';
-
-  static final String transaction = '/transaction';
-
-  static String reversal(String? referenceId) =>
-      '/transaction/$referenceId/reversal';
+  
+  static final String info = '/info';
 
   static final String printImage = '/print/image';
 
@@ -23,7 +20,12 @@ abstract final class TefIPEndpoints {
 
   static final String printXml = '/print/xml';
 
-  static final String info = '/info';
+  static final String restart = '/restart';
+
+  static String reversal(String? referenceId) =>
+      '/transaction/$referenceId/reversal';
+  
+  static final String transaction = '/transaction';
 
   static final String status = '/status';
 }
