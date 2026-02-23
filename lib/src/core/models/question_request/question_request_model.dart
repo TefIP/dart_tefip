@@ -20,7 +20,7 @@ class QuestionRequestModel {
 
   QuestionRequestModel({
     required this.type,
-    @JsonKey(name: 'question') String? question,
+    String? question,
     this.buttonText,
     this.showCancelButton,
     this.buttonCancelText,

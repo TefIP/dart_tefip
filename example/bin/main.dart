@@ -73,12 +73,13 @@ void main(List<String> arguments) async {
     _imageFromPathToBase64('assets/example_carousel2.jpeg'),
     _imageFromPathToBase64('assets/example_carousel3.jpeg'),
   ]);
+  
   final displayCarouselResult = await tefIP.displayCarousel.post(
     displayCarouselRequest: DisplayCarouselRequestModel(
       images: carouselImages,
       intervalMs: 3000,
       transition: TefIPCarouselTransition.fade,
-      backgroundColor: "white",
+      backgroundColor: 'white',
       showCloseButton: false,
     ),
   );
