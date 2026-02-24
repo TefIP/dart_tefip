@@ -1,3 +1,8 @@
+## 1.0.1
+* Updated project description in pubspec.yaml
+* Added example/README.md with usage instructions
+* Updated repository link in the main README.md
+
 ## 1.0.0
 
 * Initial stable release of `dart_tefip`
