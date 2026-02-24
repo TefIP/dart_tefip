@@ -1,5 +1,5 @@
 name: example
-description: Exemplo de implementação do dart_tefip
+description: dart_tefip usage example for terminal integration
 version: 1.0.0
 publish_to: none
 

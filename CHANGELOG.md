@@ -1,5 +1,7 @@
-## 1.0.1
+## 1.0.2
 * Updated project description in pubspec.yaml
+
+## 1.0.1
 * Added example/README.md with usage instructions
 * Updated repository link in the main README.md
 
