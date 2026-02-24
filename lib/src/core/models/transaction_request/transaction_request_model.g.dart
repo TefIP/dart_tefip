@@ -9,7 +9,7 @@ part of 'transaction_request_model.dart';
 _TransactionRequestModel _$TransactionRequestModelFromJson(
   Map<String, dynamic> json,
 ) => _TransactionRequestModel(
-  referenceId: json['referenceId'] as String? ?? null,
+  referenceId: json['referenceId'] as String?,
   type:
       $enumDecodeNullable(_$TefIPTransactionTypeEnumMap, json['type']) ??
       TefIPTransactionType.unknown,

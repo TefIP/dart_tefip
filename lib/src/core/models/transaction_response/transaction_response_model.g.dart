@@ -9,9 +9,9 @@ part of 'transaction_response_model.dart';
 _TransactionResponseModel _$TransactionResponseModelFromJson(
   Map<String, dynamic> json,
 ) => _TransactionResponseModel(
-  nsu: json['nsu'] as String? ?? null,
-  message: json['message'] as String? ?? null,
-  details: json['details'] as Map<String, dynamic>? ?? null,
+  nsu: json['nsu'] as String?,
+  message: json['message'] as String?,
+  details: json['details'] as Map<String, dynamic>?,
 );
 
 Map<String, dynamic> _$TransactionResponseModelToJson(
