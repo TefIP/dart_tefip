@@ -6,6 +6,25 @@ part 'display_carousel_request_model.freezed.dart';
 part 'display_carousel_request_model.g.dart';
 
 @freezed
+/// Request model responsible for configuring a carousel display on the terminal.
+///
+/// This model is serialized to JSON and sent to the display endpoint
+/// responsible for rendering image carousels on the device screen.
+///
+/// Fields:
+/// - [images]: List of images to be displayed in the carousel.
+///   Uses [TefIPImagesConverter] to convert images to the expected format.
+/// - [intervalMs]: Time interval in milliseconds between image transitions.
+///   Default is `3000`.
+/// - [transition]: Transition animation between images.
+///   Default is [TefIPCarouselTransition.fade].
+/// - [backgroundColor]: Background color applied to the carousel (hex string expected).
+/// - [showCloseButton]: Defines whether a close button should be shown.
+///   Default is `false`.
+///
+/// Generated:
+/// - `fromJson` factory for deserialization.
+/// - `toJson` method via Freezed/JsonSerializable.
 abstract class DisplayCarouselRequestModel with _$DisplayCarouselRequestModel {
   const factory DisplayCarouselRequestModel({
     @TefIPImagesConverter() required List<String> images,
@@ -15,6 +34,7 @@ abstract class DisplayCarouselRequestModel with _$DisplayCarouselRequestModel {
     @Default(false) bool showCloseButton,
   }) = _DisplayCarouselRequestModel;
 
-  factory DisplayCarouselRequestModel.fromJson(Map<String, dynamic> json) =>
-      _$DisplayCarouselRequestModelFromJson(json);
+  factory DisplayCarouselRequestModel.fromJson(
+    Map<String, dynamic> json,
+  ) => _$DisplayCarouselRequestModelFromJson(json);
 }

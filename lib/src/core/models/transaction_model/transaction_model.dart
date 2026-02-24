@@ -8,6 +8,37 @@ part 'transaction_model.freezed.dart';
 part 'transaction_model.g.dart';
 
 @freezed
+/// Model representing a financial transaction processed by the terminal.
+///
+/// This model encapsulates transaction metadata, monetary data,
+/// lifecycle timestamps and detailed payment/reversal information.
+///
+/// Fields:
+/// - [referenceId]: External reference identifier for reconciliation.
+/// - [type]: Transaction type (sale, reversal, etc.).
+///   Uses [TefIPTransactionTypeConverter].
+///   Default: `TefIPTransactionType.unknown`.
+/// - [transactionStatus]: Current transaction status.
+///   Default: `TefIPTransactionStatus.unknown`.
+/// - [installmentType]: Installment modality (single, merchant, issuer).
+///   Default: `TefIPInstallmentType.single`.
+/// - [amount]: Transaction amount.
+///   Default: `0.0`.
+/// - [installments]: Number of installments.
+///   Default: `1`.
+/// - [nsu]: Unique sequential number returned by the acquirer.
+/// - [createdAt]: Creation timestamp.
+///   Uses [TefIPUnixDateTimeConverter] (Unix → DateTime).
+/// - [updatedAt]: Last update timestamp.
+///   Uses [TefIPUnixDateTimeConverter].
+/// - [paymentDetails]: Structured payment metadata.
+///   Uses [TefIPDetailsConverter].
+/// - [reversalDetails]: Structured reversal metadata.
+///   Uses [TefIPDetailsConverter].
+///
+/// Generated:
+/// - `fromJson` factory for deserialization.
+/// - `toJson` method via Freezed/JsonSerializable.
 abstract class TransactionModel with _$TransactionModel {
   const factory TransactionModel({
     String? referenceId,
@@ -26,6 +57,7 @@ abstract class TransactionModel with _$TransactionModel {
     @TefIPDetailsConverter() Map<String, dynamic>? reversalDetails,
   }) = _TransactionModel;
 
-  factory TransactionModel.fromJson(Map<String, dynamic> json) =>
-      _$TransactionModelFromJson(json);
+  factory TransactionModel.fromJson(
+    Map<String, dynamic> json,
+  ) => _$TransactionModelFromJson(json);
 }
