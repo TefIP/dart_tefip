@@ -5,6 +5,7 @@ import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/core/constants/tef_ip_endpoints.dart';
 import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 /// Endpoint responsible for managing terminal transactions.
@@ -23,10 +24,11 @@ interface class TefIPTransaction implements EndpointInterface {
   String get endpoint => TefIPEndpoints.transaction;
 
   /// Retrieves all transactions as a list of [TransactionModel].
-  Future<List<TransactionModel>> getAll() async {
+  Future<List<TransactionModel>> getAll({http.Client? client}) async {
     try {
       return await TefIPNetworkingClient.getList<TransactionModel>(
         url: TefIpUrlBuilder.build(endpoint),
+        client: client,
         onSuccess: (list) =>
             list.map((json) => TransactionModel.fromJson(json)).toList(),
       );
@@ -40,10 +42,14 @@ interface class TefIPTransaction implements EndpointInterface {
   }
 
   /// Retrieves a specific transaction by [referenceId].
-  Future<TransactionModel> get({String? referenceId}) async {
+  Future<TransactionModel> get({
+    String? referenceId,
+    http.Client? client,
+  }) async {
     try {
       return await TefIPNetworkingClient.get<TransactionModel>(
         url: TefIpUrlBuilder.build(endpoint, param: referenceId),
+        client: client,
         onSuccess: (json) => TransactionModel.fromJson(json),
       );
     } on ClientException catch (e) {
@@ -61,11 +67,13 @@ interface class TefIPTransaction implements EndpointInterface {
   /// - [transactionRequest]: Transaction data to be processed.
   Future<TransactionResponseModel> post({
     required TransactionRequestModel transactionRequest,
+    http.Client? client,
   }) async {
     try {
       return await TefIPNetworkingClient.post<TransactionResponseModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: jsonEncode(transactionRequest.toJson()),
+        client: client,
         onSuccess: (json) => TransactionResponseModel.fromJson(json),
       );
     } on ClientException catch (e) {
