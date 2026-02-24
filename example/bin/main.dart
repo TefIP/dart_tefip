@@ -30,7 +30,7 @@ void main(List<String> arguments) async {
     transactionRequest: TransactionRequestModel(
       referenceId: referenceId,
       type: TefIPTransactionType.pix,
-      amount: 777.77,
+      amount: 777,
     ),
   );
   print(postTransaction);
