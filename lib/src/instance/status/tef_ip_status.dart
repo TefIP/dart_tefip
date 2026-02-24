@@ -4,6 +4,7 @@ import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/core/constants/tef_ip_endpoints.dart';
 import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 /// Endpoint responsible for retrieving the terminal's current status.
@@ -23,10 +24,11 @@ interface class TefIPStatus implements EndpointInterface {
   String get endpoint => TefIPEndpoints.status;
 
   /// Retrieves the current terminal status.
-  Future<StatusModel> get() async {
+  Future<StatusModel> get({http.Client? client}) async {
     try {
       return await TefIPNetworkingClient.get<StatusModel>(
         url: TefIpUrlBuilder.build(endpoint),
+        client: client,
         onSuccess: (json) => StatusModel.fromJson(json),
       );
     } on ClientException catch (e) {
