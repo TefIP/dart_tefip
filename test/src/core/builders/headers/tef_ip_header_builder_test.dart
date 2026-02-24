@@ -1,10 +1,11 @@
 import 'package:dart_tefip/src/core/builders/headers/tef_ip_headers_builder.dart';
 import 'package:test/test.dart';
 
+import '../../../../../testing/mocks/shared/password_mock.dart';
+import '../../../../../testing/mocks/shared/username_mock.dart';
+
 void main() {
   group('TefIPHeadersBuilder', () {
-    const kPassword = 'kPassword';
-    const kUsername = 'kUsername';
     const kMockHeader1 = {'X-Global': 'global-value'};
     const kMockHeader2 = {'X-Test': 'test-value'};
 
