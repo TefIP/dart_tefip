@@ -4,6 +4,7 @@ import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/core/constants/tef_ip_endpoints.dart';
 import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 @immutable
@@ -25,10 +26,11 @@ interface class TefIPInfo implements EndpointInterface {
   String get endpoint => TefIPEndpoints.info;
 
   /// Retrieves terminal information.
-  Future<InfoModel> get() async {
+  Future<InfoModel> get({http.Client? client}) async {
     try {
       return await TefIPNetworkingClient.get<InfoModel>(
         url: TefIpUrlBuilder.build(endpoint),
+        client: client,
         onSuccess: (json) => InfoModel.fromJson(json),
       );
     } on ClientException catch (e) {
