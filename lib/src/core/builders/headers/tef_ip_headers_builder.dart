@@ -66,7 +66,8 @@ abstract class TefIPHeadersBuilder {
   static Map<String, String> build({Map<String, dynamic>? additionalHeader}) {
     Map<String, String> headers = <String, String>{
       'Content-Type': 'application/json',
-      'Authorization': 'Basic $username:$password',
+      if (username.isNotEmpty && password.isNotEmpty)
+        'Authorization': 'Basic $username:$password',
     };
 
     headers = {

@@ -6,6 +6,7 @@ import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/core/constants/tef_ip_endpoints.dart';
 import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 /// Endpoint responsible for sending text content to the terminal display.
@@ -30,11 +31,13 @@ interface class TefIPDisplayText implements EndpointInterface {
   /// Sends formatted text data to be rendered on the terminal display.
   Future<SuccessResponseModel> post({
     required DisplayTextRequestModel displayTextRequest,
+    http.Client? client,
   }) async {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: jsonEncode(displayTextRequest),
+        client: client,
         onSuccess: (json) => SuccessResponseModel.fromJson(json),
       );
     } on ClientException catch (e) {

@@ -33,6 +33,13 @@ void main() {
 
     group('Build headers', () {
       test('should generate default headers correctly', () {
+        final headers = TefIPHeadersBuilder.build();
+
+        expect(headers['Content-Type'], 'application/json');
+        expect(headers['Authorization'], null);
+      });
+
+      test('should generate with authorization headers correctly', () {
         TefIPHeadersBuilder.username = kUsername;
         TefIPHeadersBuilder.password = kPassword;
 
