@@ -14,9 +14,4 @@ class TefIPUnexpectedException implements Exception {
 
   /// Creates a new [TefIPUnexpectedException].
   const TefIPUnexpectedException({required this.exception});
-
-  /// Returns a concise textual representation of the exception.
-  @override
-  String toString() =>
-      'TefIPUnexpectedException(exception: $exception)';
 }

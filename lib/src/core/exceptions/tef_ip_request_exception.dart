@@ -26,9 +26,4 @@ class TefIPRequestException implements Exception {
     required this.statusCode,
     this.rawBody,
   });
-
-  /// Returns a concise textual representation of the exception.
-  @override
-  String toString() =>
-      'TefIPRequestException(statusCode: $statusCode, message: $message)';
 }
