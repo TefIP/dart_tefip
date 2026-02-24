@@ -1,3 +1,6 @@
+## 1.0.3
+* Updated project README.md
+
 ## 1.0.2
 * Updated project description in pubspec.yaml
 

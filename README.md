@@ -19,8 +19,8 @@
 
 <div align='center'>
 
-[![Version](https://img.shields.io/github/v/release/P-Sousa/dart_tefip?style=plastic)](https://pub.dev/packages/dart_tefip)
-[![Pub Points](https://img.shields.io/pub/points/dart_tefip?label=pub%20points\&style=plastic)](https://pub.dev/packages/dart_tefip/score)
+[![Version](https://img.shields.io/github/v/release/TefIP/dart_tefip?style=plastic)](https://pub.dev/packages/dart_tefip)
+[![Pub Points](https://img.shields.io/pub/points/dart_tefip?label=pub%20points&style=plastic)](https://pub.dev/packages/dart_tefip/score)
 [![Dart](https://img.shields.io/badge/language-dart-blue?style=plastic)](https://dart.dev/)
 
 </div>
@@ -224,7 +224,7 @@ Contributions are welcome. Fork the repo, create a branch, commit, and submit a 
 
 ## Contact
 
-* GitHub: [DJSystem](https://github.com/TefIP)
+* GitHub: [TefIP](https://github.com/TefIP)
 * Website: https://www.djsystem.com.br
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
