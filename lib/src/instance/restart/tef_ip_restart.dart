@@ -4,6 +4,7 @@ import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/core/constants/tef_ip_endpoints.dart';
 import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 /// Endpoint responsible for restarting the terminal application.
@@ -27,10 +28,11 @@ interface class TefIPRestart implements EndpointInterface {
   String get endpoint => TefIPEndpoints.restart;
 
   /// Sends a restart command to the terminal application.
-  Future<StatusModel> post() async {
+  Future<StatusModel> post({http.Client? client}) async {
     try {
       return await TefIPNetworkingClient.post<StatusModel>(
         url: TefIpUrlBuilder.build(endpoint),
+        client: client,
         onSuccess: (json) => StatusModel.fromJson(json),
       );
     } on ClientException catch (e) {
