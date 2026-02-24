@@ -6,7 +6,7 @@ import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 import '../../core/builders/urls/tef_ip_url_builder.dart';
-
+import 'package:http/http.dart' as http;
 
 /// Endpoint responsible for sending interactive questions
 /// to the terminal.
@@ -27,11 +27,13 @@ interface class TefIPAsk implements EndpointInterface {
   /// Sends a question to the terminal.
   Future<SuccessResponseModel> post({
     required QuestionRequestModel questionRequest,
+    http.Client? client,
   }) async {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: jsonEncode(questionRequest.toJson()),
+        client: client,
         onSuccess: (json) => SuccessResponseModel.fromJson(json),
       );
     } on ClientException catch (e) {
