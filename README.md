@@ -224,7 +224,7 @@ Contributions are welcome. Fork the repo, create a branch, commit, and submit a 
 
 ## Contact
 
-* GitHub: [DJSystem](https://github.com/DJSYSTEMWEB)
+* GitHub: [DJSystem](https://github.com/TefIP)
 * Website: https://www.djsystem.com.br
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

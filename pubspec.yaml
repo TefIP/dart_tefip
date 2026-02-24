@@ -2,8 +2,8 @@ name: dart_tefip
 description: "Dart SDK for TefIP API"
 version: 1.0.0
 homepage: https://www.tefip.com.br
-repository: https://github.com/DJSYSTEMWEB/dart_tefip
-issue_tracker: https://github.com/DJSYSTEMWEB/dart_tefip/issues
+repository: https://github.com/TefIP/dart_tefip
+issue_tracker: https://github.com/TefIP/dart_tefip/issues
 
 environment:
   sdk: ^3.9.0
