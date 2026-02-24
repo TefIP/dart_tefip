@@ -5,6 +5,7 @@ import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/core/constants/tef_ip_endpoints.dart';
 import 'package:dart_tefip/src/core/networking/tef_ip_network_client.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 @immutable
@@ -29,12 +30,16 @@ interface class TefIPPrintImage implements EndpointInterface {
   String get endpoint => TefIPEndpoints.printImage;
 
   /// Sends a binary image to be printed by the terminal.
-  Future<SuccessResponseModel> post({required Uint8List imageData}) async {
+  Future<SuccessResponseModel> post({
+    required Uint8List imageData,
+    http.Client? client,
+  }) async {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: imageData,
         headers: {'Content-Type': 'application/octet-stream'},
+        client: client,
         onSuccess: (json) => SuccessResponseModel.fromJson(json),
       );
     } on ClientException catch (e) {

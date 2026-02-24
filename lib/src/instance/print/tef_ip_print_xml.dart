@@ -3,6 +3,7 @@ import 'package:dart_tefip/src/core/base/interfaces/endpoint_interface.dart';
 import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/core/constants/tef_ip_endpoints.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 import '../../core/networking/tef_ip_network_client.dart';
@@ -28,12 +29,16 @@ interface class TefIPPrintXml implements EndpointInterface {
   String get endpoint => TefIPEndpoints.printXml;
 
   /// Sends XML content to be printed by the terminal.
-  Future<SuccessResponseModel> post({required String xml}) async {
+  Future<SuccessResponseModel> post({
+    required String xml,
+    http.Client? client,
+  }) async {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: xml,
         headers: {'Content-Type': 'application/text'},
+        client: client,
         onSuccess: (json) => SuccessResponseModel.fromJson(json),
       );
     } on ClientException catch (e) {
