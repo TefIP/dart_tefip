@@ -25,16 +25,16 @@ interface class TefIPAsk implements EndpointInterface {
   String get endpoint => TefIPEndpoints.ask;
 
   /// Sends a question to the terminal.
-  Future<SuccessResponseModel> post({
+  Future<QuestionResponseModel> post({
     required QuestionRequestModel questionRequest,
     http.Client? client,
   }) async {
     try {
-      return await TefIPNetworkingClient.post<SuccessResponseModel>(
+      return await TefIPNetworkingClient.post<QuestionResponseModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: jsonEncode(questionRequest.toJson()),
         client: client,
-        onSuccess: (json) => SuccessResponseModel.fromJson(json),
+        onSuccess: (json) => QuestionResponseModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);

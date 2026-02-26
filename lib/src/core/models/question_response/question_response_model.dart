@@ -1,19 +1,16 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'question_response_model.freezed.dart';
 part 'question_response_model.g.dart';
 
-@JsonSerializable()
-class QuestionResponseModel {
-  final int id;
-  final String value;
+@freezed
+abstract class QuestionResponseModel with _$QuestionResponseModel {
+  const factory QuestionResponseModel({
+    required int id,
+    required String value,
+  }) = _QuestionResponseModel;
 
-  QuestionResponseModel({
-    required this.id,
-    required this.value,
-  });
-
-  factory QuestionResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$QuestionResponseModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$QuestionResponseModelToJson(this);
+  factory QuestionResponseModel.fromJson(
+    Map<String, dynamic> json,
+  ) => _$QuestionResponseModelFromJson(json);
 }
