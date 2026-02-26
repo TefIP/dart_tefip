@@ -1,3 +1,9 @@
+## 1.0.4
+* Refactored `QuestionResponseModel` to use `freezed`
+* Updated `QuestionResponseModel` to abstract class with factory constructor
+* Updated `TefIpAsk.post` return type from `SuccessResponseModel` to `QuestionResponseModel`
+* Updated networking layer success parser to map response into `QuestionResponseModel`
+
 ## 1.0.3
 * Updated project README.md
 
