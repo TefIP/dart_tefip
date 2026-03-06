@@ -1,6 +1,8 @@
 import 'package:dart_tefip/src/core/base/tefip_client_base.dart';
 import 'package:dart_tefip/src/instance/ask/tef_ip_ask.dart';
 import 'package:dart_tefip/src/core/builders/headers/tef_ip_headers_builder.dart';
+import 'package:dart_tefip/src/instance/ask_cancel/tef_ip_ask_cancel.dart';
+import 'package:dart_tefip/src/instance/ask_form/tef_ip_ask_form.dart';
 import 'package:dart_tefip/src/instance/configs/tefip_configs.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_carousel.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_clear.dart';
@@ -85,6 +87,16 @@ final class TefIP extends TefIPClientBase {
   ///
   /// Used to request input or confirmation from the terminal.
   TefIPAsk get ask => TefIPAsk();
+
+  /// Provides access to the Ask Cancel endpoint.
+  ///
+  /// Used to cancel an ongoing ask request on the terminal.
+  TefIPAskCancel get askCancel => TefIPAskCancel();
+
+  /// Provides access to the Ask Form endpoint.
+  ///
+  /// Used to request multiple inputs or confirmations from the terminal sequentially.
+  TefIPAskForm get askForm => TefIPAskForm();
 
   /// Provides access to the Display Carousel endpoint.
   ///

@@ -26,11 +26,12 @@ interface class TefIPTransaction implements EndpointInterface {
   /// Retrieves all transactions as a list of [TransactionModel].
   Future<List<TransactionModel>> getAll({http.Client? client}) async {
     try {
-      return await TefIPNetworkingClient.getList<TransactionModel>(
+      return await TefIPNetworkingClient.get<List<TransactionModel>>(
         url: TefIpUrlBuilder.build(endpoint),
         client: client,
-        onSuccess: (list) =>
-            list.map((json) => TransactionModel.fromJson(json)).toList(),
+        onSuccess: (json) => List<TransactionModel>.from(
+          json.map((e) => TransactionModel.fromJson(e)),
+        ),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);

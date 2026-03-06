@@ -19,6 +19,11 @@ abstract final class TefIPEndpoints {
   /// Endpoint used to request input or confirmation from the terminal.
   static final String ask = '/ask';
 
+  static final String askCancel = '/ask/cancel';
+
+  static final String askForm = '/ask/form';
+
+
   /// Endpoint used to display an image on the terminal.
   static final String displayImage = '/display/image';
 

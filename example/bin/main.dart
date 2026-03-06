@@ -73,7 +73,7 @@ void main(List<String> arguments) async {
     _imageFromPathToBase64('assets/example_carousel2.jpeg'),
     _imageFromPathToBase64('assets/example_carousel3.jpeg'),
   ]);
-  
+
   final displayCarouselResult = await tefIP.displayCarousel.post(
     displayCarouselRequest: DisplayCarouselRequestModel(
       images: carouselImages,
@@ -108,10 +108,52 @@ void main(List<String> arguments) async {
   print(displayClearResult);
 
   // Ask a question
-  final askResult = await tefIP.ask.post(
-    questionRequest: QuestionRequestModel(type: TefIPQuestionType.cpfOrcnpj),
+  final askParameters = AskParametersModel(
+    showCancelButton: true,
   );
+
+  final askResult = await tefIP.ask.post(
+    questionRequest: AskSingleQuestionRequestModel(
+      parameters: askParameters,
+      question: AskQuestionModel(
+        type: TefIPQuestionType.text,
+      ),
+    ),
+  );
+
   print(askResult);
+
+  // Ask form
+  final askFormResult = await tefIP.askForm.post(
+    form: AskFormRequestModel(
+      parameters: askParameters,
+      questions: [
+        AskQuestionModel(
+          type: TefIPQuestionType.text,
+        ),
+        AskQuestionModel(
+          type: TefIPQuestionType.cnpj,
+        ),
+      ],
+    ),
+  );
+  print(askFormResult);
+
+  // Ask a question
+  SuccessResponseModel? askCancelResult;
+  tefIP.ask
+      .post(
+        questionRequest: AskSingleQuestionRequestModel(
+          parameters: askParameters,
+          question: AskQuestionModel(),
+        ),
+      )
+      .catchError((_) => AnswerModel(id: 0, value: '', displayValue: ''));
+
+  await Future.delayed(Duration(milliseconds: 500));
+  askCancelResult = await tefIP.askCancel.post();
+
+  print(askCancelResult);
 
   // Restart the terminal (will throw 403 for non-Android/iOS)
   try {

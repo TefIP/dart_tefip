@@ -1,5 +1,5 @@
 import 'package:dart_tefip/dart_tefip.dart';
 
-final kQuestionRequest = QuestionRequestModel(
+final kAskQuestion = AskQuestionModel(
   type: TefIPQuestionType.cpfOrcnpj,
 );

@@ -69,29 +69,6 @@ void main() {
         );
       });
 
-      test('should throw FormatException when body is not object', () async {
-        final response = http.Response(
-          jsonEncode(['invalid']),
-          200,
-        );
-
-        when(
-          () => kHttpClient.get(
-            any(),
-            headers: any(named: 'headers'),
-          ),
-        ).thenAnswer((_) async => response);
-
-        expect(
-          () => TefIPNetworkingClient.get<String>(
-            url: kBaseUrl,
-            client: kHttpClient,
-            onSuccess: (json) => json['name'],
-          ),
-          throwsA(isA<FormatException>()),
-        );
-      });
-
       test('should throw ArgumentError when onSuccess is null', () async {
         final response = http.Response(
           jsonEncode({'name': 'ok'}),
@@ -153,36 +130,13 @@ void main() {
           ),
         ).thenAnswer((_) async => response);
 
-        final result = await TefIPNetworkingClient.getList<int>(
+        final result = await TefIPNetworkingClient.get<List<int>>(
           url: kBaseUrl,
           client: kHttpClient,
-          onSuccess: (list) => list.map((e) => e['id'] as int).toList(),
+          onSuccess: (json) => List<int>.from(json.map((e) => e['id'])),
         );
 
         expect(result, equals([1]));
-      });
-
-      test('should throw FormatException when body is not list', () async {
-        final response = http.Response(
-          jsonEncode({'invalid': true}),
-          200,
-        );
-
-        when(
-          () => kHttpClient.get(
-            any(),
-            headers: any(named: 'headers'),
-          ),
-        ).thenAnswer((_) async => response);
-
-        expect(
-          () => TefIPNetworkingClient.getList<int>(
-            url: kBaseUrl,
-            client: kHttpClient,
-            onSuccess: (list) => [],
-          ),
-          throwsA(isA<FormatException>()),
-        );
       });
     });
 
