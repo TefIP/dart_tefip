@@ -176,12 +176,35 @@ final displayTextResult = await tefIP.displayText.post(
 final displayClearResult = await tefIP.displayClear.post();
 ```
 
-Ask for user input:
+Ask for user input (single question):
 
 ```dart
 final askResult = await tefIP.ask.post(
-  questionRequest: QuestionRequestModel(type: TefIPQuestionType.cpfOrcnpj),
+  askRequest: AskSingleQuestionRequestModel(
+    question: AskQuestionModel(type: TefIPQuestionType.cpfOrcnpj),
+    parameters: AskParametersModel(),
+  ),
 );
+```
+
+Ask for user input (multiple questions form):
+
+```dart
+final askFormResult = await tefIP.askForm.post(
+  askFormRequest: AskFormRequestModel(
+    questions: [
+      AskQuestionModel(type: TefIPQuestionType.cpfOrcnpj),
+      AskQuestionModel(type: TefIPQuestionType.customString),
+    ],
+    parameters: AskParametersModel(),
+  ),
+);
+```
+
+Cancel an ongoing ask request:
+
+```dart
+final cancelResult = await tefIP.askCancel.post();
 ```
 
 Restart terminal:
@@ -205,7 +228,8 @@ try {
 * ✅ Terminal info and status queries
 * ✅ Display text, image, and carousel
 * ✅ Printing: text, images, XML
-* ✅ Asking user input via terminal
+* ✅ Question endpoint for terminal input (single and form)
+* ✅ Cancel terminal input
 * ✅ Restart terminal (Android/iOS only)
 * ✅ Consistent exception handling (`TefIPRequestException`, `TefIPUnexpectedException`)
 * ✅ Async operations

@@ -1,3 +1,9 @@
+## 1.0.5
+* Added `askForm` endpoint for multiple question forms
+* Added `askCancel` endpoint to cancel ongoing questions
+* Refactored question models (`AnswerModel`, `AskQuestionModel`, `AskParametersModel`)
+* Removed legacy models (`QuestionOptionModel`, `QuestionRequestModel`, `QuestionResponseModel`)
+
 ## 1.0.4
 * Refactored `QuestionResponseModel` to use `freezed`
 * Updated `QuestionResponseModel` to abstract class with factory constructor
