@@ -34,7 +34,9 @@ part 'transaction_request_model.g.dart';
 abstract class TransactionRequestModel with _$TransactionRequestModel {
   const factory TransactionRequestModel({
     @Default(null) String? referenceId,
-    @Default(TefIPTransactionType.unknown) TefIPTransactionType type,
+    @JsonKey(name: 'tPag')
+    @Default(TefIPTransactionType.unknown)
+    TefIPTransactionType type,
     @Default(0) double amount,
     @Default(1) int installments,
     @Default(TefIPInstallmentType.single) TefIPInstallmentType installmentType,

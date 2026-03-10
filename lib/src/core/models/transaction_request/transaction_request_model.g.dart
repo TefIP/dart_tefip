@@ -11,7 +11,7 @@ _TransactionRequestModel _$TransactionRequestModelFromJson(
 ) => _TransactionRequestModel(
   referenceId: json['referenceId'] as String? ?? null,
   type:
-      $enumDecodeNullable(_$TefIPTransactionTypeEnumMap, json['type']) ??
+      $enumDecodeNullable(_$TefIPTransactionTypeEnumMap, json['tPag']) ??
       TefIPTransactionType.unknown,
   amount: (json['amount'] as num?)?.toDouble() ?? 0,
   installments: (json['installments'] as num?)?.toInt() ?? 1,
@@ -28,7 +28,7 @@ Map<String, dynamic> _$TransactionRequestModelToJson(
   _TransactionRequestModel instance,
 ) => <String, dynamic>{
   'referenceId': instance.referenceId,
-  'type': _$TefIPTransactionTypeEnumMap[instance.type]!,
+  'tPag': _$TefIPTransactionTypeEnumMap[instance.type]!,
   'amount': instance.amount,
   'installments': instance.installments,
   'installmentType': _$TefIPInstallmentTypeEnumMap[instance.installmentType]!,

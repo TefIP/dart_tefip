@@ -30,19 +30,7 @@ class TefIPTransactionTypeConverter
   /// Any other value results in [TefIPTransactionType.unknown].
   @override
   TefIPTransactionType fromJson(String json) {
-    switch (json) {
-      case '03':
-      case 'credit':
-        return TefIPTransactionType.credit;
-      case '04':
-      case 'debit':
-        return TefIPTransactionType.debit;
-      case '17':
-      case 'pix':
-        return TefIPTransactionType.pix;
-      default:
-        return TefIPTransactionType.unknown;
-    }
+    return TefIPTransactionType.fromTPag(json);
   }
 
   /// Serializes a [TefIPTransactionType] into its string representation.
@@ -50,6 +38,6 @@ class TefIPTransactionTypeConverter
   /// The enum `name` is used as the serialized value.
   @override
   String toJson(TefIPTransactionType object) {
-    return object.name;
+    return object.tPag;
   }
 }

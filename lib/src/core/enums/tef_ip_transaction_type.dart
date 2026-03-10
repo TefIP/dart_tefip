@@ -13,17 +13,32 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 enum TefIPTransactionType {
   /// Credit card transaction.
   @JsonValue('03')
-  credit,
+  credit('03'),
 
   /// Debit card transaction.
   @JsonValue('04')
-  debit,
+  debit('04'),
 
   /// PIX transaction.
   @JsonValue('17')
-  pix,
+  pix('17'),
 
   /// Unknown or unsupported transaction type.
   @JsonValue('99')
-  unknown,
+  unknown('99');
+
+  /// The TPag code associated with the transaction type.
+  final String tPag;
+
+  const TefIPTransactionType(this.tPag);
+
+  /// Returns the [TefIPTransactionType] corresponding to the given [tPag] code.
+  ///
+  /// If the code is not recognized, [TefIPTransactionType.unknown] is returned.
+  static TefIPTransactionType fromTPag(String tPag) {
+    return TefIPTransactionType.values.firstWhere(
+      (type) => type.tPag == tPag,
+      orElse: () => TefIPTransactionType.unknown,
+    );
+  }
 }
