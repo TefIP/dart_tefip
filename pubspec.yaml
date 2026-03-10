@@ -1,6 +1,6 @@
 name: dart_tefip
 description: Dart SDK for TefIP API terminal integration and usage
-version: 1.0.5
+version: 1.0.6
 homepage: https://www.tefip.com.br
 repository: https://github.com/TefIP/dart_tefip
 issue_tracker: https://github.com/TefIP/dart_tefip/issues
@@ -10,10 +10,10 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  fetch_client: ^1.2.0
   flutter:
     sdk: flutter
   http: ^1.6.0
+  fetch_client: ^1.2.0
   meta: ^1.17.0
   freezed: ^3.2.3
   freezed_annotation: ^3.1.0
