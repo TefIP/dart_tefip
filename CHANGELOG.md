@@ -1,3 +1,7 @@
+## 1.0.7
+* Updated transaction type parsings to use TPag numerical codes (`03`, `04`, `17`) instead of the alphabetic ones (`CC`, `CD`, `PX`)
+* Fixed AnswerModel code generation setup (`displayValue` custom parsing)
+
 ## 1.0.6
 * Updated transaction type parsings to use TPag numerical codes (`03`, `04`, `17`) instead of the alphabetic ones (`CC`, `CD`, `PX`)
 * Fixed AnswerModel code generation setup (`displayValue` custom parsing)
