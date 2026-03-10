@@ -6,24 +6,24 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 /// using [JsonValue], ensuring consistent serialization and deserialization.
 ///
 /// Possible values:
-/// - [credit]: Credit card transaction (`CC`).
-/// - [debit]: Debit card transaction (`CD`).
-/// - [pix]: PIX transaction (`PX`).
-/// - [unknown]: Fallback value when the transaction type is not recognized (`XX`).
+/// - [credit]: Credit card transaction (`03`).
+/// - [debit]: Debit card transaction (`04`).
+/// - [pix]: PIX transaction (`17`).
+/// - [unknown]: Fallback value when the transaction type is not recognized (`99`).
 enum TefIPTransactionType {
   /// Credit card transaction.
-  @JsonValue('CC')
+  @JsonValue('03')
   credit,
 
   /// Debit card transaction.
-  @JsonValue('CD')
+  @JsonValue('04')
   debit,
 
   /// PIX transaction.
-  @JsonValue('PX')
+  @JsonValue('17')
   pix,
 
   /// Unknown or unsupported transaction type.
-  @JsonValue('XX')
+  @JsonValue('99')
   unknown,
 }

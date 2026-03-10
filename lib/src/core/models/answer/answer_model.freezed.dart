@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AnswerModel {
 
- int get id; String get value; String get displayValue;
+ int get id; String get value;@JsonKey(readValue: _readDisplayValue) String get displayValue;
 /// Create a copy of AnswerModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $AnswerModelCopyWith<$Res>  {
   factory $AnswerModelCopyWith(AnswerModel value, $Res Function(AnswerModel) _then) = _$AnswerModelCopyWithImpl;
 @useResult
 $Res call({
- int id, String value, String displayValue
+ int id, String value,@JsonKey(readValue: _readDisplayValue) String displayValue
 });
 
 
@@ -155,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String value,  String displayValue)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String value, @JsonKey(readValue: _readDisplayValue)  String displayValue)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AnswerModel() when $default != null:
 return $default(_that.id,_that.value,_that.displayValue);case _:
@@ -176,7 +176,7 @@ return $default(_that.id,_that.value,_that.displayValue);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String value,  String displayValue)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String value, @JsonKey(readValue: _readDisplayValue)  String displayValue)  $default,) {final _that = this;
 switch (_that) {
 case _AnswerModel():
 return $default(_that.id,_that.value,_that.displayValue);case _:
@@ -196,7 +196,7 @@ return $default(_that.id,_that.value,_that.displayValue);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String value,  String displayValue)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String value, @JsonKey(readValue: _readDisplayValue)  String displayValue)?  $default,) {final _that = this;
 switch (_that) {
 case _AnswerModel() when $default != null:
 return $default(_that.id,_that.value,_that.displayValue);case _:
@@ -211,12 +211,12 @@ return $default(_that.id,_that.value,_that.displayValue);case _:
 @JsonSerializable()
 
 class _AnswerModel implements AnswerModel {
-  const _AnswerModel({required this.id, required this.value, required this.displayValue});
+  const _AnswerModel({required this.id, required this.value, @JsonKey(readValue: _readDisplayValue) required this.displayValue});
   factory _AnswerModel.fromJson(Map<String, dynamic> json) => _$AnswerModelFromJson(json);
 
 @override final  int id;
 @override final  String value;
-@override final  String displayValue;
+@override@JsonKey(readValue: _readDisplayValue) final  String displayValue;
 
 /// Create a copy of AnswerModel
 /// with the given fields replaced by the non-null parameter values.
@@ -251,7 +251,7 @@ abstract mixin class _$AnswerModelCopyWith<$Res> implements $AnswerModelCopyWith
   factory _$AnswerModelCopyWith(_AnswerModel value, $Res Function(_AnswerModel) _then) = __$AnswerModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String value, String displayValue
+ int id, String value,@JsonKey(readValue: _readDisplayValue) String displayValue
 });
 
 

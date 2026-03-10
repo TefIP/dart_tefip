@@ -8,13 +8,13 @@ abstract class AnswerModel with _$AnswerModel {
   const factory AnswerModel({
     required int id,
     required String value,
-    required String displayValue,
+    @JsonKey(readValue: _readDisplayValue) required String displayValue,
   }) = _AnswerModel;
 
-  factory AnswerModel.fromJson(Map<String, dynamic> json) {
-    return _$AnswerModelFromJson({
-      ...json,
-      'displayValue': json['displayValue'] ?? json['value'],
-    });
-  }
+  factory AnswerModel.fromJson(Map<String, dynamic> json) =>
+      _$AnswerModelFromJson(json);
+}
+
+Object? _readDisplayValue(Map<dynamic, dynamic> json, String key) {
+  return json['displayValue'] ?? json['value'];
 }

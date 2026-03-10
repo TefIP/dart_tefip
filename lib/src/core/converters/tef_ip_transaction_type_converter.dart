@@ -7,7 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 ///
 /// The API may return different string formats for the same
 /// transaction type, including:
-/// - Short codes (e.g., `CC`, `CD`, `PX`)
+/// - Short codes (e.g., `03`, `04`, `17`)
 /// - Full lowercase names (e.g., `credit`, `debit`, `pix`)
 ///
 /// This converter normalizes those representations into a
@@ -23,21 +23,21 @@ class TefIPTransactionTypeConverter
   /// Converts the raw JSON string into a [TefIPTransactionType].
   ///
   /// Supported mappings:
-  /// - `CC` or `credit` → [TefIPTransactionType.credit]
-  /// - `CD` or `debit` → [TefIPTransactionType.debit]
-  /// - `PX` or `pix` → [TefIPTransactionType.pix]
+  /// - `03` or `credit` → [TefIPTransactionType.credit]
+  /// - `04` or `debit` → [TefIPTransactionType.debit]
+  /// - `17` or `pix` → [TefIPTransactionType.pix]
   ///
   /// Any other value results in [TefIPTransactionType.unknown].
   @override
   TefIPTransactionType fromJson(String json) {
     switch (json) {
-      case 'CC':
+      case '03':
       case 'credit':
         return TefIPTransactionType.credit;
-      case 'CD':
+      case '04':
       case 'debit':
         return TefIPTransactionType.debit;
-      case 'PX':
+      case '17':
       case 'pix':
         return TefIPTransactionType.pix;
       default:
