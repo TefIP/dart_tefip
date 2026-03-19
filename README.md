@@ -89,6 +89,29 @@ dart pub add dart_tefip
 
 ## How to Use
 
+Initialize the terminal instance and configure the connection:
+
+```dart
+TefIP.baseUrl = "http://localhost:8080";
+TefIP.username = "admin";
+TefIP.password = "1234";
+```
+
+### Timeout
+
+By default, requests wait indefinitely — suitable for TEF IP terminals that
+may take an unpredictable amount of time to respond (e.g., waiting for payment
+confirmation on the physical terminal).
+
+To apply a global timeout:
+
+```dart
+TefIP.requestsTimeOut = const Duration(minutes: 2);
+```
+
+You can also pass a per-call timeout to individual endpoint methods that
+support it.
+
 Initialize the terminal instance:
 
 ```dart

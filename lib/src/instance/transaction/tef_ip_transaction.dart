@@ -44,7 +44,7 @@ interface class TefIPTransaction implements EndpointInterface {
 
   /// Retrieves a specific transaction by [referenceId].
   Future<TransactionModel> get({
-    String? referenceId,
+    required String referenceId,
     http.Client? client,
   }) async {
     try {

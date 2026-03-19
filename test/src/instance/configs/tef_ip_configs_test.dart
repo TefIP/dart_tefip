@@ -10,15 +10,12 @@ void main() {
 
     setUp(() {
       TefIPConfigs.baseUrl = null;
-      TefIPConfigs.requestsTimeOut = TefIPConfigs.defaultRequestsTimeOut;
+      TefIPConfigs.requestsTimeOut = null;
     });
 
     group('requestsTimeOut', () {
-      test('should have default timeout initially', () {
-        expect(
-          TefIPConfigs.requestsTimeOut,
-          equals(TefIPConfigs.defaultRequestsTimeOut),
-        );
+      test('should be null by default', () {
+        expect(TefIPConfigs.requestsTimeOut, isNull);
       });
 
       test('should allow overriding timeout', () {
@@ -28,6 +25,13 @@ void main() {
           TefIPConfigs.requestsTimeOut,
           equals(kDuration),
         );
+      });
+
+      test('should allow resetting to null', () {
+        TefIPConfigs.requestsTimeOut = kDuration;
+        TefIPConfigs.requestsTimeOut = null;
+
+        expect(TefIPConfigs.requestsTimeOut, isNull);
       });
     });
 

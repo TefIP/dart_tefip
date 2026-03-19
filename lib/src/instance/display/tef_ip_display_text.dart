@@ -36,7 +36,7 @@ interface class TefIPDisplayText implements EndpointInterface {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
         url: TefIpUrlBuilder.build(endpoint),
-        body: jsonEncode(displayTextRequest),
+        body: jsonEncode(displayTextRequest.toJson()),
         client: client,
         onSuccess: (json) => SuccessResponseModel.fromJson(json),
       );

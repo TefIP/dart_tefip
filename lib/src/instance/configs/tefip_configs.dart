@@ -10,14 +10,11 @@ import 'package:meta/meta.dart';
 @immutable
 @internal
 abstract class TefIPConfigs {
-  /// Default timeout applied to HTTP requests.
-  static final defaultRequestsTimeOut =
-      Duration(minutes: 1, seconds: 30);
-
   /// Current timeout used for requests.
   ///
+  /// Defaults to `null` (no timeout — waits indefinitely).
   /// Can be overridden before performing API calls.
-  static Duration requestsTimeOut = defaultRequestsTimeOut;
+  static Duration? requestsTimeOut;
 
   static String? _baseUrl;
 

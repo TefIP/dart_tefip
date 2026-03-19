@@ -35,9 +35,13 @@ class TefIPDetailsConverter
     if (json == null || json == 'null') return null;
     if (json is Map<String, dynamic>) return json;
     if (json is String) {
-      return jsonDecode(json) as Map<String, dynamic>;
+      final decoded = jsonDecode(json);
+      if (decoded is Map<String, dynamic>) return decoded;
+      throw FormatException(
+        'Expected a JSON object, got: ${decoded.runtimeType}',
+      );
     }
-    throw FormatException();
+    throw FormatException('Unsupported details type: ${json.runtimeType}');
   }
 
   /// Converts a `Map<String, dynamic>?` into a JSON-compatible structure.

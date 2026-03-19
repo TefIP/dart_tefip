@@ -1,10 +1,12 @@
 ## 1.0.7
-* Updated transaction type parsings to use TPag numerical codes (`03`, `04`, `17`) instead of the alphabetic ones (`CC`, `CD`, `PX`)
-* Fixed AnswerModel code generation setup (`displayValue` custom parsing)
+* Refactored `TefIPTransactionType` enum to carry the tPag code as a field (`tPag`) with a `fromTPag()` factory method
+* Updated `TefIPTransactionTypeConverter` to use `fromTPag()` for deserialization and `object.tPag` for serialization (instead of `object.name`)
+* Updated `TransactionRequestModel` to serialize/deserialize the transaction type under the `tPag` JSON key (instead of `type`)
 
 ## 1.0.6
-* Updated transaction type parsings to use TPag numerical codes (`03`, `04`, `17`) instead of the alphabetic ones (`CC`, `CD`, `PX`)
-* Fixed AnswerModel code generation setup (`displayValue` custom parsing)
+* Updated `TefIPTransactionTypeConverter` to accept tPag numerical codes (`03`, `04`, `17`, `99`) instead of alphabetic codes (`CC`, `CD`, `PX`, `XX`)
+* Updated `TefIPTransactionType` `@JsonValue` annotations to use tPag numerical codes
+* Fixed `AnswerModel.displayValue` parsing using `@JsonKey(readValue:)` instead of manual JSON manipulation in `fromJson`
 
 ## 1.0.5
 * Added `askCancel` endpoint to cancel ongoing questions

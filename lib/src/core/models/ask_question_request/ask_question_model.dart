@@ -1,33 +1,29 @@
 import 'package:dart_tefip/dart_tefip.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-///  model responsible for configuring a question flow on the terminal.
+/// Model representing a single question displayed on the terminal.
 ///
-/// This model defines how the question should be rendered,
-/// which validation rules apply, and how the interaction behaves.
+/// Defines the question prompt, expected input type, validation rules,
+/// and the list of selectable options when applicable.
 ///
 /// Fields:
-/// - [type]: Question type that defines expected input format
-///   (e.g., CPF, CNPJ, phone, email).
-/// - [question]: Custom question text.
-///   If not provided, a default message is generated based on [type].
-/// - [buttonText]: Label for the confirmation button.
-/// - [showCancelButton]: Whether a cancel button should be displayed.
-/// - [buttonCancelText]: Label for the cancel button.
-/// - [showSuccessMessage]: Whether a success message should be shown after confirmation.
-/// - [successMessage]: Custom success message text.
-/// - [successMessageInterval]: Duration (ms) the success message remains visible.
-/// - [confirmAnswer]: Whether the user must confirm the entered answer.
-/// - [options]: List of selectable options (used for multiple-choice types).
-/// - [regex]: Custom validation pattern applied to the input.
-///
-/// Behavior:
-/// - If [question] is not explicitly provided,
-///   a default message is resolved using [_getDefaultQuestion].
-///
-/// Generated:
-/// - `fromJson` factory for deserialization.
-/// - `toJson` method for serialization.
+/// - [id]: Identifier of the question within a form flow.
+///   Default: `0`.
+/// - [question]: Text of the question shown to the user.
+///   If `null`, a default prompt is used based on [type].
+/// - [type]: Expected input type (e.g., CPF, phone, text, list).
+///   Default: [TefIPQuestionType.text].
+/// - [`required`]: Whether an answer is mandatory.
+///   Default: `false`.
+/// - [minLength]: Minimum allowed answer length.
+///   Default: `0`.
+/// - [maxLength]: Maximum allowed answer length.
+///   Default: `255`.
+/// - [defaultValue]: Pre-filled value shown in the input field.
+/// - [mask]: Input mask pattern applied to the field.
+/// - [regex]: Custom validation regex applied to the answer.
+/// - [errorMessage]: Message shown when validation fails.
+/// - [options]: Selectable options for list/button question types.
 
 part 'ask_question_model.freezed.dart';
 part 'ask_question_model.g.dart';

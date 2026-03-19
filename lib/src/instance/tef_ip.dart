@@ -49,7 +49,7 @@ final class TefIP extends TefIPClientBase {
   ///
   /// Example:
   /// ```dart
-  /// TefIP.baseUrl = "http://192.168.0.10:8080";
+  /// TefIP.baseUrl = "http://localhost:8080";
   /// ```
   static set baseUrl(String baseUrl) {
     TefIPConfigs.baseUrl = baseUrl;
