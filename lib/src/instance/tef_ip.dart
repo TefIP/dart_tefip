@@ -14,6 +14,11 @@ import 'package:dart_tefip/src/instance/print/tef_ip_print_text.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_xml.dart';
 import 'package:dart_tefip/src/instance/restart/tef_ip_restart.dart';
 import 'package:dart_tefip/src/instance/reversal/tef_ip_reversal.dart';
+import 'package:dart_tefip/src/instance/sale/tef_ip_sale.dart';
+import 'package:dart_tefip/src/instance/sale/tef_ip_sale_cancel.dart';
+import 'package:dart_tefip/src/instance/sale/tef_ip_sale_finalize.dart';
+import 'package:dart_tefip/src/instance/sale/tef_ip_sale_item.dart';
+import 'package:dart_tefip/src/instance/sale/tef_ip_sale_payment.dart';
 import 'package:dart_tefip/src/instance/status/tef_ip_status.dart';
 import 'package:dart_tefip/src/instance/transaction/tef_ip_transaction.dart';
 import 'package:meta/meta.dart';
@@ -152,6 +157,31 @@ final class TefIP extends TefIPClientBase {
   ///
   /// Used to check the current terminal or transaction status.
   TefIPStatus get status => TefIPStatus();
+
+  /// Provides access to the Sale endpoint.
+  ///
+  /// Used to start a new sale on the terminal display.
+  TefIPSale get sale => TefIPSale();
+
+  /// Provides access to the Sale Item endpoint.
+  ///
+  /// Used to add, update, remove, and cancel items within a sale.
+  TefIPSaleItem get saleItem => TefIPSaleItem();
+
+  /// Provides access to the Sale Payment endpoint.
+  ///
+  /// Used to add and remove payments within a sale.
+  TefIPSalePayment get salePayment => TefIPSalePayment();
+
+  /// Provides access to the Sale Finalize endpoint.
+  ///
+  /// Used to finalize the current sale.
+  TefIPSaleFinalize get saleFinalize => TefIPSaleFinalize();
+
+  /// Provides access to the Sale Cancel endpoint.
+  ///
+  /// Used to cancel the current sale.
+  TefIPSaleCancel get saleCancel => TefIPSaleCancel();
 
   /// Provides access to the Transaction endpoint.
   ///

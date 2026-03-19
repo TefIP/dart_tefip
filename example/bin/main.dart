@@ -20,7 +20,7 @@ void main(List<String> arguments) async {
 
   // Retrieve a specific transaction
   final transaction = await tefIP.transaction.get(
-    referenceId: transactions.first.referenceId,
+    referenceId: transactions.first.referenceId!,
   );
   print(transaction);
 
@@ -154,6 +154,93 @@ void main(List<String> arguments) async {
   askCancelResult = await tefIP.askCancel.post();
 
   print(askCancelResult);
+
+  // Start a sale
+  final saleResult = await tefIP.sale.post(
+    request: SaleStartRequestModel(
+      id: 'VENDA-001',
+      customerName: 'Joao da Silva',
+      sellerName: 'Maria Souza',
+      additionalInfo: 'Mesa 12',
+    ),
+  );
+  print(saleResult);
+
+  // Add an item to the sale
+  final addItemResult = await tefIP.sale.postItem(
+    item: SaleItemModel(
+      id: 'ITEM-001',
+      code: '7891000100103',
+      description: 'Produto Exemplo',
+      quantity: 2.0,
+      unitPrice: 10.0,
+      total: 20.0,
+    ),
+  );
+  print(addItemResult);
+
+  // Update an item in the sale
+  final updateItemResult = await tefIP.sale.patchItem(
+    itemId: 'ITEM-001',
+    item: SaleItemModel(
+      id: 'ITEM-001',
+      code: '7891000100103',
+      description: 'Produto Exemplo Atualizado',
+      quantity: 3.0,
+      unitPrice: 10.0,
+      total: 30.0,
+    ),
+  );
+  print(updateItemResult);
+
+  // Cancel an item in the sale
+  final cancelItemResult = await tefIP.sale.cancelItem(
+    itemId: 'ITEM-001',
+  );
+  print(cancelItemResult);
+
+  // Remove an item from the sale
+  final deleteItemResult = await tefIP.sale.deleteItem(
+    itemId: 'ITEM-001',
+  );
+  print(deleteItemResult);
+
+  // Add a payment to the sale
+  final addPaymentResult = await tefIP.sale.postPayment(
+    payment: SalePaymentModel(
+      id: 'PGTO-001',
+      type: TefIPSalePaymentType.money,
+      description: 'Dinheiro',
+      value: 30.0,
+    ),
+  );
+  print(addPaymentResult);
+
+  // Remove a payment from the sale
+  final deletePaymentResult = await tefIP.sale.deletePayment(
+    paymentId: 'PGTO-001',
+  );
+  print(deletePaymentResult);
+
+  // Finalize the sale
+  final finalizeResult = await tefIP.sale.finalize(
+    params: SaleActionRequestModel(
+      message: 'Venda finalizada!',
+      showMessage: true,
+      messageInterval: 3000,
+    ),
+  );
+  print(finalizeResult);
+
+  // Cancel the sale
+  final cancelSaleResult = await tefIP.sale.cancel(
+    params: SaleActionRequestModel(
+      message: 'Venda cancelada.',
+      showMessage: true,
+      messageInterval: 3000,
+    ),
+  );
+  print(cancelSaleResult);
 
   // Restart the terminal (will throw 403 for non-Android/iOS)
   try {

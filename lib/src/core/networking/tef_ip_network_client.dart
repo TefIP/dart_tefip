@@ -166,4 +166,124 @@ abstract class TefIPNetworkingClient {
       if (internalClient) client.close();
     }
   }
+
+  /// Performs an HTTP PATCH request to [url] and returns a typed result.
+  ///
+  /// Throws [TefIPRequestException] on non-2xx responses.
+  static Future<T> patch<T>({
+    required String url,
+    Object? body,
+    Encoding? encoding,
+    bool returnRawResponse = false,
+    T Function(dynamic json)? onSuccess,
+    Map<String, String>? headers,
+    http.Client? client,
+    Duration? timeout,
+  }) async {
+    final internalClient = client == null;
+    client ??= _streamingHttpClient();
+    headers = TefIPHeadersBuilder.build(additionalHeader: headers);
+
+    final uri = Uri.parse(url);
+
+    try {
+      final effectiveTimeout = timeout ?? TefIPConfigs.requestsTimeOut;
+      final responseFuture = client.patch(
+        uri,
+        headers: headers,
+        body: body,
+        encoding: encoding,
+      );
+      final response = await (effectiveTimeout != null
+          ? responseFuture.timeout(effectiveTimeout)
+          : responseFuture);
+
+      if (returnRawResponse) {
+        return response.body as T;
+      }
+
+      final responseBody = utf8.decode(response.bodyBytes);
+      final decoded = jsonDecode(responseBody);
+
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        throw TefIPRequestException(
+          message: decoded is Map && decoded['message'] != null
+              ? decoded['message'].toString()
+              : 'Request failed',
+          statusCode: response.statusCode,
+          rawBody: responseBody,
+        );
+      }
+
+      if (onSuccess == null) {
+        throw ArgumentError(
+          'onSuccess is required when returnRawResponse = false',
+        );
+      }
+
+      return onSuccess(decoded);
+    } finally {
+      if (internalClient) client.close();
+    }
+  }
+
+  /// Performs an HTTP DELETE request to [url] and returns a typed result.
+  ///
+  /// Throws [TefIPRequestException] on non-2xx responses.
+  static Future<T> delete<T>({
+    required String url,
+    Object? body,
+    Encoding? encoding,
+    bool returnRawResponse = false,
+    T Function(dynamic json)? onSuccess,
+    Map<String, String>? headers,
+    http.Client? client,
+    Duration? timeout,
+  }) async {
+    final internalClient = client == null;
+    client ??= _streamingHttpClient();
+    headers = TefIPHeadersBuilder.build(additionalHeader: headers);
+
+    final uri = Uri.parse(url);
+
+    try {
+      final effectiveTimeout = timeout ?? TefIPConfigs.requestsTimeOut;
+      final responseFuture = client.delete(
+        uri,
+        headers: headers,
+        body: body,
+        encoding: encoding,
+      );
+      final response = await (effectiveTimeout != null
+          ? responseFuture.timeout(effectiveTimeout)
+          : responseFuture);
+
+      if (returnRawResponse) {
+        return response.body as T;
+      }
+
+      final responseBody = utf8.decode(response.bodyBytes);
+      final decoded = jsonDecode(responseBody);
+
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        throw TefIPRequestException(
+          message: decoded is Map && decoded['message'] != null
+              ? decoded['message'].toString()
+              : 'Request failed',
+          statusCode: response.statusCode,
+          rawBody: responseBody,
+        );
+      }
+
+      if (onSuccess == null) {
+        throw ArgumentError(
+          'onSuccess is required when returnRawResponse = false',
+        );
+      }
+
+      return onSuccess(decoded);
+    } finally {
+      if (internalClient) client.close();
+    }
+  }
 }

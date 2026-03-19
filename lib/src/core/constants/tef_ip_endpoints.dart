@@ -67,4 +67,29 @@ abstract final class TefIPEndpoints {
 
   /// Endpoint used to retrieve the current terminal status.
   static final String status = '/status';
+
+  /// Endpoint used to start a sale.
+  static final String sale = '/sale';
+
+  /// Endpoint used to add or list sale items.
+  static final String saleItem = '/sale/item';
+
+  /// Builds the endpoint for a specific sale item by [itemId].
+  static String saleItemById(String itemId) => '/sale/item/$itemId';
+
+  /// Builds the endpoint to cancel a specific sale item by [itemId].
+  static String saleItemCancel(String itemId) => '/sale/item/$itemId/cancel';
+
+  /// Endpoint used to add a payment to a sale.
+  static final String salePayment = '/sale/payment';
+
+  /// Builds the endpoint for a specific sale payment by [paymentId].
+  static String salePaymentById(String paymentId) =>
+      '/sale/payment/$paymentId';
+
+  /// Endpoint used to finalize a sale.
+  static final String saleFinalize = '/sale/finalize';
+
+  /// Endpoint used to cancel a sale.
+  static final String saleCancel = '/sale/cancel';
 }
