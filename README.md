@@ -53,6 +53,7 @@
 * Display text, images, and carousels on the terminal
 * Print text, images, or XML documents
 * Ask user input through terminal questions
+* Manage sales: items, payments, finalization, and cancellation
 * Restart terminals (returns 403 on non-Android/iOS devices by business rules)
 
 The SDK uses a consistent exception handling pattern:
@@ -157,6 +158,64 @@ Perform a reversal:
 final reversalTransaction = await tefIP.reversal.post(referenceId: '12345');
 ```
 
+### Sale
+
+Start a sale:
+
+```dart
+final sale = await tefIP.sale.post(
+  request: SaleStartRequestModel(...),
+);
+```
+
+Add an item:
+
+```dart
+await tefIP.saleItem.post(item: SaleItemModel(...));
+```
+
+Update an item:
+
+```dart
+await tefIP.saleItem.patch(itemId: 'ITEM-001', item: SaleItemModel(...));
+```
+
+Remove an item:
+
+```dart
+await tefIP.saleItem.delete(itemId: 'ITEM-001');
+```
+
+Cancel an item:
+
+```dart
+await tefIP.saleItem.cancel(itemId: 'ITEM-001');
+```
+
+Add a payment:
+
+```dart
+await tefIP.salePayment.post(payment: SalePaymentModel(...));
+```
+
+Remove a payment:
+
+```dart
+await tefIP.salePayment.delete(paymentId: 'PGTO-001');
+```
+
+Finalize the sale:
+
+```dart
+await tefIP.saleFinalize.post();
+```
+
+Cancel the sale:
+
+```dart
+await tefIP.saleCancel.post();
+```
+
 ### Printing
 
 Print an image:
@@ -248,6 +307,7 @@ try {
 
 * ✅ Transaction management (pix, debit, credit)
 * ✅ Reversal support
+* ✅ Sale management (items, payments, finalize, cancel)
 * ✅ Terminal info and status queries
 * ✅ Display text, image, and carousel
 * ✅ Printing: text, images, XML
