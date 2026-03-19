@@ -167,7 +167,7 @@ void main(List<String> arguments) async {
   print(saleResult);
 
   // Add an item to the sale
-  final addItemResult = await tefIP.sale.postItem(
+  final addItemResult = await tefIP.saleItem.post(
     item: SaleItemModel(
       id: 'ITEM-001',
       code: '7891000100103',
@@ -180,7 +180,7 @@ void main(List<String> arguments) async {
   print(addItemResult);
 
   // Update an item in the sale
-  final updateItemResult = await tefIP.sale.patchItem(
+  final updateItemResult = await tefIP.saleItem.patch(
     itemId: 'ITEM-001',
     item: SaleItemModel(
       id: 'ITEM-001',
@@ -194,19 +194,19 @@ void main(List<String> arguments) async {
   print(updateItemResult);
 
   // Cancel an item in the sale
-  final cancelItemResult = await tefIP.sale.cancelItem(
+  final cancelItemResult = await tefIP.saleItem.cancel(
     itemId: 'ITEM-001',
   );
   print(cancelItemResult);
 
   // Remove an item from the sale
-  final deleteItemResult = await tefIP.sale.deleteItem(
+  final deleteItemResult = await tefIP.saleItem.delete(
     itemId: 'ITEM-001',
   );
   print(deleteItemResult);
 
   // Add a payment to the sale
-  final addPaymentResult = await tefIP.sale.postPayment(
+  final addPaymentResult = await tefIP.salePayment.post(
     payment: SalePaymentModel(
       id: 'PGTO-001',
       type: TefIPSalePaymentType.money,
@@ -217,13 +217,13 @@ void main(List<String> arguments) async {
   print(addPaymentResult);
 
   // Remove a payment from the sale
-  final deletePaymentResult = await tefIP.sale.deletePayment(
+  final deletePaymentResult = await tefIP.salePayment.delete(
     paymentId: 'PGTO-001',
   );
   print(deletePaymentResult);
 
   // Finalize the sale
-  final finalizeResult = await tefIP.sale.finalize(
+  final finalizeResult = await tefIP.saleFinalize.post(
     params: SaleActionRequestModel(
       message: 'Venda finalizada!',
       showMessage: true,
@@ -232,8 +232,19 @@ void main(List<String> arguments) async {
   );
   print(finalizeResult);
 
+  // Start a sale
+  final saleResult2 = await tefIP.sale.post(
+    request: SaleStartRequestModel(
+      id: 'VENDA-001',
+      customerName: 'Joao da Silva',
+      sellerName: 'Maria Souza',
+      additionalInfo: 'Mesa 12',
+    ),
+  );
+  print(saleResult2);
+
   // Cancel the sale
-  final cancelSaleResult = await tefIP.sale.cancel(
+  final cancelSaleResult = await tefIP.saleCancel.post(
     params: SaleActionRequestModel(
       message: 'Venda cancelada.',
       showMessage: true,
