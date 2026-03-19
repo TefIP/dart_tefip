@@ -1,3 +1,20 @@
+## 1.0.8
+
+### Added
+- New `TefIPSale` endpoint for sale management (start, cancel, finalize, items, payments)
+- New models: `SaleStartRequest`, `SaleActionRequest`, `SaleCreatedResponse`, `SaleMutationResponse`, `SaleItem`, `SalePayment`
+- New enum `TefIPSalePaymentType` for sale payment types
+- New tests for all sale endpoints
+
+### Fixed
+- Authentication header construction error in `TefIPHeadersBuilder`
+- Updated `example/bin/main.dart` to reflect correct SDK usage
+
+### Improved
+- Refactored `TefIPNetworkingClient` with better error handling
+- Updated Ask models (`ask_parameters`, `answer`) with improved structure
+- General documentation and configuration updates (README.md, CLAUDE.md)
+
 ## 1.0.7
 * Refactored `TefIPTransactionType` enum to carry the tPag code as a field (`tPag`) with a `fromTPag()` factory method
 * Updated `TefIPTransactionTypeConverter` to use `fromTPag()` for deserialization and `object.tPag` for serialization (instead of `object.name`)

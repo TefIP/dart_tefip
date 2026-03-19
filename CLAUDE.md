@@ -5,7 +5,7 @@ Dart/Flutter SDK for communicating with TEF IP payment terminals over HTTP.
 ## Project Overview
 
 - **Package**: `dart_tefip` (pub.dev)
-- **Version**: 1.0.7
+- **Version**: 1.0.8
 - **Type**: Dart/Flutter library package
 - **Purpose**: Structured SDK for TEF IP terminal operations (transactions, printing, display, input)
 
