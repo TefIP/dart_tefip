@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:meta/meta.dart';
 
 /// Internal header builder responsible for configuring and generating
@@ -67,7 +69,7 @@ abstract class TefIPHeadersBuilder {
     Map<String, String> headers = <String, String>{
       'Content-Type': 'application/json',
       if (username.isNotEmpty && password.isNotEmpty)
-        'Authorization': 'Basic $username:$password',
+        'Authorization': 'Basic ${base64Encode(utf8.encode('$username:$password'))}',
     };
 
     headers = {
