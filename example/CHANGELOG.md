@@ -1,3 +1,13 @@
+## 1.1.0
+
+### Added
+- Usage example for `displayPop.post` to close the current display overlay
+- Usage example for `sale.patch` to update sale metadata after creation
+- Usage example for `salePayment.patch` to update an existing payment
+
+### Changed
+- Removed `id` field from `SaleItemModel` usage in `saleItem.patch` example — field is now optional
+
 ## 1.0.8
 
 ### Added

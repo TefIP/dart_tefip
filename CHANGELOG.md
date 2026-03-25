@@ -1,3 +1,21 @@
+## 1.1.0
+
+### Added
+- New `displayPop` endpoint (`POST /display/pop`) to close the current display overlay
+- New `salePayment.patch` and `salePayment.delete` methods — full CRUD for sale payments
+- New `saleItem.patch` and `saleItem.delete` methods — full CRUD for sale items
+- New `sale.patch` method to update sale metadata at any point during the sale flow
+
+### Changed
+- `SaleItemModel.id` and `SalePaymentModel.id` are now optional (`String?`) — backend manages IDs internally
+- Removed `SaleCreatedResponse` model (sale creation now returns `SuccessResponseModel`)
+- `SaleStartRequestModel` no longer exposes an `id` field
+
+### Testing
+- Added extensive unit tests for all models: `SaleItem`, `SalePayment`, `SaleStartRequest`, `SaleActionRequest`, `SaleMutationResponse`, `SuccessResponse`, `Transaction`, `TransactionRequest`, `AskFormRequest`, `AskOption`, `AskParameters`, `AskQuestion`, `AskSingleQuestionRequest`, `DisplayCarouselRequest`, `DisplayTextRequest`
+- Added tests for enums (`TefIPTransactionType`, all other enums), converters (`details`, `images`, `transaction type`, `unix datetime`), exceptions, endpoint constants, and header builder
+- Added tests for new `displayPop` and `salePayment` endpoints
+
 ## 1.0.8
 
 ### Added
