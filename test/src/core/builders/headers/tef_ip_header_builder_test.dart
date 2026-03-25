@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dart_tefip/src/core/builders/headers/tef_ip_headers_builder.dart';
 import 'package:test/test.dart';
 
@@ -47,7 +49,7 @@ void main() {
         final headers = TefIPHeadersBuilder.build();
 
         expect(headers['Content-Type'], 'application/json');
-        expect(headers['Authorization'], 'Basic $kUsername:$kPassword');
+        expect(headers['Authorization'], 'Basic ${base64Encode(utf8.encode('$kUsername:$kPassword'))}');
       });
 
       test('should include global headers', () {
@@ -92,7 +94,10 @@ void main() {
           );
           expect(
             headers,
-            containsPair('Authorization', 'Basic $kUsername:$kPassword'),
+            containsPair(
+              'Authorization',
+              'Basic ${base64Encode(utf8.encode('$kUsername:$kPassword'))}',
+            ),
           );
           expect(
             headers[kMockHeader1.keys.first],

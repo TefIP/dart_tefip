@@ -158,7 +158,6 @@ void main(List<String> arguments) async {
   // Start a sale
   final saleResult = await tefIP.sale.post(
     request: SaleStartRequestModel(
-      id: 'VENDA-001',
       customerName: 'Joao da Silva',
       sellerName: 'Maria Souza',
       additionalInfo: 'Mesa 12',
@@ -235,7 +234,6 @@ void main(List<String> arguments) async {
   // Start a sale
   final saleResult2 = await tefIP.sale.post(
     request: SaleStartRequestModel(
-      id: 'VENDA-001',
       customerName: 'Joao da Silva',
       sellerName: 'Maria Souza',
       additionalInfo: 'Mesa 12',
