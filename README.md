@@ -20,8 +20,8 @@
 <div align='center'>
 
 [![Version](https://img.shields.io/github/v/release/TefIP/dart_tefip?style=plastic)](https://pub.dev/packages/dart_tefip)
-[![Pub Points](https://img.shields.io/pub/points/dart_tefip?label=pub%/cla0points&style=plastic)](https://pub.dev/packages/dart_tefip/score)
 [![Dart](https://img.shields.io/badge/language-dart-blue?style=plastic)](https://dart.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
 
