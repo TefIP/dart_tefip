@@ -36,6 +36,9 @@ abstract final class TefIPEndpoints {
   /// Endpoint used to clear the terminal display.
   static final String displayClear = '/display/clear';
 
+  /// Endpoint used to close the current display overlay.
+  static final String displayPop = '/display/pop';
+
   /// Endpoint used to retrieve device and environment information.
   static final String info = '/info';
 

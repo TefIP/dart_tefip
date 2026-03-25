@@ -48,6 +48,33 @@ interface class TefIPSalePayment implements EndpointInterface {
     }
   }
 
+  /// Updates an existing payment in the current sale.
+  ///
+  /// - [paymentId] ID of the payment to be updated.
+  /// - [payment] model with updated data.
+  Future<SaleMutationResponseModel> patch({
+    required String paymentId,
+    required SalePaymentModel payment,
+    http.Client? client,
+    Duration? timeout,
+  }) async {
+    try {
+      return await TefIPNetworkingClient.patch<SaleMutationResponseModel>(
+        url: TefIpUrlBuilder.build(TefIPEndpoints.salePaymentById(paymentId)),
+        body: jsonEncode(payment.toJson()),
+        client: client,
+        timeout: timeout,
+        onSuccess: (json) => SaleMutationResponseModel.fromJson(json),
+      );
+    } on ClientException catch (e) {
+      throw TefIPRequestException(message: e.message, statusCode: -1);
+    } on TefIPRequestException {
+      rethrow;
+    } catch (e) {
+      throw TefIPUnexpectedException(exception: e);
+    }
+  }
+
   /// Removes a payment from the current sale.
   ///
   /// - [paymentId] ID of the payment to be removed.

@@ -9,7 +9,6 @@ part of 'sale_start_request_model.dart';
 _SaleStartRequestModel _$SaleStartRequestModelFromJson(
   Map<String, dynamic> json,
 ) => _SaleStartRequestModel(
-  id: json['id'] as String?,
   customerDocument: json['customerDocument'] as String?,
   customerName: json['customerName'] as String?,
   sellerName: json['sellerName'] as String?,
@@ -19,7 +18,6 @@ _SaleStartRequestModel _$SaleStartRequestModelFromJson(
 Map<String, dynamic> _$SaleStartRequestModelToJson(
   _SaleStartRequestModel instance,
 ) => <String, dynamic>{
-  'id': instance.id,
   'customerDocument': instance.customerDocument,
   'customerName': instance.customerName,
   'sellerName': instance.sellerName,

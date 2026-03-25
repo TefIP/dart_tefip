@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SaleStartRequestModel {
 
- String? get id; String? get customerDocument; String? get customerName; String? get sellerName; String? get additionalInfo;
+ String? get customerDocument; String? get customerName; String? get sellerName; String? get additionalInfo;
 /// Create a copy of SaleStartRequestModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SaleStartRequestModelCopyWith<SaleStartRequestModel> get copyWith => _$SaleStar
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SaleStartRequestModel&&(identical(other.id, id) || other.id == id)&&(identical(other.customerDocument, customerDocument) || other.customerDocument == customerDocument)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.sellerName, sellerName) || other.sellerName == sellerName)&&(identical(other.additionalInfo, additionalInfo) || other.additionalInfo == additionalInfo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SaleStartRequestModel&&(identical(other.customerDocument, customerDocument) || other.customerDocument == customerDocument)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.sellerName, sellerName) || other.sellerName == sellerName)&&(identical(other.additionalInfo, additionalInfo) || other.additionalInfo == additionalInfo));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,customerDocument,customerName,sellerName,additionalInfo);
+int get hashCode => Object.hash(runtimeType,customerDocument,customerName,sellerName,additionalInfo);
 
 @override
 String toString() {
-  return 'SaleStartRequestModel(id: $id, customerDocument: $customerDocument, customerName: $customerName, sellerName: $sellerName, additionalInfo: $additionalInfo)';
+  return 'SaleStartRequestModel(customerDocument: $customerDocument, customerName: $customerName, sellerName: $sellerName, additionalInfo: $additionalInfo)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $SaleStartRequestModelCopyWith<$Res>  {
   factory $SaleStartRequestModelCopyWith(SaleStartRequestModel value, $Res Function(SaleStartRequestModel) _then) = _$SaleStartRequestModelCopyWithImpl;
 @useResult
 $Res call({
- String? id, String? customerDocument, String? customerName, String? sellerName, String? additionalInfo
+ String? customerDocument, String? customerName, String? sellerName, String? additionalInfo
 });
 
 
@@ -65,10 +65,9 @@ class _$SaleStartRequestModelCopyWithImpl<$Res>
 
 /// Create a copy of SaleStartRequestModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? customerDocument = freezed,Object? customerName = freezed,Object? sellerName = freezed,Object? additionalInfo = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? customerDocument = freezed,Object? customerName = freezed,Object? sellerName = freezed,Object? additionalInfo = freezed,}) {
   return _then(_self.copyWith(
-id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,customerDocument: freezed == customerDocument ? _self.customerDocument : customerDocument // ignore: cast_nullable_to_non_nullable
+customerDocument: freezed == customerDocument ? _self.customerDocument : customerDocument // ignore: cast_nullable_to_non_nullable
 as String?,customerName: freezed == customerName ? _self.customerName : customerName // ignore: cast_nullable_to_non_nullable
 as String?,sellerName: freezed == sellerName ? _self.sellerName : sellerName // ignore: cast_nullable_to_non_nullable
 as String?,additionalInfo: freezed == additionalInfo ? _self.additionalInfo : additionalInfo // ignore: cast_nullable_to_non_nullable
@@ -157,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String? customerDocument,  String? customerName,  String? sellerName,  String? additionalInfo)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? customerDocument,  String? customerName,  String? sellerName,  String? additionalInfo)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SaleStartRequestModel() when $default != null:
-return $default(_that.id,_that.customerDocument,_that.customerName,_that.sellerName,_that.additionalInfo);case _:
+return $default(_that.customerDocument,_that.customerName,_that.sellerName,_that.additionalInfo);case _:
   return orElse();
 
 }
@@ -178,10 +177,10 @@ return $default(_that.id,_that.customerDocument,_that.customerName,_that.sellerN
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String? customerDocument,  String? customerName,  String? sellerName,  String? additionalInfo)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? customerDocument,  String? customerName,  String? sellerName,  String? additionalInfo)  $default,) {final _that = this;
 switch (_that) {
 case _SaleStartRequestModel():
-return $default(_that.id,_that.customerDocument,_that.customerName,_that.sellerName,_that.additionalInfo);case _:
+return $default(_that.customerDocument,_that.customerName,_that.sellerName,_that.additionalInfo);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +197,10 @@ return $default(_that.id,_that.customerDocument,_that.customerName,_that.sellerN
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String? customerDocument,  String? customerName,  String? sellerName,  String? additionalInfo)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? customerDocument,  String? customerName,  String? sellerName,  String? additionalInfo)?  $default,) {final _that = this;
 switch (_that) {
 case _SaleStartRequestModel() when $default != null:
-return $default(_that.id,_that.customerDocument,_that.customerName,_that.sellerName,_that.additionalInfo);case _:
+return $default(_that.customerDocument,_that.customerName,_that.sellerName,_that.additionalInfo);case _:
   return null;
 
 }
@@ -213,10 +212,9 @@ return $default(_that.id,_that.customerDocument,_that.customerName,_that.sellerN
 @JsonSerializable()
 
 class _SaleStartRequestModel implements SaleStartRequestModel {
-  const _SaleStartRequestModel({this.id, this.customerDocument, this.customerName, this.sellerName, this.additionalInfo});
+  const _SaleStartRequestModel({this.customerDocument, this.customerName, this.sellerName, this.additionalInfo});
   factory _SaleStartRequestModel.fromJson(Map<String, dynamic> json) => _$SaleStartRequestModelFromJson(json);
 
-@override final  String? id;
 @override final  String? customerDocument;
 @override final  String? customerName;
 @override final  String? sellerName;
@@ -235,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SaleStartRequestModel&&(identical(other.id, id) || other.id == id)&&(identical(other.customerDocument, customerDocument) || other.customerDocument == customerDocument)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.sellerName, sellerName) || other.sellerName == sellerName)&&(identical(other.additionalInfo, additionalInfo) || other.additionalInfo == additionalInfo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SaleStartRequestModel&&(identical(other.customerDocument, customerDocument) || other.customerDocument == customerDocument)&&(identical(other.customerName, customerName) || other.customerName == customerName)&&(identical(other.sellerName, sellerName) || other.sellerName == sellerName)&&(identical(other.additionalInfo, additionalInfo) || other.additionalInfo == additionalInfo));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,customerDocument,customerName,sellerName,additionalInfo);
+int get hashCode => Object.hash(runtimeType,customerDocument,customerName,sellerName,additionalInfo);
 
 @override
 String toString() {
-  return 'SaleStartRequestModel(id: $id, customerDocument: $customerDocument, customerName: $customerName, sellerName: $sellerName, additionalInfo: $additionalInfo)';
+  return 'SaleStartRequestModel(customerDocument: $customerDocument, customerName: $customerName, sellerName: $sellerName, additionalInfo: $additionalInfo)';
 }
 
 
@@ -255,7 +253,7 @@ abstract mixin class _$SaleStartRequestModelCopyWith<$Res> implements $SaleStart
   factory _$SaleStartRequestModelCopyWith(_SaleStartRequestModel value, $Res Function(_SaleStartRequestModel) _then) = __$SaleStartRequestModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? id, String? customerDocument, String? customerName, String? sellerName, String? additionalInfo
+ String? customerDocument, String? customerName, String? sellerName, String? additionalInfo
 });
 
 
@@ -272,10 +270,9 @@ class __$SaleStartRequestModelCopyWithImpl<$Res>
 
 /// Create a copy of SaleStartRequestModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? customerDocument = freezed,Object? customerName = freezed,Object? sellerName = freezed,Object? additionalInfo = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? customerDocument = freezed,Object? customerName = freezed,Object? sellerName = freezed,Object? additionalInfo = freezed,}) {
   return _then(_SaleStartRequestModel(
-id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String?,customerDocument: freezed == customerDocument ? _self.customerDocument : customerDocument // ignore: cast_nullable_to_non_nullable
+customerDocument: freezed == customerDocument ? _self.customerDocument : customerDocument // ignore: cast_nullable_to_non_nullable
 as String?,customerName: freezed == customerName ? _self.customerName : customerName // ignore: cast_nullable_to_non_nullable
 as String?,sellerName: freezed == sellerName ? _self.sellerName : sellerName // ignore: cast_nullable_to_non_nullable
 as String?,additionalInfo: freezed == additionalInfo ? _self.additionalInfo : additionalInfo // ignore: cast_nullable_to_non_nullable

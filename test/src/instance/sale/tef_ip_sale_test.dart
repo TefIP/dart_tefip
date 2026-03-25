@@ -8,9 +8,9 @@ import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-import '../../../../testing/mocks/models/sale_created_response_model_mock.dart';
 import '../../../../testing/mocks/models/sale_start_request_model_mock.dart';
 import '../../../../testing/mocks/networking/tef_ip_networking_client_test.dart';
+import '../../../../testing/mocks/shared/success_response_mock.dart';
 import '../../../../testing/mocks/shared/uri_mock.dart';
 
 void main() {
@@ -32,7 +32,7 @@ void main() {
     });
 
     group('post', () {
-      test('should return SaleCreatedResponseModel on success', () async {
+      test('should return SuccessResponseModel on success', () async {
         final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.sale);
 
         when(
@@ -44,7 +44,7 @@ void main() {
           ),
         ).thenAnswer(
           (_) async => http.Response(
-            jsonEncode(kSaleCreatedResponse.toJson()),
+            jsonEncode(kSuccessResponse.toJson()),
             200,
           ),
         );
@@ -54,7 +54,7 @@ void main() {
           client: kHttpClient,
         );
 
-        expect(result, equals(kSaleCreatedResponse));
+        expect(result, equals(kSuccessResponse));
 
         verify(
           () => kHttpClient.post(
@@ -109,6 +109,89 @@ void main() {
 
         expect(
           () => sale.post(request: kSaleStartRequest, client: kHttpClient),
+          throwsA(isA<TefIPUnexpectedException>()),
+        );
+      });
+    });
+
+    group('patch', () {
+      test('should return SuccessResponseModel on success', () async {
+        final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.sale);
+
+        when(
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenAnswer(
+          (_) async => http.Response(
+            jsonEncode(kSuccessResponse.toJson()),
+            200,
+          ),
+        );
+
+        final result = await sale.patch(
+          request: kSaleStartRequest,
+          client: kHttpClient,
+        );
+
+        expect(result, equals(kSuccessResponse));
+
+        verify(
+          () => kHttpClient.patch(
+            Uri.parse(expectedUrl),
+            headers: any(named: 'headers'),
+            body: jsonEncode(kSaleStartRequest.toJson()),
+          ),
+        ).called(1);
+      });
+
+      test('should throw TefIPRequestException on ClientException', () {
+        when(
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenThrow(httpError);
+
+        expect(
+          () => sale.patch(request: kSaleStartRequest, client: kHttpClient),
+          throwsA(isA<TefIPRequestException>()),
+        );
+      });
+
+      test('should rethrow TefIPRequestException', () {
+        when(
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
+
+        expect(
+          () => sale.patch(request: kSaleStartRequest, client: kHttpClient),
+          throwsA(isA<TefIPRequestException>()),
+        );
+      });
+
+      test('should throw TefIPUnexpectedException on unknown error', () {
+        when(
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenThrow(Exception());
+
+        expect(
+          () => sale.patch(request: kSaleStartRequest, client: kHttpClient),
           throwsA(isA<TefIPUnexpectedException>()),
         );
       });

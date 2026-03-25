@@ -20,7 +20,7 @@
 <div align='center'>
 
 [![Version](https://img.shields.io/github/v/release/TefIP/dart_tefip?style=plastic)](https://pub.dev/packages/dart_tefip)
-[![Pub Points](https://img.shields.io/pub/points/dart_tefip?label=pub%20points&style=plastic)](https://pub.dev/packages/dart_tefip/score)
+[![Pub Points](https://img.shields.io/pub/points/dart_tefip?label=pub%/cla0points&style=plastic)](https://pub.dev/packages/dart_tefip/score)
 [![Dart](https://img.shields.io/badge/language-dart-blue?style=plastic)](https://dart.dev/)
 
 </div>
@@ -163,7 +163,15 @@ final reversalTransaction = await tefIP.reversal.post(referenceId: '12345');
 Start a sale:
 
 ```dart
-final sale = await tefIP.sale.post(
+await tefIP.sale.post(
+  request: SaleStartRequestModel(...),
+);
+```
+
+Update an active sale:
+
+```dart
+await tefIP.sale.patch(
   request: SaleStartRequestModel(...),
 );
 ```
@@ -196,6 +204,12 @@ Add a payment:
 
 ```dart
 await tefIP.salePayment.post(payment: SalePaymentModel(...));
+```
+
+Update a payment:
+
+```dart
+await tefIP.salePayment.patch(paymentId: 'PGTO-001', payment: SalePaymentModel(...));
 ```
 
 Remove a payment:
@@ -256,6 +270,8 @@ final displayTextResult = await tefIP.displayText.post(
 );
 
 final displayClearResult = await tefIP.displayClear.post();
+
+final displayPopResult = await tefIP.displayPop.post();
 ```
 
 Ask for user input (single question):

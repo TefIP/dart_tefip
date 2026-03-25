@@ -7,6 +7,7 @@ import 'package:dart_tefip/src/instance/configs/tefip_configs.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_carousel.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_clear.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_image.dart';
+import 'package:dart_tefip/src/instance/display/tef_ip_display_pop.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_text.dart';
 import 'package:dart_tefip/src/instance/info/tef_ip_info.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_image.dart';
@@ -113,6 +114,11 @@ final class TefIP extends TefIPClientBase {
   /// Used to clear the terminal display.
   TefIPDisplayClear get displayClear => TefIPDisplayClear();
 
+  /// Provides access to the Display Pop endpoint.
+  ///
+  /// Used to close the current display overlay on the terminal.
+  TefIPDisplayPop get displayPop => TefIPDisplayPop();
+
   /// Provides access to the Display Image endpoint.
   ///
   /// Used to render a single image on the terminal screen.
@@ -170,7 +176,7 @@ final class TefIP extends TefIPClientBase {
 
   /// Provides access to the Sale Payment endpoint.
   ///
-  /// Used to add and remove payments within a sale.
+  /// Used to add, update, and remove payments within a sale.
   TefIPSalePayment get salePayment => TefIPSalePayment();
 
   /// Provides access to the Sale Finalize endpoint.

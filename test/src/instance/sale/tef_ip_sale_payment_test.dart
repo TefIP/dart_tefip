@@ -114,6 +114,104 @@ void main() {
       });
     });
 
+    group('patch', () {
+      test('should return SaleMutationResponseModel on success', () async {
+        final expectedUrl = TefIpUrlBuilder.build(
+          TefIPEndpoints.salePaymentById(kSalePaymentId),
+        );
+
+        when(
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenAnswer(
+          (_) async => http.Response(
+            jsonEncode(kSaleMutationResponse.toJson()),
+            200,
+          ),
+        );
+
+        final result = await salePayment.patch(
+          paymentId: kSalePaymentId,
+          payment: kSalePayment,
+          client: kHttpClient,
+        );
+
+        expect(result, equals(kSaleMutationResponse));
+
+        verify(
+          () => kHttpClient.patch(
+            Uri.parse(expectedUrl),
+            headers: any(named: 'headers'),
+            body: jsonEncode(kSalePayment.toJson()),
+          ),
+        ).called(1);
+      });
+
+      test('should throw TefIPRequestException on ClientException', () {
+        when(
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenThrow(httpError);
+
+        expect(
+          () => salePayment.patch(
+            paymentId: kSalePaymentId,
+            payment: kSalePayment,
+            client: kHttpClient,
+          ),
+          throwsA(isA<TefIPRequestException>()),
+        );
+      });
+
+      test('should rethrow TefIPRequestException', () {
+        when(
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
+
+        expect(
+          () => salePayment.patch(
+            paymentId: kSalePaymentId,
+            payment: kSalePayment,
+            client: kHttpClient,
+          ),
+          throwsA(isA<TefIPRequestException>()),
+        );
+      });
+
+      test('should throw TefIPUnexpectedException on unknown error', () {
+        when(
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenThrow(Exception());
+
+        expect(
+          () => salePayment.patch(
+            paymentId: kSalePaymentId,
+            payment: kSalePayment,
+            client: kHttpClient,
+          ),
+          throwsA(isA<TefIPUnexpectedException>()),
+        );
+      });
+    });
+
     group('delete', () {
       test('should return SaleMutationResponseModel on success', () async {
         final expectedUrl = TefIpUrlBuilder.build(

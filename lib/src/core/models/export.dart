@@ -10,7 +10,6 @@ export 'ask_question_request/ask_question_model.dart';
 export 'ask_single_question_request/ask_single_question_request_model.dart';
 
 export 'sale_action_request/sale_action_request_model.dart';
-export 'sale_created_response/sale_created_response_model.dart';
 export 'sale_item/sale_item_model.dart';
 export 'sale_mutation_response/sale_mutation_response_model.dart';
 export 'sale_payment/sale_payment_model.dart';

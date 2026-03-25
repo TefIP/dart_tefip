@@ -3,10 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'sale_start_request_model.freezed.dart';
 part 'sale_start_request_model.g.dart';
 
-/// Model with the data required to start a new sale on the terminal display.
+/// Model with the data required to start or update a sale on the terminal display.
 ///
 /// Fields:
-/// - [id]: External sale identifier (optional).
 /// - [customerDocument]: Customer CPF/CNPJ (optional).
 /// - [customerName]: Customer name shown on the display.
 /// - [sellerName]: Seller name shown on the display.
@@ -14,7 +13,6 @@ part 'sale_start_request_model.g.dart';
 @freezed
 abstract class SaleStartRequestModel with _$SaleStartRequestModel {
   const factory SaleStartRequestModel({
-    String? id,
     String? customerDocument,
     String? customerName,
     String? sellerName,

@@ -5,6 +5,7 @@ import 'package:dart_tefip/src/instance/configs/tefip_configs.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_carousel.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_clear.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_image.dart';
+import 'package:dart_tefip/src/instance/display/tef_ip_display_pop.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_text.dart';
 import 'package:dart_tefip/src/instance/info/tef_ip_info.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_image.dart';
@@ -72,6 +73,10 @@ void main() {
 
       test('should return TefIPDisplayClear', () {
         expect(tefip.displayClear, isA<TefIPDisplayClear>());
+      });
+
+      test('should return TefIPDisplayPop', () {
+        expect(tefip.displayPop, isA<TefIPDisplayPop>());
       });
 
       test('should return TefIPDisplayImage', () {
