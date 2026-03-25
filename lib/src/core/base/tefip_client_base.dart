@@ -1,7 +1,7 @@
-/// Base abstract class for the TefIP SDK.
+/// Base abstract class for the TEF IP SDK.
 ///
 /// This class defines the foundation for all client implementations
-/// responsible for communicating with the TefIP API.
+/// responsible for communicating with the TEF IP API.
 ///
 /// It is intended to be extended by the main SDK entry point
 /// (e.g., [TefIP]) and may be used to:

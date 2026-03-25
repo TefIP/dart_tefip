@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-/// Defines the supported payment types for a sale recognized by the TefIP API.
+/// Defines the supported payment types for a sale recognized by the TEF IP API.
 ///
 /// Each enum value is mapped to its corresponding API string representation
 /// using [JsonValue].

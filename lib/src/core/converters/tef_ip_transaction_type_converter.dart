@@ -2,7 +2,7 @@ import 'package:dart_tefip/dart_tefip.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 /// Custom JSON converter responsible for mapping transaction type
-/// representations returned by the TefIP API into the
+/// representations returned by the TEF IP API into the
 /// [TefIPTransactionType] enum.
 ///
 /// The API may return different string formats for the same

@@ -26,7 +26,7 @@ import 'package:meta/meta.dart';
 
 @immutable
 /// The main class of the package. It is a singleton class,
-/// responsible for configuring and providing access to all TefIP API endpoints.
+/// responsible for configuring and providing access to all TEF IP API endpoints.
 ///
 /// You can access the instance by calling the [TefIP.instance] getter.
 ///
@@ -51,7 +51,7 @@ final class TefIP extends TefIPClientBase {
 
   /// Sets the base URL used for all API requests.
   ///
-  /// This should point to the TefIP server address.
+  /// This should point to the TEF IP server address.
   ///
   /// Example:
   /// ```dart

@@ -1,7 +1,7 @@
 import 'package:dart_tefip/src/core/constants/tef_ip_strings.dart';
 import 'package:meta/meta.dart';
 
-/// Internal configuration holder for the TefIP SDK.
+/// Internal configuration holder for the TEF IP SDK.
 ///
 /// Stores global configuration used by the networking layer,
 /// including request timeout and base URL.

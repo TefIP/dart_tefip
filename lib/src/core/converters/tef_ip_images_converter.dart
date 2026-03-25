@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 /// Custom JSON converter used to normalize image list responses
-/// returned by the TefIP API.
+/// returned by the TEF IP API.
 ///
 /// Some API responses may return images in different structures:
 /// - A flat list of strings:

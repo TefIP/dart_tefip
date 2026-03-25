@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:meta/meta.dart';
 
 /// Internal header builder responsible for configuring and generating
-/// HTTP headers for all TefIP API requests.
+/// HTTP headers for all TEF IP API requests.
 ///
 /// This class manages:
 /// - Authentication credentials (username and password).

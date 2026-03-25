@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 /// Internal container for SDK-wide constant string values.
 ///
 /// This class centralizes default configuration values
-/// and string literals used across the TefIP SDK,
+/// and string literals used across the TEF IP SDK,
 /// preventing duplication and improving maintainability.
 ///
 /// All fields are immutable and compile-time constants.
@@ -14,7 +14,7 @@ import 'package:meta/meta.dart';
 abstract final class TefIPStrings {
   /// Default base URL used when no custom base URL is provided.
   ///
-  /// This typically points to a local TefIP service instance.
+  /// This typically points to a local TEF IP service instance.
   ///
   /// Example:
   /// ```dart

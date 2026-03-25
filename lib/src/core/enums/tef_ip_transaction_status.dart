@@ -1,7 +1,7 @@
 /// Represents the current status of a transaction.
 ///
 /// This enum reflects the lifecycle state returned
-/// by the TefIP transaction endpoints.
+/// by the TEF IP transaction endpoints.
 ///
 /// Possible values:
 /// - [pending]: The transaction has been created and is awaiting completion.

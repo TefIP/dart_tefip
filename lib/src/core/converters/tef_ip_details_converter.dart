@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 
 /// Custom JSON converter used to normalize dynamic `details` payloads
-/// returned by the TefIP API.
+/// returned by the TEF IP API.
 ///
 /// Some API responses may return the `details` field in different formats:
 /// - `null`

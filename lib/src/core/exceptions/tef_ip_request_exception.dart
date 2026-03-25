@@ -1,4 +1,4 @@
-/// Exception thrown when an HTTP request to the TefIP API fails.
+/// Exception thrown when an HTTP request to the TEF IP API fails.
 ///
 /// This exception encapsulates:
 /// - A human-readable error [message].

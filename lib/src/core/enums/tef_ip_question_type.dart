@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 /// Defines the supported input types for questions
-/// requested by the TefIP Ask endpoint.
+/// requested by the TEF IP Ask endpoint.
 ///
 /// Each enum value is mapped to a specific string representation
 /// using [JsonValue], ensuring correct serialization and

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-/// Defines the supported transaction types recognized by the TefIP API.
+/// Defines the supported transaction types recognized by the TEF IP API.
 ///
 /// Each enum value is mapped to its corresponding API representation
 /// using [JsonValue], ensuring consistent serialization and deserialization.

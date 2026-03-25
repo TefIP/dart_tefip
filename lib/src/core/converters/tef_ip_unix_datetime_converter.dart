@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 /// Custom JSON converter responsible for handling Unix timestamp
 /// serialization and deserialization.
 ///
-/// The TefIP API may return timestamps in:
+/// The TEF IP API may return timestamps in:
 /// - Seconds since Unix epoch
 /// - Milliseconds since Unix epoch
 ///

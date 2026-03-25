@@ -347,7 +347,7 @@ Contributions are welcome. Fork the repo, create a branch, commit, and submit a 
 
 ## Contact
 
-* GitHub: [TefIP](https://github.com/TefIP)
+* GitHub: [TEF IP](https://github.com/TefIP)
 * Website: https://www.djsystem.com.br
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

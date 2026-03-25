@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-/// Centralized definition of all TefIP API endpoint paths.
+/// Centralized definition of all TEF IP API endpoint paths.
 ///
 /// This class provides a single source of truth for route
 /// definitions used across the SDK. It ensures consistency
