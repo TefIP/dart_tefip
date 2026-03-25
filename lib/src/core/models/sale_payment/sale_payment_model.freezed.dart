@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SalePaymentModel {
 
- String get id;@JsonKey(name: 'tPag') TefIPSalePaymentType get type; String? get description; double get value; String? get additionalInfo;
+ String? get id;@JsonKey(name: 'tPag') TefIPSalePaymentType get type; String? get description; double get value; String? get additionalInfo;
 /// Create a copy of SalePaymentModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $SalePaymentModelCopyWith<$Res>  {
   factory $SalePaymentModelCopyWith(SalePaymentModel value, $Res Function(SalePaymentModel) _then) = _$SalePaymentModelCopyWithImpl;
 @useResult
 $Res call({
- String id,@JsonKey(name: 'tPag') TefIPSalePaymentType type, String? description, double value, String? additionalInfo
+ String? id,@JsonKey(name: 'tPag') TefIPSalePaymentType type, String? description, double value, String? additionalInfo
 });
 
 
@@ -65,10 +65,10 @@ class _$SalePaymentModelCopyWithImpl<$Res>
 
 /// Create a copy of SalePaymentModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? type = null,Object? description = freezed,Object? value = null,Object? additionalInfo = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? type = null,Object? description = freezed,Object? value = null,Object? additionalInfo = freezed,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as TefIPSalePaymentType,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as double,additionalInfo: freezed == additionalInfo ? _self.additionalInfo : additionalInfo // ignore: cast_nullable_to_non_nullable
@@ -157,7 +157,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'tPag')  TefIPSalePaymentType type,  String? description,  double value,  String? additionalInfo)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id, @JsonKey(name: 'tPag')  TefIPSalePaymentType type,  String? description,  double value,  String? additionalInfo)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SalePaymentModel() when $default != null:
 return $default(_that.id,_that.type,_that.description,_that.value,_that.additionalInfo);case _:
@@ -178,7 +178,7 @@ return $default(_that.id,_that.type,_that.description,_that.value,_that.addition
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'tPag')  TefIPSalePaymentType type,  String? description,  double value,  String? additionalInfo)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id, @JsonKey(name: 'tPag')  TefIPSalePaymentType type,  String? description,  double value,  String? additionalInfo)  $default,) {final _that = this;
 switch (_that) {
 case _SalePaymentModel():
 return $default(_that.id,_that.type,_that.description,_that.value,_that.additionalInfo);case _:
@@ -198,7 +198,7 @@ return $default(_that.id,_that.type,_that.description,_that.value,_that.addition
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'tPag')  TefIPSalePaymentType type,  String? description,  double value,  String? additionalInfo)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id, @JsonKey(name: 'tPag')  TefIPSalePaymentType type,  String? description,  double value,  String? additionalInfo)?  $default,) {final _that = this;
 switch (_that) {
 case _SalePaymentModel() when $default != null:
 return $default(_that.id,_that.type,_that.description,_that.value,_that.additionalInfo);case _:
@@ -213,10 +213,10 @@ return $default(_that.id,_that.type,_that.description,_that.value,_that.addition
 @JsonSerializable()
 
 class _SalePaymentModel implements SalePaymentModel {
-  const _SalePaymentModel({required this.id, @JsonKey(name: 'tPag') this.type = TefIPSalePaymentType.unknown, this.description, required this.value, this.additionalInfo});
+  const _SalePaymentModel({this.id, @JsonKey(name: 'tPag') this.type = TefIPSalePaymentType.unknown, this.description, required this.value, this.additionalInfo});
   factory _SalePaymentModel.fromJson(Map<String, dynamic> json) => _$SalePaymentModelFromJson(json);
 
-@override final  String id;
+@override final  String? id;
 @override@JsonKey(name: 'tPag') final  TefIPSalePaymentType type;
 @override final  String? description;
 @override final  double value;
@@ -255,7 +255,7 @@ abstract mixin class _$SalePaymentModelCopyWith<$Res> implements $SalePaymentMod
   factory _$SalePaymentModelCopyWith(_SalePaymentModel value, $Res Function(_SalePaymentModel) _then) = __$SalePaymentModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(name: 'tPag') TefIPSalePaymentType type, String? description, double value, String? additionalInfo
+ String? id,@JsonKey(name: 'tPag') TefIPSalePaymentType type, String? description, double value, String? additionalInfo
 });
 
 
@@ -272,10 +272,10 @@ class __$SalePaymentModelCopyWithImpl<$Res>
 
 /// Create a copy of SalePaymentModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? type = null,Object? description = freezed,Object? value = null,Object? additionalInfo = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? type = null,Object? description = freezed,Object? value = null,Object? additionalInfo = freezed,}) {
   return _then(_SalePaymentModel(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as TefIPSalePaymentType,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as double,additionalInfo: freezed == additionalInfo ? _self.additionalInfo : additionalInfo // ignore: cast_nullable_to_non_nullable

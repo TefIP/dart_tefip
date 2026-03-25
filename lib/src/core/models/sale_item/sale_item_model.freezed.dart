@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SaleItemModel {
 
- String get id; String get code; String get description; bool get canceled; double get quantity; double get unitPrice; double? get discount; double? get addition; double get total; String? get additionalInfo;
+ String? get id; String get code; String get description; bool get canceled; double get quantity; double get unitPrice; double? get discount; double? get addition; double get total; String? get additionalInfo;
 /// Create a copy of SaleItemModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $SaleItemModelCopyWith<$Res>  {
   factory $SaleItemModelCopyWith(SaleItemModel value, $Res Function(SaleItemModel) _then) = _$SaleItemModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String code, String description, bool canceled, double quantity, double unitPrice, double? discount, double? addition, double total, String? additionalInfo
+ String? id, String code, String description, bool canceled, double quantity, double unitPrice, double? discount, double? addition, double total, String? additionalInfo
 });
 
 
@@ -65,10 +65,10 @@ class _$SaleItemModelCopyWithImpl<$Res>
 
 /// Create a copy of SaleItemModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? code = null,Object? description = null,Object? canceled = null,Object? quantity = null,Object? unitPrice = null,Object? discount = freezed,Object? addition = freezed,Object? total = null,Object? additionalInfo = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? code = null,Object? description = null,Object? canceled = null,Object? quantity = null,Object? unitPrice = null,Object? discount = freezed,Object? addition = freezed,Object? total = null,Object? additionalInfo = freezed,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,canceled: null == canceled ? _self.canceled : canceled // ignore: cast_nullable_to_non_nullable
 as bool,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
@@ -162,7 +162,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String code,  String description,  bool canceled,  double quantity,  double unitPrice,  double? discount,  double? addition,  double total,  String? additionalInfo)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id,  String code,  String description,  bool canceled,  double quantity,  double unitPrice,  double? discount,  double? addition,  double total,  String? additionalInfo)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SaleItemModel() when $default != null:
 return $default(_that.id,_that.code,_that.description,_that.canceled,_that.quantity,_that.unitPrice,_that.discount,_that.addition,_that.total,_that.additionalInfo);case _:
@@ -183,7 +183,7 @@ return $default(_that.id,_that.code,_that.description,_that.canceled,_that.quant
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String code,  String description,  bool canceled,  double quantity,  double unitPrice,  double? discount,  double? addition,  double total,  String? additionalInfo)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id,  String code,  String description,  bool canceled,  double quantity,  double unitPrice,  double? discount,  double? addition,  double total,  String? additionalInfo)  $default,) {final _that = this;
 switch (_that) {
 case _SaleItemModel():
 return $default(_that.id,_that.code,_that.description,_that.canceled,_that.quantity,_that.unitPrice,_that.discount,_that.addition,_that.total,_that.additionalInfo);case _:
@@ -203,7 +203,7 @@ return $default(_that.id,_that.code,_that.description,_that.canceled,_that.quant
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String code,  String description,  bool canceled,  double quantity,  double unitPrice,  double? discount,  double? addition,  double total,  String? additionalInfo)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id,  String code,  String description,  bool canceled,  double quantity,  double unitPrice,  double? discount,  double? addition,  double total,  String? additionalInfo)?  $default,) {final _that = this;
 switch (_that) {
 case _SaleItemModel() when $default != null:
 return $default(_that.id,_that.code,_that.description,_that.canceled,_that.quantity,_that.unitPrice,_that.discount,_that.addition,_that.total,_that.additionalInfo);case _:
@@ -218,10 +218,10 @@ return $default(_that.id,_that.code,_that.description,_that.canceled,_that.quant
 @JsonSerializable()
 
 class _SaleItemModel implements SaleItemModel {
-  const _SaleItemModel({required this.id, required this.code, required this.description, this.canceled = false, required this.quantity, required this.unitPrice, this.discount, this.addition, required this.total, this.additionalInfo});
+  const _SaleItemModel({this.id, required this.code, required this.description, this.canceled = false, required this.quantity, required this.unitPrice, this.discount, this.addition, required this.total, this.additionalInfo});
   factory _SaleItemModel.fromJson(Map<String, dynamic> json) => _$SaleItemModelFromJson(json);
 
-@override final  String id;
+@override final  String? id;
 @override final  String code;
 @override final  String description;
 @override@JsonKey() final  bool canceled;
@@ -265,7 +265,7 @@ abstract mixin class _$SaleItemModelCopyWith<$Res> implements $SaleItemModelCopy
   factory _$SaleItemModelCopyWith(_SaleItemModel value, $Res Function(_SaleItemModel) _then) = __$SaleItemModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String code, String description, bool canceled, double quantity, double unitPrice, double? discount, double? addition, double total, String? additionalInfo
+ String? id, String code, String description, bool canceled, double quantity, double unitPrice, double? discount, double? addition, double total, String? additionalInfo
 });
 
 
@@ -282,10 +282,10 @@ class __$SaleItemModelCopyWithImpl<$Res>
 
 /// Create a copy of SaleItemModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? code = null,Object? description = null,Object? canceled = null,Object? quantity = null,Object? unitPrice = null,Object? discount = freezed,Object? addition = freezed,Object? total = null,Object? additionalInfo = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? code = null,Object? description = null,Object? canceled = null,Object? quantity = null,Object? unitPrice = null,Object? discount = freezed,Object? addition = freezed,Object? total = null,Object? additionalInfo = freezed,}) {
   return _then(_SaleItemModel(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
 as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String,canceled: null == canceled ? _self.canceled : canceled // ignore: cast_nullable_to_non_nullable
 as bool,quantity: null == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable

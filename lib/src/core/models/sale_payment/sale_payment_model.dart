@@ -15,7 +15,7 @@ part 'sale_payment_model.g.dart';
 @freezed
 abstract class SalePaymentModel with _$SalePaymentModel {
   const factory SalePaymentModel({
-    required String id,
+    String? id,
     @JsonKey(name: 'tPag')
     @Default(TefIPSalePaymentType.unknown)
     TefIPSalePaymentType type,

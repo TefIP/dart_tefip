@@ -8,7 +8,7 @@ part of 'sale_item_model.dart';
 
 _SaleItemModel _$SaleItemModelFromJson(Map<String, dynamic> json) =>
     _SaleItemModel(
-      id: json['id'] as String,
+      id: json['id'] as String?,
       code: json['code'] as String,
       description: json['description'] as String,
       canceled: json['canceled'] as bool? ?? false,

@@ -85,6 +85,10 @@ void main(List<String> arguments) async {
   );
   print(displayCarouselResult);
 
+  // Clear display
+  final displayPopResult = await tefIP.displayPop.post();
+  print(displayPopResult);
+
   // Display a single image
   final displayImageResult = await tefIP.displayImage.post(
     imageData: await _imageFromPathToBytes('assets/example_display.png'),
@@ -165,6 +169,16 @@ void main(List<String> arguments) async {
   );
   print(saleResult);
 
+  // Update a sale
+  final saleUpdateResult = await tefIP.sale.patch(
+    request: SaleStartRequestModel(
+      customerName: 'João',
+      sellerName: 'Maria',
+      additionalInfo: 'Mesa 07',
+    ),
+  );
+  print(saleUpdateResult);
+
   // Add an item to the sale
   final addItemResult = await tefIP.saleItem.post(
     item: SaleItemModel(
@@ -182,7 +196,6 @@ void main(List<String> arguments) async {
   final updateItemResult = await tefIP.saleItem.patch(
     itemId: 'ITEM-001',
     item: SaleItemModel(
-      id: 'ITEM-001',
       code: '7891000100103',
       description: 'Produto Exemplo Atualizado',
       quantity: 3.0,
@@ -214,6 +227,17 @@ void main(List<String> arguments) async {
     ),
   );
   print(addPaymentResult);
+
+  // Add a payment to the sale
+  final updatePaymentResult = await tefIP.salePayment.patch(
+    paymentId: 'PGTO-001',
+    payment: SalePaymentModel(
+      type: TefIPSalePaymentType.money,
+      description: 'Dinheiro',
+      value: 30.0,
+    ),
+  );
+  print(updatePaymentResult);
 
   // Remove a payment from the sale
   final deletePaymentResult = await tefIP.salePayment.delete(

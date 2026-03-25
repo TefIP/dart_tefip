@@ -19,7 +19,7 @@ part 'sale_item_model.g.dart';
 @freezed
 abstract class SaleItemModel with _$SaleItemModel {
   const factory SaleItemModel({
-    required String id,
+    String? id,
     required String code,
     required String description,
     @Default(false) bool canceled,
