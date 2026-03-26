@@ -19,7 +19,8 @@
 
 <div align='center'>
 
-[![Version](https://img.shields.io/github/v/release/TefIP/dart_tefip?style=plastic)](https://pub.dev/packages/dart_tefip)
+[![pub version](https://img.shields.io/pub/v/dart_tefip.svg?style=plastic)](https://pub.dev/packages/dart_tefip)
+[![Version](https://img.shields.io/github/v/release/TefIP/dart_tefip?style=plastic)](https://github.com/TefIP/dart_tefip/releases)
 [![Dart](https://img.shields.io/badge/language-dart-blue?style=plastic)](https://dart.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -41,6 +42,14 @@
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
+
+---
+
+## Platform Support
+
+| Android | iOS | Web | macOS | Windows | Linux |
+|:-------:|:---:|:---:|:-----:|:-------:|:-----:|
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ---
 
@@ -117,6 +126,29 @@ Initialize the terminal instance:
 
 ```dart
 final tefIP = TefIP.instance;
+```
+
+### Error Handling
+
+All endpoints throw typed exceptions — wrap calls with a `try/catch`:
+
+```dart
+try {
+  final result = await tefIP.transaction.post(
+    transactionRequest: TransactionRequestModel(
+      referenceId: '12345',
+      type: TefIPTransactionType.pix,
+      amount: 100.00,
+    ),
+  );
+} on TefIPRequestException catch (e) {
+  // HTTP 4xx/5xx or connection refused (statusCode == -1)
+  print('Request error ${e.statusCode}: ${e.message}');
+  print('Raw body: ${e.rawBody}');
+} on TefIPUnexpectedException catch (e) {
+  // Unhandled/unexpected error
+  print('Unexpected error: ${e.exception}');
+}
 ```
 
 ### Terminal Info & Status
