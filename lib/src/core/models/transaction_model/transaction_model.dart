@@ -27,6 +27,11 @@ part 'transaction_model.g.dart';
 /// - [installments]: Number of installments.
 ///   Default: `1`.
 /// - [nsu]: Unique sequential number returned by the acquirer.
+/// - [txid]: PIX transaction ID returned by the acquirer.
+///   Only present when [type] is [TefIPTransactionType.pix]; null for other types.
+/// - [cAut]: Authorization code returned by the acquirer.
+///   Present for credit/debit transactions.
+///   Null when [type] is [TefIPTransactionType.pix].
 /// - [createdAt]: Creation timestamp.
 ///   Uses [TefIPUnixDateTimeConverter] (Unix → DateTime).
 /// - [updatedAt]: Last update timestamp.
@@ -51,6 +56,9 @@ abstract class TransactionModel with _$TransactionModel {
     @Default(0.0) double amount,
     @Default(1) int installments,
     String? nsu,
+    String? txid,
+    String? cAut,
+
     @TefIPUnixDateTimeConverter() DateTime? createdAt,
     @TefIPUnixDateTimeConverter() DateTime? updatedAt,
     @TefIPDetailsConverter() Map<String, dynamic>? paymentDetails,

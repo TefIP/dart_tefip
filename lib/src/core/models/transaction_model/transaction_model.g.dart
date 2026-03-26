@@ -29,6 +29,8 @@ _TransactionModel _$TransactionModelFromJson(Map<String, dynamic> json) =>
       amount: (json['amount'] as num?)?.toDouble() ?? 0.0,
       installments: (json['installments'] as num?)?.toInt() ?? 1,
       nsu: json['nsu'] as String?,
+      txid: json['txid'] as String?,
+      cAut: json['cAut'] as String?,
       createdAt: const TefIPUnixDateTimeConverter().fromJson(
         (json['createdAt'] as num?)?.toInt(),
       ),
@@ -54,6 +56,8 @@ Map<String, dynamic> _$TransactionModelToJson(
   'amount': instance.amount,
   'installments': instance.installments,
   'nsu': instance.nsu,
+  'txid': instance.txid,
+  'cAut': instance.cAut,
   'createdAt': const TefIPUnixDateTimeConverter().toJson(instance.createdAt),
   'updatedAt': const TefIPUnixDateTimeConverter().toJson(instance.updatedAt),
   'paymentDetails': const TefIPDetailsConverter().toJson(

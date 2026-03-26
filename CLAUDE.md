@@ -180,6 +180,45 @@ Notes:
 
 ---
 
+## Transaction Models
+
+### `TransactionModel` — campos (GET /transaction, GET /transaction/{referenceId})
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| `referenceId` | `String?` | Identificador externo para reconciliação |
+| `type` | `TefIPTransactionType` | Tipo da transação. Default: `unknown` |
+| `transactionStatus` | `TefIPTransactionStatus` | Status atual. Default: `unknown` |
+| `installmentType` | `TefIPInstallmentType` | Modalidade de parcelamento. Default: `single` |
+| `amount` | `double` | Valor da transação. Default: `0.0` |
+| `installments` | `int` | Número de parcelas. Default: `1` |
+| `nsu` | `String?` | NSU retornado pelo adquirente |
+| `txid` | `String?` | ID da transação PIX. Presente apenas quando `type == pix`; nulo para crédito/débito |
+| `cAut` | `String?` | Código de autorização do adquirente. Presente para crédito/débito; **nulo para PIX** |
+| `createdAt` | `DateTime?` | Timestamp de criação (Unix → DateTime) |
+| `updatedAt` | `DateTime?` | Timestamp de atualização (Unix → DateTime) |
+| `paymentDetails` | `Map<String,dynamic>?` | Metadados de pagamento |
+| `reversalDetails` | `Map<String,dynamic>?` | Metadados de estorno |
+
+### `TransactionResponseModel` — campos (POST /transaction — resposta imediata do adquirente)
+
+Espelha `dj_pay_interface.TransactionResponse`:
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| `nsu` | `String?` | NSU retornado pelo adquirente |
+| `cnpj` | `String?` | CNPJ do adquirente/emissor |
+| `txid` | `String?` | ID da transação PIX. Presente apenas para PIX; nulo para crédito/débito |
+| `cAut` | `String?` | Código de autorização. Presente para crédito/débito; **nulo para PIX** |
+| `tBand` | `String?` | Bandeira do cartão (ex: Visa, Master) |
+| `tPag` | `String?` | Código do tipo de pagamento retornado pelo adquirente |
+| `message` | `String?` | Mensagem informativa |
+| `details` | `Map<String,dynamic>?` | Dados adicionais estruturados |
+
+**Regra PIX:** `txid` e `cAut` são mutuamente exclusivos — quando `type == pix`, `txid` é preenchido e `cAut` é nulo; para crédito/débito é o inverso.
+
+---
+
 ## Models Pattern
 
 Each model lives in its own folder under `lib/src/core/models/<name>/`:

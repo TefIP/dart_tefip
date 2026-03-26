@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransactionModel {
 
- String? get referenceId;@TefIPTransactionTypeConverter() TefIPTransactionType get type; TefIPTransactionStatus get transactionStatus; TefIPInstallmentType get installmentType; double get amount; int get installments; String? get nsu;@TefIPUnixDateTimeConverter() DateTime? get createdAt;@TefIPUnixDateTimeConverter() DateTime? get updatedAt;@TefIPDetailsConverter() Map<String, dynamic>? get paymentDetails;@TefIPDetailsConverter() Map<String, dynamic>? get reversalDetails;
+ String? get referenceId;@TefIPTransactionTypeConverter() TefIPTransactionType get type; TefIPTransactionStatus get transactionStatus; TefIPInstallmentType get installmentType; double get amount; int get installments; String? get nsu; String? get txid; String? get cAut;@TefIPUnixDateTimeConverter() DateTime? get createdAt;@TefIPUnixDateTimeConverter() DateTime? get updatedAt;@TefIPDetailsConverter() Map<String, dynamic>? get paymentDetails;@TefIPDetailsConverter() Map<String, dynamic>? get reversalDetails;
 /// Create a copy of TransactionModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TransactionModelCopyWith<TransactionModel> get copyWith => _$TransactionModelCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionModel&&(identical(other.referenceId, referenceId) || other.referenceId == referenceId)&&(identical(other.type, type) || other.type == type)&&(identical(other.transactionStatus, transactionStatus) || other.transactionStatus == transactionStatus)&&(identical(other.installmentType, installmentType) || other.installmentType == installmentType)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.installments, installments) || other.installments == installments)&&(identical(other.nsu, nsu) || other.nsu == nsu)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other.paymentDetails, paymentDetails)&&const DeepCollectionEquality().equals(other.reversalDetails, reversalDetails));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionModel&&(identical(other.referenceId, referenceId) || other.referenceId == referenceId)&&(identical(other.type, type) || other.type == type)&&(identical(other.transactionStatus, transactionStatus) || other.transactionStatus == transactionStatus)&&(identical(other.installmentType, installmentType) || other.installmentType == installmentType)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.installments, installments) || other.installments == installments)&&(identical(other.nsu, nsu) || other.nsu == nsu)&&(identical(other.txid, txid) || other.txid == txid)&&(identical(other.cAut, cAut) || other.cAut == cAut)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other.paymentDetails, paymentDetails)&&const DeepCollectionEquality().equals(other.reversalDetails, reversalDetails));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,referenceId,type,transactionStatus,installmentType,amount,installments,nsu,createdAt,updatedAt,const DeepCollectionEquality().hash(paymentDetails),const DeepCollectionEquality().hash(reversalDetails));
+int get hashCode => Object.hash(runtimeType,referenceId,type,transactionStatus,installmentType,amount,installments,nsu,txid,cAut,createdAt,updatedAt,const DeepCollectionEquality().hash(paymentDetails),const DeepCollectionEquality().hash(reversalDetails));
 
 @override
 String toString() {
-  return 'TransactionModel(referenceId: $referenceId, type: $type, transactionStatus: $transactionStatus, installmentType: $installmentType, amount: $amount, installments: $installments, nsu: $nsu, createdAt: $createdAt, updatedAt: $updatedAt, paymentDetails: $paymentDetails, reversalDetails: $reversalDetails)';
+  return 'TransactionModel(referenceId: $referenceId, type: $type, transactionStatus: $transactionStatus, installmentType: $installmentType, amount: $amount, installments: $installments, nsu: $nsu, txid: $txid, cAut: $cAut, createdAt: $createdAt, updatedAt: $updatedAt, paymentDetails: $paymentDetails, reversalDetails: $reversalDetails)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TransactionModelCopyWith<$Res>  {
   factory $TransactionModelCopyWith(TransactionModel value, $Res Function(TransactionModel) _then) = _$TransactionModelCopyWithImpl;
 @useResult
 $Res call({
- String? referenceId,@TefIPTransactionTypeConverter() TefIPTransactionType type, TefIPTransactionStatus transactionStatus, TefIPInstallmentType installmentType, double amount, int installments, String? nsu,@TefIPUnixDateTimeConverter() DateTime? createdAt,@TefIPUnixDateTimeConverter() DateTime? updatedAt,@TefIPDetailsConverter() Map<String, dynamic>? paymentDetails,@TefIPDetailsConverter() Map<String, dynamic>? reversalDetails
+ String? referenceId,@TefIPTransactionTypeConverter() TefIPTransactionType type, TefIPTransactionStatus transactionStatus, TefIPInstallmentType installmentType, double amount, int installments, String? nsu, String? txid, String? cAut,@TefIPUnixDateTimeConverter() DateTime? createdAt,@TefIPUnixDateTimeConverter() DateTime? updatedAt,@TefIPDetailsConverter() Map<String, dynamic>? paymentDetails,@TefIPDetailsConverter() Map<String, dynamic>? reversalDetails
 });
 
 
@@ -65,7 +65,7 @@ class _$TransactionModelCopyWithImpl<$Res>
 
 /// Create a copy of TransactionModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? referenceId = freezed,Object? type = null,Object? transactionStatus = null,Object? installmentType = null,Object? amount = null,Object? installments = null,Object? nsu = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? paymentDetails = freezed,Object? reversalDetails = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? referenceId = freezed,Object? type = null,Object? transactionStatus = null,Object? installmentType = null,Object? amount = null,Object? installments = null,Object? nsu = freezed,Object? txid = freezed,Object? cAut = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? paymentDetails = freezed,Object? reversalDetails = freezed,}) {
   return _then(_self.copyWith(
 referenceId: freezed == referenceId ? _self.referenceId : referenceId // ignore: cast_nullable_to_non_nullable
 as String?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
@@ -74,6 +74,8 @@ as TefIPTransactionStatus,installmentType: null == installmentType ? _self.insta
 as TefIPInstallmentType,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as double,installments: null == installments ? _self.installments : installments // ignore: cast_nullable_to_non_nullable
 as int,nsu: freezed == nsu ? _self.nsu : nsu // ignore: cast_nullable_to_non_nullable
+as String?,txid: freezed == txid ? _self.txid : txid // ignore: cast_nullable_to_non_nullable
+as String?,cAut: freezed == cAut ? _self.cAut : cAut // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,paymentDetails: freezed == paymentDetails ? _self.paymentDetails : paymentDetails // ignore: cast_nullable_to_non_nullable
@@ -163,10 +165,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? referenceId, @TefIPTransactionTypeConverter()  TefIPTransactionType type,  TefIPTransactionStatus transactionStatus,  TefIPInstallmentType installmentType,  double amount,  int installments,  String? nsu, @TefIPUnixDateTimeConverter()  DateTime? createdAt, @TefIPUnixDateTimeConverter()  DateTime? updatedAt, @TefIPDetailsConverter()  Map<String, dynamic>? paymentDetails, @TefIPDetailsConverter()  Map<String, dynamic>? reversalDetails)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? referenceId, @TefIPTransactionTypeConverter()  TefIPTransactionType type,  TefIPTransactionStatus transactionStatus,  TefIPInstallmentType installmentType,  double amount,  int installments,  String? nsu,  String? txid,  String? cAut, @TefIPUnixDateTimeConverter()  DateTime? createdAt, @TefIPUnixDateTimeConverter()  DateTime? updatedAt, @TefIPDetailsConverter()  Map<String, dynamic>? paymentDetails, @TefIPDetailsConverter()  Map<String, dynamic>? reversalDetails)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransactionModel() when $default != null:
-return $default(_that.referenceId,_that.type,_that.transactionStatus,_that.installmentType,_that.amount,_that.installments,_that.nsu,_that.createdAt,_that.updatedAt,_that.paymentDetails,_that.reversalDetails);case _:
+return $default(_that.referenceId,_that.type,_that.transactionStatus,_that.installmentType,_that.amount,_that.installments,_that.nsu,_that.txid,_that.cAut,_that.createdAt,_that.updatedAt,_that.paymentDetails,_that.reversalDetails);case _:
   return orElse();
 
 }
@@ -184,10 +186,10 @@ return $default(_that.referenceId,_that.type,_that.transactionStatus,_that.insta
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? referenceId, @TefIPTransactionTypeConverter()  TefIPTransactionType type,  TefIPTransactionStatus transactionStatus,  TefIPInstallmentType installmentType,  double amount,  int installments,  String? nsu, @TefIPUnixDateTimeConverter()  DateTime? createdAt, @TefIPUnixDateTimeConverter()  DateTime? updatedAt, @TefIPDetailsConverter()  Map<String, dynamic>? paymentDetails, @TefIPDetailsConverter()  Map<String, dynamic>? reversalDetails)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? referenceId, @TefIPTransactionTypeConverter()  TefIPTransactionType type,  TefIPTransactionStatus transactionStatus,  TefIPInstallmentType installmentType,  double amount,  int installments,  String? nsu,  String? txid,  String? cAut, @TefIPUnixDateTimeConverter()  DateTime? createdAt, @TefIPUnixDateTimeConverter()  DateTime? updatedAt, @TefIPDetailsConverter()  Map<String, dynamic>? paymentDetails, @TefIPDetailsConverter()  Map<String, dynamic>? reversalDetails)  $default,) {final _that = this;
 switch (_that) {
 case _TransactionModel():
-return $default(_that.referenceId,_that.type,_that.transactionStatus,_that.installmentType,_that.amount,_that.installments,_that.nsu,_that.createdAt,_that.updatedAt,_that.paymentDetails,_that.reversalDetails);case _:
+return $default(_that.referenceId,_that.type,_that.transactionStatus,_that.installmentType,_that.amount,_that.installments,_that.nsu,_that.txid,_that.cAut,_that.createdAt,_that.updatedAt,_that.paymentDetails,_that.reversalDetails);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -204,10 +206,10 @@ return $default(_that.referenceId,_that.type,_that.transactionStatus,_that.insta
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? referenceId, @TefIPTransactionTypeConverter()  TefIPTransactionType type,  TefIPTransactionStatus transactionStatus,  TefIPInstallmentType installmentType,  double amount,  int installments,  String? nsu, @TefIPUnixDateTimeConverter()  DateTime? createdAt, @TefIPUnixDateTimeConverter()  DateTime? updatedAt, @TefIPDetailsConverter()  Map<String, dynamic>? paymentDetails, @TefIPDetailsConverter()  Map<String, dynamic>? reversalDetails)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? referenceId, @TefIPTransactionTypeConverter()  TefIPTransactionType type,  TefIPTransactionStatus transactionStatus,  TefIPInstallmentType installmentType,  double amount,  int installments,  String? nsu,  String? txid,  String? cAut, @TefIPUnixDateTimeConverter()  DateTime? createdAt, @TefIPUnixDateTimeConverter()  DateTime? updatedAt, @TefIPDetailsConverter()  Map<String, dynamic>? paymentDetails, @TefIPDetailsConverter()  Map<String, dynamic>? reversalDetails)?  $default,) {final _that = this;
 switch (_that) {
 case _TransactionModel() when $default != null:
-return $default(_that.referenceId,_that.type,_that.transactionStatus,_that.installmentType,_that.amount,_that.installments,_that.nsu,_that.createdAt,_that.updatedAt,_that.paymentDetails,_that.reversalDetails);case _:
+return $default(_that.referenceId,_that.type,_that.transactionStatus,_that.installmentType,_that.amount,_that.installments,_that.nsu,_that.txid,_that.cAut,_that.createdAt,_that.updatedAt,_that.paymentDetails,_that.reversalDetails);case _:
   return null;
 
 }
@@ -219,7 +221,7 @@ return $default(_that.referenceId,_that.type,_that.transactionStatus,_that.insta
 @JsonSerializable()
 
 class _TransactionModel implements TransactionModel {
-  const _TransactionModel({this.referenceId, @TefIPTransactionTypeConverter() this.type = TefIPTransactionType.unknown, this.transactionStatus = TefIPTransactionStatus.unknown, this.installmentType = TefIPInstallmentType.single, this.amount = 0.0, this.installments = 1, this.nsu, @TefIPUnixDateTimeConverter() this.createdAt, @TefIPUnixDateTimeConverter() this.updatedAt, @TefIPDetailsConverter() final  Map<String, dynamic>? paymentDetails, @TefIPDetailsConverter() final  Map<String, dynamic>? reversalDetails}): _paymentDetails = paymentDetails,_reversalDetails = reversalDetails;
+  const _TransactionModel({this.referenceId, @TefIPTransactionTypeConverter() this.type = TefIPTransactionType.unknown, this.transactionStatus = TefIPTransactionStatus.unknown, this.installmentType = TefIPInstallmentType.single, this.amount = 0.0, this.installments = 1, this.nsu, this.txid, this.cAut, @TefIPUnixDateTimeConverter() this.createdAt, @TefIPUnixDateTimeConverter() this.updatedAt, @TefIPDetailsConverter() final  Map<String, dynamic>? paymentDetails, @TefIPDetailsConverter() final  Map<String, dynamic>? reversalDetails}): _paymentDetails = paymentDetails,_reversalDetails = reversalDetails;
   factory _TransactionModel.fromJson(Map<String, dynamic> json) => _$TransactionModelFromJson(json);
 
 @override final  String? referenceId;
@@ -229,6 +231,8 @@ class _TransactionModel implements TransactionModel {
 @override@JsonKey() final  double amount;
 @override@JsonKey() final  int installments;
 @override final  String? nsu;
+@override final  String? txid;
+@override final  String? cAut;
 @override@TefIPUnixDateTimeConverter() final  DateTime? createdAt;
 @override@TefIPUnixDateTimeConverter() final  DateTime? updatedAt;
  final  Map<String, dynamic>? _paymentDetails;
@@ -263,16 +267,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionModel&&(identical(other.referenceId, referenceId) || other.referenceId == referenceId)&&(identical(other.type, type) || other.type == type)&&(identical(other.transactionStatus, transactionStatus) || other.transactionStatus == transactionStatus)&&(identical(other.installmentType, installmentType) || other.installmentType == installmentType)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.installments, installments) || other.installments == installments)&&(identical(other.nsu, nsu) || other.nsu == nsu)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other._paymentDetails, _paymentDetails)&&const DeepCollectionEquality().equals(other._reversalDetails, _reversalDetails));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionModel&&(identical(other.referenceId, referenceId) || other.referenceId == referenceId)&&(identical(other.type, type) || other.type == type)&&(identical(other.transactionStatus, transactionStatus) || other.transactionStatus == transactionStatus)&&(identical(other.installmentType, installmentType) || other.installmentType == installmentType)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.installments, installments) || other.installments == installments)&&(identical(other.nsu, nsu) || other.nsu == nsu)&&(identical(other.txid, txid) || other.txid == txid)&&(identical(other.cAut, cAut) || other.cAut == cAut)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt)&&const DeepCollectionEquality().equals(other._paymentDetails, _paymentDetails)&&const DeepCollectionEquality().equals(other._reversalDetails, _reversalDetails));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,referenceId,type,transactionStatus,installmentType,amount,installments,nsu,createdAt,updatedAt,const DeepCollectionEquality().hash(_paymentDetails),const DeepCollectionEquality().hash(_reversalDetails));
+int get hashCode => Object.hash(runtimeType,referenceId,type,transactionStatus,installmentType,amount,installments,nsu,txid,cAut,createdAt,updatedAt,const DeepCollectionEquality().hash(_paymentDetails),const DeepCollectionEquality().hash(_reversalDetails));
 
 @override
 String toString() {
-  return 'TransactionModel(referenceId: $referenceId, type: $type, transactionStatus: $transactionStatus, installmentType: $installmentType, amount: $amount, installments: $installments, nsu: $nsu, createdAt: $createdAt, updatedAt: $updatedAt, paymentDetails: $paymentDetails, reversalDetails: $reversalDetails)';
+  return 'TransactionModel(referenceId: $referenceId, type: $type, transactionStatus: $transactionStatus, installmentType: $installmentType, amount: $amount, installments: $installments, nsu: $nsu, txid: $txid, cAut: $cAut, createdAt: $createdAt, updatedAt: $updatedAt, paymentDetails: $paymentDetails, reversalDetails: $reversalDetails)';
 }
 
 
@@ -283,7 +287,7 @@ abstract mixin class _$TransactionModelCopyWith<$Res> implements $TransactionMod
   factory _$TransactionModelCopyWith(_TransactionModel value, $Res Function(_TransactionModel) _then) = __$TransactionModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? referenceId,@TefIPTransactionTypeConverter() TefIPTransactionType type, TefIPTransactionStatus transactionStatus, TefIPInstallmentType installmentType, double amount, int installments, String? nsu,@TefIPUnixDateTimeConverter() DateTime? createdAt,@TefIPUnixDateTimeConverter() DateTime? updatedAt,@TefIPDetailsConverter() Map<String, dynamic>? paymentDetails,@TefIPDetailsConverter() Map<String, dynamic>? reversalDetails
+ String? referenceId,@TefIPTransactionTypeConverter() TefIPTransactionType type, TefIPTransactionStatus transactionStatus, TefIPInstallmentType installmentType, double amount, int installments, String? nsu, String? txid, String? cAut,@TefIPUnixDateTimeConverter() DateTime? createdAt,@TefIPUnixDateTimeConverter() DateTime? updatedAt,@TefIPDetailsConverter() Map<String, dynamic>? paymentDetails,@TefIPDetailsConverter() Map<String, dynamic>? reversalDetails
 });
 
 
@@ -300,7 +304,7 @@ class __$TransactionModelCopyWithImpl<$Res>
 
 /// Create a copy of TransactionModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? referenceId = freezed,Object? type = null,Object? transactionStatus = null,Object? installmentType = null,Object? amount = null,Object? installments = null,Object? nsu = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? paymentDetails = freezed,Object? reversalDetails = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? referenceId = freezed,Object? type = null,Object? transactionStatus = null,Object? installmentType = null,Object? amount = null,Object? installments = null,Object? nsu = freezed,Object? txid = freezed,Object? cAut = freezed,Object? createdAt = freezed,Object? updatedAt = freezed,Object? paymentDetails = freezed,Object? reversalDetails = freezed,}) {
   return _then(_TransactionModel(
 referenceId: freezed == referenceId ? _self.referenceId : referenceId // ignore: cast_nullable_to_non_nullable
 as String?,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
@@ -309,6 +313,8 @@ as TefIPTransactionStatus,installmentType: null == installmentType ? _self.insta
 as TefIPInstallmentType,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as double,installments: null == installments ? _self.installments : installments // ignore: cast_nullable_to_non_nullable
 as int,nsu: freezed == nsu ? _self.nsu : nsu // ignore: cast_nullable_to_non_nullable
+as String?,txid: freezed == txid ? _self.txid : txid // ignore: cast_nullable_to_non_nullable
+as String?,cAut: freezed == cAut ? _self.cAut : cAut // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,updatedAt: freezed == updatedAt ? _self.updatedAt : updatedAt // ignore: cast_nullable_to_non_nullable
 as DateTime?,paymentDetails: freezed == paymentDetails ? _self._paymentDetails : paymentDetails // ignore: cast_nullable_to_non_nullable

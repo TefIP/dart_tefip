@@ -9,6 +9,7 @@ final kTransaction = TransactionModel(
   installments: 1,
   installmentType: TefIPInstallmentType.single,
   nsu: '777',
+  txid: '777txid',
   paymentDetails: {
     'payment': 'pix',
     'total': 777,
