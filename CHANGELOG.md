@@ -1,3 +1,13 @@
+## 1.1.1
+
+### Added
+- `txid: String?` on `TransactionModel` — PIX transaction ID returned by the acquirer; present only when `type == pix`, null for credit/debit
+- `cAut: String?` on `TransactionModel` — authorization code returned by the acquirer; present for credit/debit, null for PIX
+- `txid: String?`, `cAut: String?`, `cnpj: String?`, `tBand: String?`, `tPag: String?` on `TransactionResponseModel` — model now fully mirrors `dj_pay_interface.TransactionResponse`
+
+### Changed
+- Brand references renamed from "TefIP" to "TEF IP"
+
 ## 1.1.0
 
 ### Added

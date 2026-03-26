@@ -152,6 +152,16 @@ final postTransaction = await tefIP.transaction.post(
 );
 ```
 
+Access acquirer fields from the response:
+
+```dart
+// PIX — access the txid returned by the acquirer
+print(postTransaction.txid); // e.g. "abc123txid"
+
+// Credit/debit — access the authorization code
+print(postTransaction.cAut); // e.g. "123456"
+```
+
 Perform a reversal:
 
 ```dart

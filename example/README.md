@@ -4,7 +4,7 @@ Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  dart_tefip: ^1.1.0
+  dart_tefip: ^1.1.1
 ```
 
 ```dart

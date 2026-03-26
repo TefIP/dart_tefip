@@ -1,3 +1,7 @@
+## 1.1.1
+
+- No changes to example
+
 ## 1.1.0
 
 ### Added
