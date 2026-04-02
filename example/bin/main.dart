@@ -169,12 +169,23 @@ void main(List<String> arguments) async {
   );
   print(saleResult);
 
+  // Get a sale
+
+  final coupon = await tefIP.sale.get();
+
+  print(coupon.sale);
+  print(coupon.items);
+  print(coupon.payments);
+  print(coupon.summary);
+
   // Update a sale
   final saleUpdateResult = await tefIP.sale.patch(
     request: SaleStartRequestModel(
       customerName: 'João',
       sellerName: 'Maria',
       additionalInfo: 'Mesa 07',
+      addition: 15.0,
+      discount: 50,
     ),
   );
   print(saleUpdateResult);
@@ -188,6 +199,8 @@ void main(List<String> arguments) async {
       quantity: 2.0,
       unitPrice: 10.0,
       total: 20.0,
+      discount: 10.0,
+      addition: 15.0,
     ),
   );
   print(addItemResult);
@@ -201,6 +214,8 @@ void main(List<String> arguments) async {
       quantity: 3.0,
       unitPrice: 10.0,
       total: 30.0,
+      discount: 10.0,
+      addition: 2.0,
     ),
   );
   print(updateItemResult);

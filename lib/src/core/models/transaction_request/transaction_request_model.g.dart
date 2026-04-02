@@ -7,33 +7,30 @@ part of 'transaction_request_model.dart';
 // **************************************************************************
 
 _TransactionRequestModel _$TransactionRequestModelFromJson(
-  Map<String, dynamic> json,
-) => _TransactionRequestModel(
-  referenceId: json['referenceId'] as String? ?? null,
-  type:
-      $enumDecodeNullable(_$TefIPTransactionTypeEnumMap, json['tPag']) ??
-      TefIPTransactionType.unknown,
-  amount: (json['amount'] as num?)?.toDouble() ?? 0,
-  installments: (json['installments'] as num?)?.toInt() ?? 1,
-  installmentType:
-      $enumDecodeNullable(
-        _$TefIPInstallmentTypeEnumMap,
-        json['installmentType'],
-      ) ??
-      TefIPInstallmentType.single,
-  details: const TefIPDetailsConverter().fromJson(json['details']),
-);
+        Map<String, dynamic> json) =>
+    _TransactionRequestModel(
+      referenceId: json['referenceId'] as String? ?? null,
+      type: $enumDecodeNullable(_$TefIPTransactionTypeEnumMap, json['tPag']) ??
+          TefIPTransactionType.unknown,
+      amount: (json['amount'] as num?)?.toDouble() ?? 0,
+      installments: (json['installments'] as num?)?.toInt() ?? 1,
+      installmentType: $enumDecodeNullable(
+              _$TefIPInstallmentTypeEnumMap, json['installmentType']) ??
+          TefIPInstallmentType.single,
+      details: const TefIPDetailsConverter().fromJson(json['details']),
+    );
 
 Map<String, dynamic> _$TransactionRequestModelToJson(
-  _TransactionRequestModel instance,
-) => <String, dynamic>{
-  'referenceId': instance.referenceId,
-  'tPag': _$TefIPTransactionTypeEnumMap[instance.type]!,
-  'amount': instance.amount,
-  'installments': instance.installments,
-  'installmentType': _$TefIPInstallmentTypeEnumMap[instance.installmentType]!,
-  'details': const TefIPDetailsConverter().toJson(instance.details),
-};
+        _TransactionRequestModel instance) =>
+    <String, dynamic>{
+      'referenceId': instance.referenceId,
+      'tPag': _$TefIPTransactionTypeEnumMap[instance.type]!,
+      'amount': instance.amount,
+      'installments': instance.installments,
+      'installmentType':
+          _$TefIPInstallmentTypeEnumMap[instance.installmentType]!,
+      'details': const TefIPDetailsConverter().toJson(instance.details),
+    };
 
 const _$TefIPTransactionTypeEnumMap = {
   TefIPTransactionType.credit: '03',

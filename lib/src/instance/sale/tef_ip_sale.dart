@@ -9,10 +9,9 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
-/// Endpoint responsible for starting and updating a sale on the terminal display.
+/// Endpoint responsible for managing a sale on the terminal display.
 ///
-/// Performs HTTP `POST` and `PATCH` requests to `/sale`
-/// and returns a [SuccessResponseModel].
+/// Performs HTTP `GET`, `POST`, and `PATCH` requests to `/sale`.
 ///
 /// Errors:
 /// - [TefIPRequestException] for request failures.
@@ -23,6 +22,27 @@ interface class TefIPSale implements EndpointInterface {
   /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.sale;
+
+  /// Returns the current active sale state.
+  Future<SaleCouponModel> get({
+    http.Client? client,
+    Duration? timeout,
+  }) async {
+    try {
+      return await TefIPNetworkingClient.get<SaleCouponModel>(
+        url: TefIpUrlBuilder.build(endpoint),
+        client: client,
+        timeout: timeout,
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
+      );
+    } on ClientException catch (e) {
+      throw TefIPRequestException(message: e.message, statusCode: -1);
+    } on TefIPRequestException {
+      rethrow;
+    } catch (e) {
+      throw TefIPUnexpectedException(exception: e);
+    }
+  }
 
   /// Starts a new sale on the terminal display.
   ///

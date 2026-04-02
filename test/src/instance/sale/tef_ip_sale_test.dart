@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
+import '../../../../testing/mocks/models/sale_coupon_model_mock.dart';
 import '../../../../testing/mocks/models/sale_start_request_model_mock.dart';
 import '../../../../testing/mocks/networking/tef_ip_networking_client_test.dart';
 import '../../../../testing/mocks/shared/success_response_mock.dart';
@@ -29,6 +30,78 @@ void main() {
     setUp(() {
       kHttpClient = MockHttpClient();
       sale = TefIPSale();
+    });
+
+    group('get', () {
+      test('should return SaleCouponModel on success', () async {
+        final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.sale);
+
+        final jsonBody = jsonEncode(kSaleCoupon.toJson());
+        when(
+          () => kHttpClient.get(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenAnswer(
+          (_) async => http.Response.bytes(
+            utf8.encode(jsonBody),
+            200,
+          ),
+        );
+
+        final result = await sale.get(client: kHttpClient);
+
+        expect(result, equals(kSaleCoupon));
+
+        verify(
+          () => kHttpClient.get(
+            Uri.parse(expectedUrl),
+            headers: any(named: 'headers'),
+          ),
+        ).called(1);
+      });
+
+      test('should throw TefIPRequestException on ClientException', () {
+        when(
+          () => kHttpClient.get(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenThrow(httpError);
+
+        expect(
+          () => sale.get(client: kHttpClient),
+          throwsA(isA<TefIPRequestException>()),
+        );
+      });
+
+      test('should rethrow TefIPRequestException', () {
+        when(
+          () => kHttpClient.get(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
+
+        expect(
+          () => sale.get(client: kHttpClient),
+          throwsA(isA<TefIPRequestException>()),
+        );
+      });
+
+      test('should throw TefIPUnexpectedException on unknown error', () {
+        when(
+          () => kHttpClient.get(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenThrow(Exception());
+
+        expect(
+          () => sale.get(client: kHttpClient),
+          throwsA(isA<TefIPUnexpectedException>()),
+        );
+      });
     });
 
     group('post', () {

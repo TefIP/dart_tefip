@@ -10,8 +10,7 @@ _AskQuestionModel _$AskQuestionModelFromJson(Map<String, dynamic> json) =>
     _AskQuestionModel(
       id: (json['id'] as num?)?.toInt() ?? 0,
       question: json['question'] as String?,
-      type:
-          $enumDecodeNullable(_$TefIPQuestionTypeEnumMap, json['type']) ??
+      type: $enumDecodeNullable(_$TefIPQuestionTypeEnumMap, json['type']) ??
           TefIPQuestionType.text,
       required: json['required'] as bool? ?? false,
       minLength: (json['minLength'] as num?)?.toInt() ?? 0,

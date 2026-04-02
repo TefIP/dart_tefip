@@ -107,12 +107,14 @@ Complete reference of every getter on `TefIP.instance`:
 | `transaction` | GET | `/transaction` | — | `List<TransactionModel>` |
 | `transaction` | GET | `/transaction/{referenceId}` | — | `TransactionModel` |
 | `reversal` | POST | `/transaction/{referenceId}/reversal` | — | `TransactionResponseModel` |
+| `sale` | GET | `/sale` | — | `SaleCouponModel` |
 | `sale` | POST | `/sale` | `SaleStartRequestModel` | `SuccessResponseModel` |
 | `sale` | PATCH | `/sale` | `SaleStartRequestModel` | `SuccessResponseModel` |
 | `saleItem` | POST | `/sale/item` | `SaleItemModel` | `SaleMutationResponseModel` |
 | `saleItem` | PATCH | `/sale/item/{itemId}` | `SaleItemModel` | `SaleMutationResponseModel` |
 | `saleItem` | DELETE | `/sale/item/{itemId}` | — | `SaleMutationResponseModel` |
 | `saleItem` (cancel) | POST | `/sale/item/{itemId}/cancel` | — | `SaleMutationResponseModel` |
+| `saleItem` (clear) | DELETE | `/sale/item/clear` | — | `SuccessResponseModel` |
 | `salePayment` | POST | `/sale/payment` | `SalePaymentModel` | `SaleMutationResponseModel` |
 | `salePayment` | PATCH | `/sale/payment/{paymentId}` | `SalePaymentModel` | `SaleMutationResponseModel` |
 | `salePayment` | DELETE | `/sale/payment/{paymentId}` | — | `SaleMutationResponseModel` |
@@ -144,6 +146,8 @@ Notes:
 - `SaleStartRequestModel` has no `id` field — the backend manages sale identity internally
 - `SalePaymentModel.type` uses the `tPag` JSON key (mapped via `@JsonKey(name: 'tPag')`)
 - `SaleActionRequestModel` on finalize/cancel controls the result screen shown to the customer
+- `SaleStartRequestModel.discount` and `.addition` operate at the **sale level** and affect the final total
+- `SaleItemModel.discount` and `.addition` are **visual only** — they do not affect the sale total
 
 ---
 
@@ -216,6 +220,37 @@ Espelha `dj_pay_interface.TransactionResponse`:
 | `details` | `Map<String,dynamic>?` | Dados adicionais estruturados |
 
 **Regra PIX:** `txid` e `cAut` são mutuamente exclusivos — quando `type == pix`, `txid` é preenchido e `cAut` é nulo; para crédito/débito é o inverso.
+
+### `SaleStartRequestModel` — sale metadata (POST /sale, PATCH /sale, nested in `SaleCouponModel.sale`)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `customerDocument` | `String?` | Customer CPF/CNPJ |
+| `customerName` | `String?` | Customer name shown on display |
+| `sellerName` | `String?` | Seller name shown on display |
+| `additionalInfo` | `String?` | Supplementary information |
+| `discount` | `double?` | Sale-level discount — affects the final total |
+| `addition` | `double?` | Sale-level surcharge — affects the final total |
+
+### `SaleSummaryModel` — computed totals (nested in `SaleCouponModel.summary`)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `subtotal` | `double` | Sum of all item totals. Default: `0.0` |
+| `surcharge` | `double` | Sale-level addition applied to total. Default: `0.0` |
+| `discount` | `double` | Sale-level discount applied to total. Default: `0.0` |
+| `itemDiscount` | `double` | Aggregate of item-level discounts (visual only). Default: `0.0` |
+| `itemAddition` | `double` | Aggregate of item-level additions (visual only). Default: `0.0` |
+| `total` | `double` | Final payable total. Default: `0.0` |
+
+### `SaleCouponModel` — active sale snapshot (GET /sale)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `sale` | `SaleStartRequestModel` | Sale metadata |
+| `items` | `List<SaleItemModel>` | Items in the sale. Default: `[]` |
+| `payments` | `List<SalePaymentModel>` | Payments in the sale. Default: `[]` |
+| `summary` | `SaleSummaryModel` | Computed totals |
 
 ---
 

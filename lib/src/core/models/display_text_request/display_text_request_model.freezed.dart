@@ -14,47 +14,59 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$DisplayTextRequestModel {
+  List<Map<String, dynamic>> get content;
+  String get backgroundColor;
+  bool? get showCloseButton;
 
- List<Map<String, dynamic>> get content; String get backgroundColor; bool? get showCloseButton;
-/// Create a copy of DisplayTextRequestModel
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$DisplayTextRequestModelCopyWith<DisplayTextRequestModel> get copyWith => _$DisplayTextRequestModelCopyWithImpl<DisplayTextRequestModel>(this as DisplayTextRequestModel, _$identity);
+  /// Create a copy of DisplayTextRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DisplayTextRequestModelCopyWith<DisplayTextRequestModel> get copyWith =>
+      _$DisplayTextRequestModelCopyWithImpl<DisplayTextRequestModel>(
+          this as DisplayTextRequestModel, _$identity);
 
   /// Serializes this DisplayTextRequestModel to a JSON map.
   Map<String, dynamic> toJson();
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DisplayTextRequestModel &&
+            const DeepCollectionEquality().equals(other.content, content) &&
+            (identical(other.backgroundColor, backgroundColor) ||
+                other.backgroundColor == backgroundColor) &&
+            (identical(other.showCloseButton, showCloseButton) ||
+                other.showCloseButton == showCloseButton));
+  }
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DisplayTextRequestModel&&const DeepCollectionEquality().equals(other.content, content)&&(identical(other.backgroundColor, backgroundColor) || other.backgroundColor == backgroundColor)&&(identical(other.showCloseButton, showCloseButton) || other.showCloseButton == showCloseButton));
-}
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(content),
+      backgroundColor,
+      showCloseButton);
 
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(content),backgroundColor,showCloseButton);
-
-@override
-String toString() {
-  return 'DisplayTextRequestModel(content: $content, backgroundColor: $backgroundColor, showCloseButton: $showCloseButton)';
-}
-
-
+  @override
+  String toString() {
+    return 'DisplayTextRequestModel(content: $content, backgroundColor: $backgroundColor, showCloseButton: $showCloseButton)';
+  }
 }
 
 /// @nodoc
-abstract mixin class $DisplayTextRequestModelCopyWith<$Res>  {
-  factory $DisplayTextRequestModelCopyWith(DisplayTextRequestModel value, $Res Function(DisplayTextRequestModel) _then) = _$DisplayTextRequestModelCopyWithImpl;
-@useResult
-$Res call({
- List<Map<String, dynamic>> content, String backgroundColor, bool? showCloseButton
-});
-
-
-
-
+abstract mixin class $DisplayTextRequestModelCopyWith<$Res> {
+  factory $DisplayTextRequestModelCopyWith(DisplayTextRequestModel value,
+          $Res Function(DisplayTextRequestModel) _then) =
+      _$DisplayTextRequestModelCopyWithImpl;
+  @useResult
+  $Res call(
+      {List<Map<String, dynamic>> content,
+      String backgroundColor,
+      bool? showCloseButton});
 }
+
 /// @nodoc
 class _$DisplayTextRequestModelCopyWithImpl<$Res>
     implements $DisplayTextRequestModelCopyWith<$Res> {
@@ -63,207 +75,278 @@ class _$DisplayTextRequestModelCopyWithImpl<$Res>
   final DisplayTextRequestModel _self;
   final $Res Function(DisplayTextRequestModel) _then;
 
-/// Create a copy of DisplayTextRequestModel
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? content = null,Object? backgroundColor = null,Object? showCloseButton = freezed,}) {
-  return _then(_self.copyWith(
-content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
-as String,showCloseButton: freezed == showCloseButton ? _self.showCloseButton : showCloseButton // ignore: cast_nullable_to_non_nullable
-as bool?,
-  ));
+  /// Create a copy of DisplayTextRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? content = null,
+    Object? backgroundColor = null,
+    Object? showCloseButton = freezed,
+  }) {
+    return _then(_self.copyWith(
+      content: null == content
+          ? _self.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>,
+      backgroundColor: null == backgroundColor
+          ? _self.backgroundColor
+          : backgroundColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      showCloseButton: freezed == showCloseButton
+          ? _self.showCloseButton
+          : showCloseButton // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
 }
-
-}
-
 
 /// Adds pattern-matching-related methods to [DisplayTextRequestModel].
 extension DisplayTextRequestModelPatterns on DisplayTextRequestModel {
-/// A variant of `map` that fallback to returning `orElse`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DisplayTextRequestModel value)?  $default,{required TResult orElse(),}){
-final _that = this;
-switch (_that) {
-case _DisplayTextRequestModel() when $default != null:
-return $default(_that);case _:
-  return orElse();
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_DisplayTextRequestModel value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DisplayTextRequestModel() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
 
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// Callbacks receives the raw object, upcasted.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case final Subclass2 value:
-///     return ...;
-/// }
-/// ```
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DisplayTextRequestModel value)  $default,){
-final _that = this;
-switch (_that) {
-case _DisplayTextRequestModel():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_DisplayTextRequestModel value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DisplayTextRequestModel():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
 
-}
-}
-/// A variant of `map` that fallback to returning `null`.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case final Subclass value:
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DisplayTextRequestModel value)?  $default,){
-final _that = this;
-switch (_that) {
-case _DisplayTextRequestModel() when $default != null:
-return $default(_that);case _:
-  return null;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_DisplayTextRequestModel value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DisplayTextRequestModel() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
 
-}
-}
-/// A variant of `when` that fallback to an `orElse` callback.
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return orElse();
-/// }
-/// ```
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Map<String, dynamic>> content,  String backgroundColor,  bool? showCloseButton)?  $default,{required TResult orElse(),}) {final _that = this;
-switch (_that) {
-case _DisplayTextRequestModel() when $default != null:
-return $default(_that.content,_that.backgroundColor,_that.showCloseButton);case _:
-  return orElse();
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(List<Map<String, dynamic>> content, String backgroundColor,
+            bool? showCloseButton)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DisplayTextRequestModel() when $default != null:
+        return $default(
+            _that.content, _that.backgroundColor, _that.showCloseButton);
+      case _:
+        return orElse();
+    }
+  }
 
-}
-}
-/// A `switch`-like method, using callbacks.
-///
-/// As opposed to `map`, this offers destructuring.
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case Subclass2(:final field2):
-///     return ...;
-/// }
-/// ```
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Map<String, dynamic>> content,  String backgroundColor,  bool? showCloseButton)  $default,) {final _that = this;
-switch (_that) {
-case _DisplayTextRequestModel():
-return $default(_that.content,_that.backgroundColor,_that.showCloseButton);case _:
-  throw StateError('Unexpected subclass');
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(List<Map<String, dynamic>> content, String backgroundColor,
+            bool? showCloseButton)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DisplayTextRequestModel():
+        return $default(
+            _that.content, _that.backgroundColor, _that.showCloseButton);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
 
-}
-}
-/// A variant of `when` that fallback to returning `null`
-///
-/// It is equivalent to doing:
-/// ```dart
-/// switch (sealedClass) {
-///   case Subclass(:final field):
-///     return ...;
-///   case _:
-///     return null;
-/// }
-/// ```
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Map<String, dynamic>> content,  String backgroundColor,  bool? showCloseButton)?  $default,) {final _that = this;
-switch (_that) {
-case _DisplayTextRequestModel() when $default != null:
-return $default(_that.content,_that.backgroundColor,_that.showCloseButton);case _:
-  return null;
-
-}
-}
-
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(List<Map<String, dynamic>> content,
+            String backgroundColor, bool? showCloseButton)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _DisplayTextRequestModel() when $default != null:
+        return $default(
+            _that.content, _that.backgroundColor, _that.showCloseButton);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
 @JsonSerializable()
-
 class _DisplayTextRequestModel implements DisplayTextRequestModel {
-  const _DisplayTextRequestModel({required final  List<Map<String, dynamic>> content, required this.backgroundColor, this.showCloseButton}): _content = content;
-  factory _DisplayTextRequestModel.fromJson(Map<String, dynamic> json) => _$DisplayTextRequestModelFromJson(json);
+  const _DisplayTextRequestModel(
+      {required final List<Map<String, dynamic>> content,
+      required this.backgroundColor,
+      this.showCloseButton})
+      : _content = content;
+  factory _DisplayTextRequestModel.fromJson(Map<String, dynamic> json) =>
+      _$DisplayTextRequestModelFromJson(json);
 
- final  List<Map<String, dynamic>> _content;
-@override List<Map<String, dynamic>> get content {
-  if (_content is EqualUnmodifiableListView) return _content;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_content);
-}
+  final List<Map<String, dynamic>> _content;
+  @override
+  List<Map<String, dynamic>> get content {
+    if (_content is EqualUnmodifiableListView) return _content;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_content);
+  }
 
-@override final  String backgroundColor;
-@override final  bool? showCloseButton;
+  @override
+  final String backgroundColor;
+  @override
+  final bool? showCloseButton;
 
-/// Create a copy of DisplayTextRequestModel
-/// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$DisplayTextRequestModelCopyWith<_DisplayTextRequestModel> get copyWith => __$DisplayTextRequestModelCopyWithImpl<_DisplayTextRequestModel>(this, _$identity);
+  /// Create a copy of DisplayTextRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DisplayTextRequestModelCopyWith<_DisplayTextRequestModel> get copyWith =>
+      __$DisplayTextRequestModelCopyWithImpl<_DisplayTextRequestModel>(
+          this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$DisplayTextRequestModelToJson(this, );
-}
+  @override
+  Map<String, dynamic> toJson() {
+    return _$DisplayTextRequestModelToJson(
+      this,
+    );
+  }
 
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DisplayTextRequestModel&&const DeepCollectionEquality().equals(other._content, _content)&&(identical(other.backgroundColor, backgroundColor) || other.backgroundColor == backgroundColor)&&(identical(other.showCloseButton, showCloseButton) || other.showCloseButton == showCloseButton));
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DisplayTextRequestModel &&
+            const DeepCollectionEquality().equals(other._content, _content) &&
+            (identical(other.backgroundColor, backgroundColor) ||
+                other.backgroundColor == backgroundColor) &&
+            (identical(other.showCloseButton, showCloseButton) ||
+                other.showCloseButton == showCloseButton));
+  }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
-@override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_content),backgroundColor,showCloseButton);
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_content),
+      backgroundColor,
+      showCloseButton);
 
-@override
-String toString() {
-  return 'DisplayTextRequestModel(content: $content, backgroundColor: $backgroundColor, showCloseButton: $showCloseButton)';
-}
-
-
+  @override
+  String toString() {
+    return 'DisplayTextRequestModel(content: $content, backgroundColor: $backgroundColor, showCloseButton: $showCloseButton)';
+  }
 }
 
 /// @nodoc
-abstract mixin class _$DisplayTextRequestModelCopyWith<$Res> implements $DisplayTextRequestModelCopyWith<$Res> {
-  factory _$DisplayTextRequestModelCopyWith(_DisplayTextRequestModel value, $Res Function(_DisplayTextRequestModel) _then) = __$DisplayTextRequestModelCopyWithImpl;
-@override @useResult
-$Res call({
- List<Map<String, dynamic>> content, String backgroundColor, bool? showCloseButton
-});
-
-
-
-
+abstract mixin class _$DisplayTextRequestModelCopyWith<$Res>
+    implements $DisplayTextRequestModelCopyWith<$Res> {
+  factory _$DisplayTextRequestModelCopyWith(_DisplayTextRequestModel value,
+          $Res Function(_DisplayTextRequestModel) _then) =
+      __$DisplayTextRequestModelCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {List<Map<String, dynamic>> content,
+      String backgroundColor,
+      bool? showCloseButton});
 }
+
 /// @nodoc
 class __$DisplayTextRequestModelCopyWithImpl<$Res>
     implements _$DisplayTextRequestModelCopyWith<$Res> {
@@ -272,18 +355,30 @@ class __$DisplayTextRequestModelCopyWithImpl<$Res>
   final _DisplayTextRequestModel _self;
   final $Res Function(_DisplayTextRequestModel) _then;
 
-/// Create a copy of DisplayTextRequestModel
-/// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? content = null,Object? backgroundColor = null,Object? showCloseButton = freezed,}) {
-  return _then(_DisplayTextRequestModel(
-content: null == content ? _self._content : content // ignore: cast_nullable_to_non_nullable
-as List<Map<String, dynamic>>,backgroundColor: null == backgroundColor ? _self.backgroundColor : backgroundColor // ignore: cast_nullable_to_non_nullable
-as String,showCloseButton: freezed == showCloseButton ? _self.showCloseButton : showCloseButton // ignore: cast_nullable_to_non_nullable
-as bool?,
-  ));
-}
-
-
+  /// Create a copy of DisplayTextRequestModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? content = null,
+    Object? backgroundColor = null,
+    Object? showCloseButton = freezed,
+  }) {
+    return _then(_DisplayTextRequestModel(
+      content: null == content
+          ? _self._content
+          : content // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, dynamic>>,
+      backgroundColor: null == backgroundColor
+          ? _self.backgroundColor
+          : backgroundColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      showCloseButton: freezed == showCloseButton
+          ? _self.showCloseButton
+          : showCloseButton // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
 }
 
 // dart format on

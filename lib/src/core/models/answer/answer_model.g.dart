@@ -7,10 +7,10 @@ part of 'answer_model.dart';
 // **************************************************************************
 
 _AnswerModel _$AnswerModelFromJson(Map<String, dynamic> json) => _AnswerModel(
-  id: (json['id'] as num).toInt(),
-  value: json['value'] as String,
-  displayValue: _readDisplayValue(json, 'displayValue') as String,
-);
+      id: (json['id'] as num).toInt(),
+      value: json['value'] as String,
+      displayValue: _readDisplayValue(json, 'displayValue') as String,
+    );
 
 Map<String, dynamic> _$AnswerModelToJson(_AnswerModel instance) =>
     <String, dynamic>{

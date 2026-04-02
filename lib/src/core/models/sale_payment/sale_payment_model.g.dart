@@ -9,8 +9,7 @@ part of 'sale_payment_model.dart';
 _SalePaymentModel _$SalePaymentModelFromJson(Map<String, dynamic> json) =>
     _SalePaymentModel(
       id: json['id'] as String?,
-      type:
-          $enumDecodeNullable(_$TefIPSalePaymentTypeEnumMap, json['tPag']) ??
+      type: $enumDecodeNullable(_$TefIPSalePaymentTypeEnumMap, json['tPag']) ??
           TefIPSalePaymentType.unknown,
       description: json['description'] as String?,
       value: (json['value'] as num).toDouble(),

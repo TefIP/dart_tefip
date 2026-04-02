@@ -7,10 +7,10 @@ part of 'status_model.dart';
 // **************************************************************************
 
 _StatusModel _$StatusModelFromJson(Map<String, dynamic> json) => _StatusModel(
-  status: json['status'] as String,
-  uptimeSeconds: (json['uptimeSeconds'] as num).toInt(),
-  startedAt: json['startedAt'] as String,
-);
+      status: json['status'] as String,
+      uptimeSeconds: (json['uptimeSeconds'] as num).toInt(),
+      startedAt: json['startedAt'] as String,
+    );
 
 Map<String, dynamic> _$StatusModelToJson(_StatusModel instance) =>
     <String, dynamic>{

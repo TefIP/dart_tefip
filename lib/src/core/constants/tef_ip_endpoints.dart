@@ -80,6 +80,9 @@ abstract final class TefIPEndpoints {
   /// Builds the endpoint for a specific sale item by [itemId].
   static String saleItemById(String itemId) => '/sale/item/$itemId';
 
+  /// Endpoint used to remove all items from the current sale at once.
+  static final String saleItemClear = '/sale/item/clear';
+
   /// Builds the endpoint to cancel a specific sale item by [itemId].
   static String saleItemCancel(String itemId) => '/sale/item/$itemId/cancel';
 

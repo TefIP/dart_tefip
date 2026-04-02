@@ -10,10 +10,12 @@ export 'ask_question_request/ask_question_model.dart';
 export 'ask_single_question_request/ask_single_question_request_model.dart';
 
 export 'sale_action_request/sale_action_request_model.dart';
+export 'sale_coupon/sale_coupon_model.dart';
 export 'sale_item/sale_item_model.dart';
 export 'sale_mutation_response/sale_mutation_response_model.dart';
 export 'sale_payment/sale_payment_model.dart';
 export 'sale_start_request/sale_start_request_model.dart';
+export 'sale_summary/sale_summary_model.dart';
 export 'status/status_model.dart';
 export 'success_response/success_response_model.dart';
 export 'transaction_model/transaction_model.dart';

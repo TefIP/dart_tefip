@@ -99,6 +99,27 @@ interface class TefIPSaleItem implements EndpointInterface {
     }
   }
 
+  /// Removes all items from the current sale at once.
+  Future<SuccessResponseModel> clear({
+    http.Client? client,
+    Duration? timeout,
+  }) async {
+    try {
+      return await TefIPNetworkingClient.delete<SuccessResponseModel>(
+        url: TefIpUrlBuilder.build(TefIPEndpoints.saleItemClear),
+        client: client,
+        timeout: timeout,
+        onSuccess: (json) => SuccessResponseModel.fromJson(json),
+      );
+    } on ClientException catch (e) {
+      throw TefIPRequestException(message: e.message, statusCode: -1);
+    } on TefIPRequestException {
+      rethrow;
+    } catch (e) {
+      throw TefIPUnexpectedException(exception: e);
+    }
+  }
+
   /// Cancels an item in the current sale (marks it as canceled on the display).
   ///
   /// - [itemId] ID of the item to be canceled.
