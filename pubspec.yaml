@@ -6,7 +6,7 @@ repository: https://github.com/TefIP/dart_tefip
 issue_tracker: https://github.com/TefIP/dart_tefip/issues
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.0.0-0.0.dev <4.0.0"
 
 dependencies:
   http: ^1.6.0

@@ -61,10 +61,10 @@ final class TefIP extends TefIPClientBase {
     TefIPConfigs.baseUrl = baseUrl;
   }
 
-  static String? get baseUrl => TefIPConfigs.baseUrl;
+  static String get baseUrl => TefIPConfigs.baseUrl;
 
   /// Returns the configured username used for authentication.
-  static String? get username => TefIPHeadersBuilder.username;
+  static String get username => TefIPHeadersBuilder.username;
 
   /// Sets the username used for authentication in all API requests.
   ///
@@ -77,7 +77,7 @@ final class TefIP extends TefIPClientBase {
   }
 
   /// Returns the configured password used for authentication.
-  static String? get password => TefIPHeadersBuilder.password;
+  static String get password => TefIPHeadersBuilder.password;
 
   /// Sets the password used for authentication in all API requests.
   ///
