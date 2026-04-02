@@ -1,3 +1,15 @@
+## 1.1.2
+
+### Added
+- `GET /sale` endpoint — `sale.get()` returns a `SaleCouponModel` snapshot of the active sale
+- `DELETE /sale/item/clear` endpoint — `saleItem.clear()` removes all items from the current sale at once
+- `discount: double?` and `addition: double?` fields on `SaleStartRequestModel` — sale-level discount and surcharge that affect the final total
+- New `SaleCouponModel` response model with `sale`, `items`, `payments`, and `summary` fields
+- New `SaleSummaryModel` with computed totals: `subtotal`, `surcharge`, `discount`, `itemDiscount`, `itemAddition`, `total`
+
+### Notes
+- Item-level `discount`/`addition` on `SaleItemModel` remain visual only and do not affect sale totals
+
 ## 1.1.1
 
 ### Added
