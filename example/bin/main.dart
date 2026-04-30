@@ -290,6 +290,38 @@ void main(List<String> arguments) async {
   );
   print(cancelSaleResult);
 
+  // Fetch all logs
+  final logs = await tefIP.log.getAll();
+  print('Total logs: ${logs.length}');
+  if (logs.isNotEmpty) print('Latest log: ${logs.first.message}');
+
+  // Fetch logs filtered by level and source
+  final errorLogs = await tefIP.log.getAll(
+    level: TefIPLogLevel.error,
+    source: TefIPLogSource.app,
+    limit: 10,
+  );
+  print('Error logs: ${errorLogs.length}');
+
+  // Download logs as ZIP archive
+  final zipBytes = await tefIP.log.downloadZip(
+    level: TefIPLogLevel.error,
+    limit: 50,
+  );
+  final zipFile = File('tefip_logs.zip');
+  await zipFile.writeAsBytes(zipBytes);
+  print('Logs ZIP saved: ${zipFile.path} (${zipBytes.length} bytes)');
+
+  // Stream live logs (SSE) — listens for 5 seconds then cancels
+  final logEvents = <LogModel>[];
+  final subscription = tefIP.log.stream().listen((log) {
+    logEvents.add(log);
+    print('Live log [${log.level.name}] ${log.message}');
+  });
+  await Future.delayed(const Duration(seconds: 5));
+  await subscription.cancel();
+  print('Stream closed. Received ${logEvents.length} events.');
+
   // Restart the terminal (will throw 403 for non-Android/iOS)
   try {
     final restartResult = await tefIP.restart.post();

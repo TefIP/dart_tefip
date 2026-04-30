@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dart_tefip/src/core/builders/headers/tef_ip_headers_builder.dart';
 import 'package:dart_tefip/src/core/exceptions/tef_ip_request_exception.dart';
+import 'package:dart_tefip/src/core/exceptions/tef_ip_unexpected_exception.dart';
 import 'package:dart_tefip/src/instance/configs/tefip_configs.dart';
 import 'package:meta/meta.dart';
 
@@ -282,6 +283,63 @@ abstract class TefIPNetworkingClient {
       }
 
       return onSuccess(decoded);
+    } finally {
+      if (internalClient) client.close();
+    }
+  }
+
+  /// Opens a persistent SSE connection to [url] and yields decoded events.
+  ///
+  /// Parses `data: <json>` lines from the Server-Sent Events stream.
+  /// Each JSON object is passed to [fromJson] to produce a [T].
+  ///
+  /// - [timeout]: Applied only to the initial connection handshake.
+  /// - [client]: Optional HTTP client for testing.
+  static Stream<T> stream<T>({
+    required String url,
+    required T Function(Map<String, dynamic>) fromJson,
+    Map<String, String>? headers,
+    http.Client? client,
+    Duration? timeout,
+  }) async* {
+    final internalClient = client == null;
+    client ??= _streamingHttpClient();
+    final mergedHeaders = TefIPHeadersBuilder.build(additionalHeader: headers);
+    final request = http.Request('GET', Uri.parse(url));
+    request.headers.addAll(mergedHeaders);
+
+    try {
+      final effectiveTimeout = timeout ?? TefIPConfigs.requestsTimeOut;
+      final sendFuture = client.send(request);
+      final response = await (effectiveTimeout != null
+          ? sendFuture.timeout(effectiveTimeout)
+          : sendFuture);
+
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        final body = await response.stream.bytesToString();
+        throw TefIPRequestException(
+          message: 'Stream request failed',
+          statusCode: response.statusCode,
+          rawBody: body,
+        );
+      }
+
+      await for (final line in response.stream
+          .transform(utf8.decoder)
+          .transform(const LineSplitter())) {
+        if (line.startsWith('data: ')) {
+          final json = jsonDecode(line.substring(6));
+          if (json is Map<String, dynamic>) {
+            yield fromJson(json);
+          }
+        }
+      }
+    } on http.ClientException catch (e) {
+      throw TefIPRequestException(message: e.message, statusCode: -1);
+    } on TefIPRequestException {
+      rethrow;
+    } catch (e) {
+      throw TefIPUnexpectedException(exception: e);
     } finally {
       if (internalClient) client.close();
     }

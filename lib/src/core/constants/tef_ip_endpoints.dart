@@ -98,4 +98,13 @@ abstract final class TefIPEndpoints {
 
   /// Endpoint used to cancel a sale.
   static final String saleCancel = '/sale/cancel';
+
+  /// Endpoint used to retrieve application logs.
+  static final String logs = '/logs';
+
+  /// Endpoint used to download logs as a ZIP archive.
+  static final String logsZip = '/logs/zip/download';
+
+  /// Endpoint used to stream logs in real time via SSE.
+  static final String logsStream = '/logs/stream';
 }

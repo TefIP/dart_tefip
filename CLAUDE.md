@@ -120,6 +120,9 @@ Complete reference of every getter on `TefIP.instance`:
 | `salePayment` | DELETE | `/sale/payment/{paymentId}` | — | `SaleMutationResponseModel` |
 | `saleFinalize` | POST | `/sale/finalize` | `SaleActionRequestModel?` | `SuccessResponseModel` |
 | `saleCancel` | POST | `/sale/cancel` | `SaleActionRequestModel?` | `SuccessResponseModel` |
+| `log` | GET | `/logs` | filter query params | `List<LogModel>` |
+| `log` (zip) | GET | `/logs/zip/download` | filter query params | `Uint8List` |
+| `log` (stream) | GET | `/logs/stream` | — | `Stream<LogModel>` (SSE) |
 
 ---
 
@@ -182,44 +185,111 @@ Notes:
 
 `pending`, `paid`, `cancelled`, `unknown`
 
+### `TefIPLogLevel` — log severity level
+
+`fatal`, `error`, `warning`, `info`, `trace`, `path`, `debug`
+
+### `TefIPLogSource` — log origin system
+
+`app`, `router`, `http`
+
 ---
 
 ## Transaction Models
 
-### `TransactionModel` — campos (GET /transaction, GET /transaction/{referenceId})
+### `LogModel` — fields (GET /logs, SSE stream events)
 
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| `referenceId` | `String?` | Identificador externo para reconciliação |
-| `type` | `TefIPTransactionType` | Tipo da transação. Default: `unknown` |
-| `transactionStatus` | `TefIPTransactionStatus` | Status atual. Default: `unknown` |
-| `installmentType` | `TefIPInstallmentType` | Modalidade de parcelamento. Default: `single` |
-| `amount` | `double` | Valor da transação. Default: `0.0` |
-| `installments` | `int` | Número de parcelas. Default: `1` |
-| `nsu` | `String?` | NSU retornado pelo adquirente |
-| `txid` | `String?` | ID da transação PIX. Presente apenas quando `type == pix`; nulo para crédito/débito |
-| `cAut` | `String?` | Código de autorização do adquirente. Presente para crédito/débito; **nulo para PIX** |
-| `createdAt` | `DateTime?` | Timestamp de criação (Unix → DateTime) |
-| `updatedAt` | `DateTime?` | Timestamp de atualização (Unix → DateTime) |
-| `paymentDetails` | `Map<String,dynamic>?` | Metadados de pagamento |
-| `reversalDetails` | `Map<String,dynamic>?` | Metadados de estorno |
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `int` | Log entry identifier |
+| `level` | `TefIPLogLevel` | Severity level |
+| `source` | `TefIPLogSource` | Origin system |
+| `message` | `String` | Log message |
+| `details` | `String?` | Extra context (optional) |
+| `createdAt` | `DateTime?` | Creation timestamp (Unix → DateTime) |
 
-### `TransactionResponseModel` — campos (POST /transaction — resposta imediata do adquirente)
+### Log Filters — query params for `log.getAll()` and `log.downloadZip()`
 
-Espelha `dj_pay_interface.TransactionResponse`:
+| Param | Type | Description |
+|-------|------|-------------|
+| `level` | `TefIPLogLevel?` | Filter by severity |
+| `source` | `TefIPLogSource?` | Filter by origin |
+| `dateFrom` | `DateTime?` | Logs after this time |
+| `dateTo` | `DateTime?` | Logs before this time |
+| `limit` | `int?` | Max number of logs |
+| `search` | `String?` | Full-text search in message and details |
+| `includeDetails` | `bool?` | Include `details` field (default true) |
 
-| Campo | Tipo | Descrição |
-|-------|------|-----------|
-| `nsu` | `String?` | NSU retornado pelo adquirente |
-| `cnpj` | `String?` | CNPJ do adquirente/emissor |
-| `txid` | `String?` | ID da transação PIX. Presente apenas para PIX; nulo para crédito/débito |
-| `cAut` | `String?` | Código de autorização. Presente para crédito/débito; **nulo para PIX** |
-| `tBand` | `String?` | Bandeira do cartão (ex: Visa, Master) |
-| `tPag` | `String?` | Código do tipo de pagamento retornado pelo adquirente |
-| `message` | `String?` | Mensagem informativa |
-| `details` | `Map<String,dynamic>?` | Dados adicionais estruturados |
+### `TransactionModel` — fields (GET /transaction, GET /transaction/{referenceId})
 
-**Regra PIX:** `txid` e `cAut` são mutuamente exclusivos — quando `type == pix`, `txid` é preenchido e `cAut` é nulo; para crédito/débito é o inverso.
+| Field | Type | Description |
+|-------|------|-------------|
+| `referenceId` | `String?` | External identifier for reconciliation |
+| `type` | `TefIPTransactionType` | Transaction type. Default: `unknown` |
+| `transactionStatus` | `TefIPTransactionStatus` | Current status. Default: `unknown` |
+| `installmentType` | `TefIPInstallmentType` | Installment modality. Default: `single` |
+| `amount` | `double` | Transaction amount. Default: `0.0` |
+| `installments` | `int` | Number of installments. Default: `1` |
+| `nsu` | `String?` | NSU returned by the acquirer |
+| `txid` | `String?` | PIX transaction ID. Present only when `type == pix`; null for credit/debit |
+| `cAut` | `String?` | Acquirer authorization code. Present for credit/debit; **null for PIX** |
+| `createdAt` | `DateTime?` | Creation timestamp (Unix → DateTime) |
+| `updatedAt` | `DateTime?` | Update timestamp (Unix → DateTime) |
+| `paymentDetails` | `Map<String,dynamic>?` | Payment metadata |
+| `reversalDetails` | `Map<String,dynamic>?` | Reversal metadata |
+
+### `TransactionRequestModel` — fields (POST /transaction)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `referenceId` | `String?` | External identifier for reconciliation. Default: `null` |
+| `type` | `TefIPTransactionType` | Transaction type (`tPag` key). Default: `unknown` |
+| `amount` | `double` | Transaction amount. Default: `0` |
+| `installments` | `int` | Number of installments. Default: `1` |
+| `installmentType` | `TefIPInstallmentType` | Installment modality. Default: `single` |
+| `details` | `Map<String,dynamic>?` | Extra acquirer metadata — serialized via `TefIPDetailsConverter` |
+
+### `TransactionResponseModel` — fields (POST /transaction — immediate acquirer response)
+
+Mirrors `dj_pay_interface.TransactionResponse`:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `nsu` | `String?` | NSU returned by the acquirer |
+| `cnpj` | `String?` | Acquirer/issuer CNPJ |
+| `txid` | `String?` | PIX transaction ID. Present only for PIX; null for credit/debit |
+| `cAut` | `String?` | Authorization code. Present for credit/debit; **null for PIX** |
+| `tBand` | `String?` | Card brand (e.g. Visa, Master) |
+| `tPag` | `String?` | Payment type code returned by the acquirer |
+| `message` | `String?` | Informational message |
+| `details` | `Map<String,dynamic>?` | Additional structured data |
+
+**PIX rule:** `txid` and `cAut` are mutually exclusive — when `type == pix`, `txid` is set and `cAut` is null; for credit/debit it is the inverse.
+
+### `SaleItemModel` — fields (POST /sale/item, PATCH /sale/item/{itemId})
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `String?` | External item identifier |
+| `code` | `String` | Product code (e.g. EAN/barcode) |
+| `description` | `String` | Description shown on the display |
+| `canceled` | `bool` | Whether the item is canceled. Default: `false` |
+| `quantity` | `double` | Item quantity |
+| `unitPrice` | `double` | Unit price |
+| `discount` | `double?` | Item-level discount — **visual only**, does not affect sale total |
+| `addition` | `double?` | Item-level surcharge — **visual only**, does not affect sale total |
+| `total` | `double` | Total value of the item |
+| `additionalInfo` | `String?` | Supplementary information |
+
+### `SalePaymentModel` — fields (POST /sale/payment, PATCH /sale/payment/{paymentId})
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `String?` | External payment identifier |
+| `type` | `TefIPSalePaymentType` | Payment type (`tPag` JSON key). Default: `unknown` |
+| `description` | `String?` | Payment description shown on the display |
+| `value` | `double` | Payment amount |
+| `additionalInfo` | `String?` | Supplementary information |
 
 ### `SaleStartRequestModel` — sale metadata (POST /sale, PATCH /sale, nested in `SaleCouponModel.sale`)
 
@@ -328,6 +398,11 @@ dart run build_runner watch --delete-conflicting-outputs
 ### Analyze
 ```bash
 flutter analyze
+```
+
+### Format
+```bash
+dart format .
 ```
 
 ---

@@ -10,6 +10,7 @@ import 'package:dart_tefip/src/instance/display/tef_ip_display_image.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_pop.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_text.dart';
 import 'package:dart_tefip/src/instance/info/tef_ip_info.dart';
+import 'package:dart_tefip/src/instance/log/tef_ip_log.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_image.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_text.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_xml.dart';
@@ -193,4 +194,9 @@ final class TefIP extends TefIPClientBase {
   ///
   /// Used to initiate and manage payment transactions.
   TefIPTransaction get transaction => TefIPTransaction();
+
+  /// Provides access to the Log endpoints.
+  ///
+  /// Used to query, download, and stream application logs.
+  TefIPLog get log => TefIPLog();
 }

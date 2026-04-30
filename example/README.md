@@ -150,3 +150,30 @@ try {
   print('Restart not allowed on this device: $e');
 }
 ```
+
+## 10. Logs
+
+```dart
+// Fetch all logs
+final logs = await tefIP.log.getAll();
+print('Total logs: ${logs.length}');
+
+// Fetch filtered logs
+final errorLogs = await tefIP.log.getAll(
+  level: TefIPLogLevel.error,
+  source: TefIPLogSource.app,
+  limit: 10,
+);
+print('Error logs: ${errorLogs.length}');
+
+// Download logs as ZIP archive
+final zipBytes = await tefIP.log.downloadZip(level: TefIPLogLevel.error);
+await File('tefip_logs.zip').writeAsBytes(zipBytes);
+
+// Stream live logs (SSE)
+final sub = tefIP.log.stream().listen((log) {
+  print('[${log.level.name}] ${log.message}');
+});
+await Future.delayed(const Duration(seconds: 5));
+await sub.cancel();
+```

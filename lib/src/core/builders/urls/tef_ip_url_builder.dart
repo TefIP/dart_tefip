@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 /// - The configured base URL.
 /// - The endpoint path.
 /// - An optional path parameter.
+/// - Optional query parameters.
 ///
 /// The base URL is retrieved from [TefIPConfigs.baseUrl].
 ///
@@ -23,20 +24,35 @@ abstract class TefIpUrlBuilder {
   /// If [param] is provided, it is appended as a path segment.
   /// Otherwise, only the base URL and endpoint are combined.
   ///
+  /// If [queryParams] is provided, they are appended as query parameters.
+  ///
   /// Example without parameter:
   /// ```dart
   /// final url = TefIpUrlBuilder.build("/status");
   /// ```
   ///
-  /// Example with parameter:
+  /// Example with path parameter:
   /// ```dart
   /// final url = TefIpUrlBuilder.build("/transaction", param: "123");
   /// ```
+  ///
+  /// Example with query parameters:
+  /// ```dart
+  /// final url = TefIpUrlBuilder.build("/sale", queryParams: {"limit": "10", "offset": "0"});
+  /// ```
   @internal
-  static String build(String endpoint, {String? param}) {
+  static String build(
+    String endpoint, {
+    String? param,
+    Map<String, String>? queryParams,
+  }) {
     final baseUrl = TefIPConfigs.baseUrl;
 
-    if (param == null) return '$baseUrl$endpoint';
-    return '$baseUrl$endpoint/$param';
+    
+    final String path =
+        param == null ? '$baseUrl$endpoint' : '$baseUrl$endpoint/$param';
+
+    if (queryParams == null || queryParams.isEmpty) return path;
+    return Uri.parse(path).replace(queryParameters: queryParams).toString();
   }
 }
