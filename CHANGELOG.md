@@ -1,3 +1,15 @@
+## 1.2.0
+
+### Added
+- `GET /logs` endpoint — `log.getAll({level, source, dateFrom, dateTo, limit, search, includeDetails})` returns `List<LogModel>`
+- `GET /logs/zip/download` endpoint — `log.downloadZip({...})` returns raw `Uint8List` ZIP archive
+- `GET /logs/stream` endpoint — `log.stream()` returns `Stream<LogModel>` SSE real-time feed
+- New `LogModel` with fields: `id`, `level`, `source`, `message`, `details`, `createdAt`
+- New `TefIPLogLevel` enum: `fatal`, `error`, `warning`, `info`, `trace`, `path`, `debug`
+- New `TefIPLogSource` enum: `app`, `router`, `http`
+- `TefIpUrlBuilder.build()` now accepts optional `queryParams` for filtered GET requests
+- `TefIPNetworkingClient.stream<T>()` for SSE streaming support
+
 ## 1.1.2
 
 ### Added
