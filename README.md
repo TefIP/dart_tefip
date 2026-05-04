@@ -260,6 +260,42 @@ Remove a payment:
 await tefIP.salePayment.delete(paymentId: 'PGTO-001');
 ```
 
+Clear all payments:
+
+```dart
+await tefIP.salePayment.clear();
+```
+
+Manage sale discounts:
+
+```dart
+await tefIP.saleDiscount.post(
+  discount: SaleDiscountModel(
+    id: 'DESC-1',
+    description: 'Desconto promocional',
+    value: 10.0,
+  ),
+);
+```
+
+Clear sale discounts:
+
+```dart
+await tefIP.saleDiscount.clear();
+```
+
+Clear sale additions:
+
+```dart
+await tefIP.saleAddition.clear();
+```
+
+Clear the sale (removes all items, payments, etc., returning to an empty active sale):
+
+```dart
+await tefIP.sale.clear();
+```
+
 Finalize the sale:
 
 ```dart

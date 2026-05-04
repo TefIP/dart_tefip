@@ -1,3 +1,13 @@
+## 1.2.1
+
+### Added
+- `DELETE /sale/clear` via `sale.clear()`
+- `DELETE /sale/payment/clear` via `salePayment.clear()`
+- `saleDiscount` and `saleAddition` endpoint clients with full CRUD
+
+### Fixed
+- Binary-safe ZIP parsing for `log.downloadZip()`
+
 ## 1.2.0
 
 ### Added

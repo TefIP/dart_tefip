@@ -22,3 +22,5 @@ export 'transaction_model/transaction_model.dart';
 export 'transaction_request/transaction_request_model.dart';
 export 'transaction_response/transaction_response_model.dart';
 export 'log/log_model.dart';
+export 'sale_discount/sale_discount_model.dart';
+export 'sale_addition/sale_addition_model.dart';

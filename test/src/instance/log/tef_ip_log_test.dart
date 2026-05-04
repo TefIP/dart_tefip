@@ -179,6 +179,29 @@ void main() {
         ).called(1);
       });
 
+      test('downloadZip preserves byte values above ASCII', () async {
+        final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.logsZip);
+        final binary = Uint8List.fromList([0, 255, 120, 3, 4]);
+
+        when(
+          () => kHttpClient.get(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenAnswer((_) async => http.Response.bytes(binary, 200));
+
+        final result = await log.downloadZip(client: kHttpClient);
+
+        expect(result, equals(binary));
+
+        verify(
+          () => kHttpClient.get(
+            Uri.parse(expectedUrl),
+            headers: any(named: 'headers'),
+          ),
+        ).called(1);
+      });
+
       test('should throw TefIPRequestException on ClientException', () async {
         when(
           () => kHttpClient.get(

@@ -21,11 +21,14 @@ import 'package:dart_tefip/src/instance/sale/tef_ip_sale_cancel.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_finalize.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_item.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_payment.dart';
+import 'package:dart_tefip/src/instance/sale/tef_ip_sale_addition.dart';
+import 'package:dart_tefip/src/instance/sale/tef_ip_sale_discount.dart';
 import 'package:dart_tefip/src/instance/status/tef_ip_status.dart';
 import 'package:dart_tefip/src/instance/transaction/tef_ip_transaction.dart';
 import 'package:meta/meta.dart';
 
 @immutable
+
 /// The main class of the package. It is a singleton class,
 /// responsible for configuring and providing access to all TEF IP API endpoints.
 ///
@@ -179,6 +182,16 @@ final class TefIP extends TefIPClientBase {
   ///
   /// Used to add, update, and remove payments within a sale.
   TefIPSalePayment get salePayment => TefIPSalePayment();
+
+  /// Provides access to the Sale Discount endpoint.
+  ///
+  /// Used to add, update, and remove discounts within a sale.
+  TefIPSaleDiscount get saleDiscount => TefIPSaleDiscount();
+
+  /// Provides access to the Sale Addition endpoint.
+  ///
+  /// Used to add, update, and remove additions within a sale.
+  TefIPSaleAddition get saleAddition => TefIPSaleAddition();
 
   /// Provides access to the Sale Finalize endpoint.
   ///

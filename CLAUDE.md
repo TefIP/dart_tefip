@@ -27,7 +27,7 @@ final tefip = TefIP.instance;
 | Layer | Path | Responsibility |
 |-------|------|---------------|
 | Endpoint classes | `lib/src/instance/` | One class per endpoint group, accessed via `TefIP` getters |
-| Network client | `lib/src/core/networking/tef_ip_network_client.dart` | Static `get<T>()`, `post<T>()`, `patch<T>()`, `delete<T>()` |
+| Network client | `lib/src/core/networking/tef_ip_network_client.dart` | Static `get<T>()`, `post<T>()`, `patch<T>()`, `delete<T>()`, and binary `getBytes()` |
 | Models | `lib/src/core/models/` | Freezed + json_serializable, one folder per model |
 | URL builder | `lib/src/core/builders/urls/tef_ip_url_builder.dart` | Prepends `baseUrl` to endpoint paths |
 | Headers builder | `lib/src/core/builders/headers/tef_ip_headers_builder.dart` | Builds Basic Auth + Content-Type headers |
@@ -110,6 +110,7 @@ Complete reference of every getter on `TefIP.instance`:
 | `sale` | GET | `/sale` | — | `SaleCouponModel` |
 | `sale` | POST | `/sale` | `SaleStartRequestModel` | `SuccessResponseModel` |
 | `sale` | PATCH | `/sale` | `SaleStartRequestModel` | `SuccessResponseModel` |
+| `sale` (clear) | DELETE | `/sale/clear` | — | `SaleCouponModel` |
 | `saleItem` | POST | `/sale/item` | `SaleItemModel` | `SaleMutationResponseModel` |
 | `saleItem` | PATCH | `/sale/item/{itemId}` | `SaleItemModel` | `SaleMutationResponseModel` |
 | `saleItem` | DELETE | `/sale/item/{itemId}` | — | `SaleMutationResponseModel` |
@@ -118,6 +119,15 @@ Complete reference of every getter on `TefIP.instance`:
 | `salePayment` | POST | `/sale/payment` | `SalePaymentModel` | `SaleMutationResponseModel` |
 | `salePayment` | PATCH | `/sale/payment/{paymentId}` | `SalePaymentModel` | `SaleMutationResponseModel` |
 | `salePayment` | DELETE | `/sale/payment/{paymentId}` | — | `SaleMutationResponseModel` |
+| `salePayment` (clear) | DELETE | `/sale/payment/clear` | — | `SaleCouponModel` |
+| `saleDiscount` | POST | `/sale/discount` | `SaleDiscountModel` | `SaleCouponModel` |
+| `saleDiscount` | PATCH | `/sale/discount/{discountId}` | `SaleDiscountModel` | `SaleCouponModel` |
+| `saleDiscount` | DELETE | `/sale/discount/{discountId}` | — | `SaleCouponModel` |
+| `saleDiscount` (clear) | DELETE | `/sale/discount/clear` | — | `SaleCouponModel` |
+| `saleAddition` | POST | `/sale/addition` | `SaleAdditionModel` | `SaleCouponModel` |
+| `saleAddition` | PATCH | `/sale/addition/{additionId}` | `SaleAdditionModel` | `SaleCouponModel` |
+| `saleAddition` | DELETE | `/sale/addition/{additionId}` | — | `SaleCouponModel` |
+| `saleAddition` (clear) | DELETE | `/sale/addition/clear` | — | `SaleCouponModel` |
 | `saleFinalize` | POST | `/sale/finalize` | `SaleActionRequestModel?` | `SuccessResponseModel` |
 | `saleCancel` | POST | `/sale/cancel` | `SaleActionRequestModel?` | `SuccessResponseModel` |
 | `log` | GET | `/logs` | filter query params | `List<LogModel>` |
@@ -139,8 +149,11 @@ Complete lifecycle of a sale session:
 6.  salePayment.post(payment: ...) POST /sale/payment          Add payment
 7.  salePayment.patch(id, payment) PATCH /sale/payment/{id}   Update payment
 8.  salePayment.delete(paymentId)  DELETE /sale/payment/{id}  Remove payment
-9.  sale.patch(request: ...)       PATCH /sale                 Update sale metadata (anytime)
-10. saleFinalize.post()            POST /sale/finalize         Complete sale
+9.  saleDiscount.post(discount:..) POST /sale/discount         Add sale discount
+10. saleAddition.post(addition:..) POST /sale/addition         Add sale addition
+11. sale.patch(request: ...)       PATCH /sale                 Update sale metadata (anytime)
+12. sale.clear()                   DELETE /sale/clear          Wipe all items/payments/coupons
+13. saleFinalize.post()            POST /sale/finalize         Complete sale
     OR saleCancel.post()           POST /sale/cancel           Abort sale
 ```
 
@@ -149,8 +162,9 @@ Notes:
 - `SaleStartRequestModel` has no `id` field — the backend manages sale identity internally
 - `SalePaymentModel.type` uses the `tPag` JSON key (mapped via `@JsonKey(name: 'tPag')`)
 - `SaleActionRequestModel` on finalize/cancel controls the result screen shown to the customer
-- `SaleStartRequestModel.discount` and `.addition` operate at the **sale level** and affect the final total
-- `SaleItemModel.discount` and `.addition` are **visual only** — they do not affect the sale total
+- `SaleStartRequestModel.discount` and `.addition` operate at the **sale level** via metadata
+- `SaleDiscountModel` and `SaleAdditionModel` provide **standardized CRUD** for coupons/discounts
+- `SaleItemModel.discount` and `.addition` are **visual only** — they do not affect the sale total in summary
 
 ---
 
@@ -299,8 +313,24 @@ Mirrors `dj_pay_interface.TransactionResponse`:
 | `customerName` | `String?` | Customer name shown on display |
 | `sellerName` | `String?` | Seller name shown on display |
 | `additionalInfo` | `String?` | Supplementary information |
-| `discount` | `double?` | Sale-level discount — affects the final total |
-| `addition` | `double?` | Sale-level surcharge — affects the final total |
+| `discount` | `double?` | Sale-level discount — affects the final total via metadata |
+| `addition` | `double?` | Sale-level surcharge — affects the final total via metadata |
+
+### `SaleDiscountModel` — fields (POST /sale/discount, PATCH /sale/discount/{id})
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `String?` | Coupon identifier |
+| `description` | `String?` | Label shown on display |
+| `value` | `double` | Discount amount |
+
+### `SaleAdditionModel` — fields (POST /sale/addition, PATCH /sale/addition/{id})
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | `String?` | Addition identifier |
+| `description` | `String?` | Label shown on display |
+| `value` | `double` | Surcharge amount |
 
 ### `SaleSummaryModel` — computed totals (nested in `SaleCouponModel.summary`)
 

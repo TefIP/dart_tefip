@@ -9,35 +9,24 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
-/// Endpoint responsible for managing payments within a sale.
-///
-/// Provides methods to add and remove sale payments.
-///
-/// Errors:
-/// - [TefIPRequestException] for request failures.
-/// - [TefIPUnexpectedException] for unexpected errors.
 @immutable
 @protected
-interface class TefIPSalePayment implements EndpointInterface {
-  /// Fixed endpoint path.
+interface class TefIPSaleDiscount implements EndpointInterface {
   @override
-  String get endpoint => TefIPEndpoints.salePayment;
+  String get endpoint => TefIPEndpoints.saleDiscount;
 
-  /// Adds a payment to the current sale.
-  ///
-  /// - [payment] model of the payment to be added.
-  Future<SaleMutationResponseModel> post({
-    required SalePaymentModel payment,
+  Future<SaleCouponModel> post({
+    required SaleDiscountModel discount,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.post<SaleMutationResponseModel>(
+      return await TefIPNetworkingClient.post<SaleCouponModel>(
         url: TefIpUrlBuilder.build(endpoint),
-        body: jsonEncode(payment.toJson()),
+        body: jsonEncode(discount.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleMutationResponseModel.fromJson(json),
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -48,23 +37,19 @@ interface class TefIPSalePayment implements EndpointInterface {
     }
   }
 
-  /// Updates an existing payment in the current sale.
-  ///
-  /// - [paymentId] ID of the payment to be updated.
-  /// - [payment] model with updated data.
-  Future<SaleMutationResponseModel> patch({
-    required String paymentId,
-    required SalePaymentModel payment,
+  Future<SaleCouponModel> patch({
+    required String discountId,
+    required SaleDiscountModel discount,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.patch<SaleMutationResponseModel>(
-        url: TefIpUrlBuilder.build(TefIPEndpoints.salePaymentById(paymentId)),
-        body: jsonEncode(payment.toJson()),
+      return await TefIPNetworkingClient.patch<SaleCouponModel>(
+        url: TefIpUrlBuilder.build(TefIPEndpoints.saleDiscountById(discountId)),
+        body: jsonEncode(discount.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleMutationResponseModel.fromJson(json),
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -75,20 +60,17 @@ interface class TefIPSalePayment implements EndpointInterface {
     }
   }
 
-  /// Removes a payment from the current sale.
-  ///
-  /// - [paymentId] ID of the payment to be removed.
-  Future<SaleMutationResponseModel> delete({
-    required String paymentId,
+  Future<SaleCouponModel> delete({
+    required String discountId,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.delete<SaleMutationResponseModel>(
-        url: TefIpUrlBuilder.build(TefIPEndpoints.salePaymentById(paymentId)),
+      return await TefIPNetworkingClient.delete<SaleCouponModel>(
+        url: TefIpUrlBuilder.build(TefIPEndpoints.saleDiscountById(discountId)),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleMutationResponseModel.fromJson(json),
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -99,14 +81,13 @@ interface class TefIPSalePayment implements EndpointInterface {
     }
   }
 
-  /// Clears all payments from the active sale.
   Future<SaleCouponModel> clear({
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
       return await TefIPNetworkingClient.delete<SaleCouponModel>(
-        url: TefIpUrlBuilder.build(TefIPEndpoints.salePaymentClear),
+        url: TefIpUrlBuilder.build(endpoint),
         client: client,
         timeout: timeout,
         onSuccess: (json) => SaleCouponModel.fromJson(json),

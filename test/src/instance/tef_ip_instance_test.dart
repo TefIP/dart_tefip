@@ -16,6 +16,8 @@ import 'package:dart_tefip/src/instance/reversal/tef_ip_reversal.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_cancel.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_finalize.dart';
+import 'package:dart_tefip/src/instance/sale/tef_ip_sale_addition.dart';
+import 'package:dart_tefip/src/instance/sale/tef_ip_sale_discount.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_item.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_payment.dart';
 import 'package:dart_tefip/src/instance/status/tef_ip_status.dart';
@@ -125,6 +127,14 @@ void main() {
 
       test('should return TefIPSalePayment', () {
         expect(tefip.salePayment, isA<TefIPSalePayment>());
+      });
+
+      test('should return TefIPSaleDiscount', () {
+        expect(tefip.saleDiscount, isA<TefIPSaleDiscount>());
+      });
+
+      test('should return TefIPSaleAddition', () {
+        expect(tefip.saleAddition, isA<TefIPSaleAddition>());
       });
 
       test('should return TefIPSaleFinalize', () {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:dart_tefip/src/core/builders/headers/tef_ip_headers_builder.dart';
 import 'package:dart_tefip/src/core/exceptions/tef_ip_request_exception.dart';
@@ -67,6 +68,13 @@ abstract class TefIPNetworkingClient {
           : responseFuture);
 
       if (returnRawResponse) {
+        if (response.statusCode < 200 || response.statusCode >= 300) {
+          throw TefIPRequestException(
+            message: 'Request failed',
+            statusCode: response.statusCode,
+            rawBody: response.body,
+          );
+        }
         return response.body as T;
       }
 
@@ -90,6 +98,42 @@ abstract class TefIPNetworkingClient {
       }
 
       return onSuccess(decoded);
+    } finally {
+      if (internalClient) client.close();
+    }
+  }
+
+  /// Performs an HTTP GET request to [url] and returns the raw bytes.
+  ///
+  /// Throws [TefIPRequestException] on non-2xx responses.
+  static Future<Uint8List> getBytes({
+    required String url,
+    Map<String, String>? headers,
+    http.Client? client,
+    Duration? timeout,
+  }) async {
+    final internalClient = client == null;
+    client ??= _streamingHttpClient();
+    headers = TefIPHeadersBuilder.build(additionalHeader: headers);
+
+    final uri = Uri.parse(url);
+
+    try {
+      final effectiveTimeout = timeout ?? TefIPConfigs.requestsTimeOut;
+      final responseFuture = client.get(uri, headers: headers);
+      final response = await (effectiveTimeout != null
+          ? responseFuture.timeout(effectiveTimeout)
+          : responseFuture);
+
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        throw TefIPRequestException(
+          message: 'Request failed',
+          statusCode: response.statusCode,
+          rawBody: utf8.decode(response.bodyBytes, allowMalformed: true),
+        );
+      }
+
+      return response.bodyBytes;
     } finally {
       if (internalClient) client.close();
     }

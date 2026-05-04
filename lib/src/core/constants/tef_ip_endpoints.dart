@@ -23,7 +23,6 @@ abstract final class TefIPEndpoints {
 
   static final String askForm = '/ask/form';
 
-
   /// Endpoint used to display an image on the terminal.
   static final String displayImage = '/display/image';
 
@@ -90,11 +89,30 @@ abstract final class TefIPEndpoints {
   static final String salePayment = '/sale/payment';
 
   /// Builds the endpoint for a specific sale payment by [paymentId].
-  static String salePaymentById(String paymentId) =>
-      '/sale/payment/$paymentId';
+  static String salePaymentById(String paymentId) => '/sale/payment/$paymentId';
 
   /// Endpoint used to finalize a sale.
   static final String saleFinalize = '/sale/finalize';
+
+  /// Endpoint used to clear a sale.
+  static final String saleClear = '/sale/clear';
+
+  /// Endpoint used to clear sale payments.
+  static final String salePaymentClear = '/sale/payment/clear';
+
+  /// Endpoint used to handle sale discounts.
+  static final String saleDiscount = '/sale/discount';
+
+  /// Endpoint used to handle sale additions.
+  static final String saleAddition = '/sale/addition';
+
+  /// Builds the endpoint for a specific sale discount by [discountId].
+  static String saleDiscountById(String discountId) =>
+      '/sale/discount/$discountId';
+
+  /// Builds the endpoint for a specific sale addition by [additionId].
+  static String saleAdditionById(String additionId) =>
+      '/sale/addition/$additionId';
 
   /// Endpoint used to cancel a sale.
   static final String saleCancel = '/sale/cancel';

@@ -112,6 +112,27 @@ void main() {
           expect(result, equals('raw'));
         },
       );
+
+      test('should throw TefIPRequestException on non-2xx for raw get',
+          () async {
+        final response = http.Response('error', 500);
+
+        when(
+          () => kHttpClient.get(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenAnswer((_) async => response);
+
+        expect(
+          () => TefIPNetworkingClient.get<String>(
+            url: kBaseUrl,
+            client: kHttpClient,
+            returnRawResponse: true,
+          ),
+          throwsA(isA<TefIPRequestException>()),
+        );
+      });
     });
 
     group('getList', () {

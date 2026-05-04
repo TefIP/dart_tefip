@@ -117,7 +117,7 @@ interface class TefIPLog implements EndpointInterface {
     Duration? timeout,
   }) async {
     try {
-      final rawBody = await TefIPNetworkingClient.get<String>(
+      return await TefIPNetworkingClient.getBytes(
         url: TefIpUrlBuilder.build(
           TefIPEndpoints.logsZip,
           queryParams: _buildQueryParams(
@@ -128,11 +128,9 @@ interface class TefIPLog implements EndpointInterface {
             limit: limit,
           ),
         ),
-        returnRawResponse: true,
         client: client,
         timeout: timeout,
       );
-      return Uint8List.fromList(rawBody.codeUnits);
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
     } on TefIPRequestException {

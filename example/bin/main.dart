@@ -260,6 +260,32 @@ void main(List<String> arguments) async {
   );
   print(deletePaymentResult);
 
+  // Clear all payments from the sale
+  final clearPaymentsResult = await tefIP.salePayment.clear();
+  print(clearPaymentsResult);
+
+  // Add a sale discount
+  final addDiscountResult = await tefIP.saleDiscount.post(
+    discount: SaleDiscountModel(
+      id: 'DESC-001',
+      description: 'Desconto VIP',
+      value: 10.0,
+    ),
+  );
+  print(addDiscountResult);
+
+  // Clear sale discounts
+  final clearDiscountsResult = await tefIP.saleDiscount.clear();
+  print(clearDiscountsResult);
+
+  // Clear sale additions
+  final clearAdditionsResult = await tefIP.saleAddition.clear();
+  print(clearAdditionsResult);
+
+  // Clear sale completely
+  final clearSaleResult = await tefIP.sale.clear();
+  print(clearSaleResult);
+
   // Finalize the sale
   final finalizeResult = await tefIP.saleFinalize.post(
     params: SaleActionRequestModel(

@@ -269,5 +269,76 @@ void main() {
         );
       });
     });
+
+    group('clear', () {
+      test('should return SaleCouponModel on success', () async {
+        final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.saleClear);
+
+        when(
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenAnswer(
+          (_) async => http.Response.bytes(
+            utf8.encode(jsonEncode(kSaleCoupon.toJson())),
+            200,
+          ),
+        );
+
+        final result = await sale.clear(client: kHttpClient);
+
+        expect(result, equals(kSaleCoupon));
+
+        verify(
+          () => kHttpClient.delete(
+            Uri.parse(expectedUrl),
+            headers: any(named: 'headers'),
+          ),
+        ).called(1);
+      });
+
+      test('should throw TefIPRequestException on ClientException', () {
+        when(
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenThrow(httpError);
+
+        expect(
+          () => sale.clear(client: kHttpClient),
+          throwsA(isA<TefIPRequestException>()),
+        );
+      });
+
+      test('should rethrow TefIPRequestException', () {
+        when(
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
+
+        expect(
+          () => sale.clear(client: kHttpClient),
+          throwsA(isA<TefIPRequestException>()),
+        );
+      });
+
+      test('should throw TefIPUnexpectedException on unknown error', () {
+        when(
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+          ),
+        ).thenThrow(Exception());
+
+        expect(
+          () => sale.clear(client: kHttpClient),
+          throwsA(isA<TefIPUnexpectedException>()),
+        );
+      });
+    });
   });
 }

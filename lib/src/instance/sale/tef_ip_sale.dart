@@ -93,4 +93,25 @@ interface class TefIPSale implements EndpointInterface {
       throw TefIPUnexpectedException(exception: e);
     }
   }
+
+  /// Clears the active sale.
+  Future<SaleCouponModel> clear({
+    http.Client? client,
+    Duration? timeout,
+  }) async {
+    try {
+      return await TefIPNetworkingClient.delete<SaleCouponModel>(
+        url: TefIpUrlBuilder.build(TefIPEndpoints.saleClear),
+        client: client,
+        timeout: timeout,
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
+      );
+    } on ClientException catch (e) {
+      throw TefIPRequestException(message: e.message, statusCode: -1);
+    } on TefIPRequestException {
+      rethrow;
+    } catch (e) {
+      throw TefIPUnexpectedException(exception: e);
+    }
+  }
 }
