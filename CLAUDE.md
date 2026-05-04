@@ -2,6 +2,43 @@
 
 Dart/Flutter SDK for communicating with TEF IP payment terminals over HTTP.
 
+## Code style
+- Functions: 4-20 lines. Split if longer.
+- Files: under 500 lines. Split by responsibility.
+- One thing per function, one responsibility per module (SRP).
+- Names: specific and unique. Avoid `data`, `handler`, `Manager`.
+  Prefer names that return <5 grep hits in the codebase.
+- Types: explicit. No `any`, no `Dict`, no untyped functions.
+- No code duplication. Extract shared logic into a function/module.
+- Early returns over nested ifs. Max 2 levels of indentation.
+- Exception messages must include the offending value and expected shape.
+
+## Comments
+- Keep your own comments. Don't strip them on refactor — they carry
+  intent and provenance.
+
+## Tests
+
+- Every new function gets a test. Bug fixes get a regression test.
+- Mock external I/O (API, DB, filesystem) with named fake classes,
+  not inline stubs.
+- Tests must be F.I.R.S.T: fast, independent, repeatable,
+  self-validating, timely.
+
+## Dependencies
+- Inject dependencies through constructor/parameter, not global/import.
+- Wrap third-party libs behind a thin interface owned by this project.
+
+## Structure
+- Follow the framework's convention (Flutter).
+- Prefer small focused modules over god files.
+- Predictable paths: controller/model/view, src/lib/test, etc.
+
+## Logging
+- Structured JSON when logging for debugging / observability.
+- Plain text only for user-facing CLI output.
+
+
 ## Project Overview
 
 - **Package**: `dart_tefip` (pub.dev)
