@@ -184,8 +184,6 @@ void main(List<String> arguments) async {
       customerName: 'João',
       sellerName: 'Maria',
       additionalInfo: 'Mesa 07',
-      addition: 15.0,
-      discount: 50,
     ),
   );
   print(saleUpdateResult);

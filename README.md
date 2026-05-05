@@ -278,10 +278,52 @@ await tefIP.saleDiscount.post(
 );
 ```
 
+Update a discount:
+
+```dart
+await tefIP.saleDiscount.patch(
+  discountId: 'DESC-1',
+  discount: SaleDiscountModel(id: 'DESC-1', value: 15.0),
+);
+```
+
+Remove a discount:
+
+```dart
+await tefIP.saleDiscount.delete(discountId: 'DESC-1');
+```
+
 Clear sale discounts:
 
 ```dart
 await tefIP.saleDiscount.clear();
+```
+
+Manage sale additions:
+
+```dart
+await tefIP.saleAddition.post(
+  addition: SaleAdditionModel(
+    id: 'TAXA-1',
+    description: 'Taxa de serviço',
+    value: 5.0,
+  ),
+);
+```
+
+Update an addition:
+
+```dart
+await tefIP.saleAddition.patch(
+  additionId: 'TAXA-1',
+  addition: SaleAdditionModel(id: 'TAXA-1', value: 7.5),
+);
+```
+
+Remove an addition:
+
+```dart
+await tefIP.saleAddition.delete(additionId: 'TAXA-1');
 ```
 
 Clear sale additions:
@@ -393,6 +435,37 @@ try {
 }
 ```
 
+### Logs
+
+Get all logs:
+
+```dart
+final logs = await tefIP.log.getAll();
+```
+
+With filters:
+
+```dart
+final logs = await tefIP.log.getAll(
+  level: TefIPLogLevel.error,
+  limit: 50,
+);
+```
+
+Stream logs in real time (SSE):
+
+```dart
+tefIP.log.stream().listen((log) {
+  print('[${log.level.name}] ${log.message}');
+});
+```
+
+Download logs as ZIP archive:
+
+```dart
+final zipBytes = await tefIP.log.downloadZip();
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
@@ -402,12 +475,14 @@ try {
 * ✅ Transaction management (pix, debit, credit)
 * ✅ Reversal support
 * ✅ Sale management (items, payments, finalize, cancel)
+* ✅ Sale discount and addition management
 * ✅ Terminal info and status queries
 * ✅ Display text, image, and carousel
 * ✅ Printing: text, images, XML
 * ✅ Question endpoint for terminal input (single and form)
 * ✅ Cancel terminal input
 * ✅ Restart terminal (Android/iOS only)
+* ✅ Log retrieval, filtering, download, and real-time streaming
 * ✅ Consistent exception handling (`TefIPRequestException`, `TefIPUnexpectedException`)
 * ✅ Async operations
 

@@ -199,7 +199,6 @@ Notes:
 - `SaleStartRequestModel` has no `id` field — the backend manages sale identity internally
 - `SalePaymentModel.type` uses the `tPag` JSON key (mapped via `@JsonKey(name: 'tPag')`)
 - `SaleActionRequestModel` on finalize/cancel controls the result screen shown to the customer
-- `SaleStartRequestModel.discount` and `.addition` operate at the **sale level** via metadata
 - `SaleDiscountModel` and `SaleAdditionModel` provide **standardized CRUD** for coupons/discounts
 - `SaleItemModel.discount` and `.addition` are **visual only** — they do not affect the sale total in summary
 
@@ -350,24 +349,24 @@ Mirrors `dj_pay_interface.TransactionResponse`:
 | `customerName` | `String?` | Customer name shown on display |
 | `sellerName` | `String?` | Seller name shown on display |
 | `additionalInfo` | `String?` | Supplementary information |
-| `discount` | `double?` | Sale-level discount — affects the final total via metadata |
-| `addition` | `double?` | Sale-level surcharge — affects the final total via metadata |
 
 ### `SaleDiscountModel` — fields (POST /sale/discount, PATCH /sale/discount/{id})
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | `String?` | Coupon identifier |
+| `id` | `String` | Coupon identifier (required) |
 | `description` | `String?` | Label shown on display |
-| `value` | `double` | Discount amount |
+| `value` | `num` | Discount amount |
+| `additionalInfo` | `String?` | Supplementary information |
 
 ### `SaleAdditionModel` — fields (POST /sale/addition, PATCH /sale/addition/{id})
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | `String?` | Addition identifier |
+| `id` | `String` | Addition identifier (required) |
 | `description` | `String?` | Label shown on display |
-| `value` | `double` | Surcharge amount |
+| `value` | `num` | Surcharge amount |
+| `additionalInfo` | `String?` | Supplementary information |
 
 ### `SaleSummaryModel` — computed totals (nested in `SaleCouponModel.summary`)
 

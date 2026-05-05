@@ -13,8 +13,6 @@ _SaleStartRequestModel _$SaleStartRequestModelFromJson(
       customerName: json['customerName'] as String?,
       sellerName: json['sellerName'] as String?,
       additionalInfo: json['additionalInfo'] as String?,
-      discount: (json['discount'] as num?)?.toDouble(),
-      addition: (json['addition'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$SaleStartRequestModelToJson(
@@ -24,6 +22,4 @@ Map<String, dynamic> _$SaleStartRequestModelToJson(
       'customerName': instance.customerName,
       'sellerName': instance.sellerName,
       'additionalInfo': instance.additionalInfo,
-      'discount': instance.discount,
-      'addition': instance.addition,
     };

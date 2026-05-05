@@ -9,12 +9,23 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
+/// Endpoint responsible for managing sale surcharge additions.
+///
+/// Performs HTTP `POST`, `PATCH`, and `DELETE` requests to `/sale/addition`.
+///
+/// Errors:
+/// - [TefIPRequestException] for request failures.
+/// - [TefIPUnexpectedException] for unexpected errors.
 @immutable
 @protected
 interface class TefIPSaleAddition implements EndpointInterface {
+  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.saleAddition;
 
+  /// Adds a surcharge addition to the active sale.
+  ///
+  /// - [addition]: model with the addition data.
   Future<SaleCouponModel> post({
     required SaleAdditionModel addition,
     http.Client? client,
@@ -37,6 +48,9 @@ interface class TefIPSaleAddition implements EndpointInterface {
     }
   }
 
+  /// Updates an existing addition by [additionId].
+  ///
+  /// - [addition]: model with the updated addition data.
   Future<SaleCouponModel> patch({
     required String additionId,
     required SaleAdditionModel addition,
@@ -60,6 +74,7 @@ interface class TefIPSaleAddition implements EndpointInterface {
     }
   }
 
+  /// Removes an addition by [additionId].
   Future<SaleCouponModel> delete({
     required String additionId,
     http.Client? client,
@@ -81,13 +96,14 @@ interface class TefIPSaleAddition implements EndpointInterface {
     }
   }
 
+  /// Removes all additions from the active sale.
   Future<SaleCouponModel> clear({
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
       return await TefIPNetworkingClient.delete<SaleCouponModel>(
-        url: TefIpUrlBuilder.build(endpoint),
+        url: TefIpUrlBuilder.build(TefIPEndpoints.saleAdditionClear),
         client: client,
         timeout: timeout,
         onSuccess: (json) => SaleCouponModel.fromJson(json),

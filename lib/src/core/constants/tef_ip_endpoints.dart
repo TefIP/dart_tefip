@@ -19,8 +19,10 @@ abstract final class TefIPEndpoints {
   /// Endpoint used to request input or confirmation from the terminal.
   static final String ask = '/ask';
 
+  /// Endpoint used to cancel an ongoing user input request.
   static final String askCancel = '/ask/cancel';
 
+  /// Endpoint used to request multiple inputs from the terminal as a form.
   static final String askForm = '/ask/form';
 
   /// Endpoint used to display an image on the terminal.
@@ -103,8 +105,14 @@ abstract final class TefIPEndpoints {
   /// Endpoint used to handle sale discounts.
   static final String saleDiscount = '/sale/discount';
 
+  /// Endpoint used to clear sale discounts.
+  static final String saleDiscountClear = '/sale/discount/clear';
+
   /// Endpoint used to handle sale additions.
   static final String saleAddition = '/sale/addition';
+
+  /// Endpoint used to clear sale additions.
+  static final String saleAdditionClear = '/sale/addition/clear';
 
   /// Builds the endpoint for a specific sale discount by [discountId].
   static String saleDiscountById(String discountId) =>

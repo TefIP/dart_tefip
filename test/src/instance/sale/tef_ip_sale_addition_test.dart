@@ -199,7 +199,7 @@ void main() {
 
     group('clear', () {
       test('should return SaleCouponModel on success', () async {
-        final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.saleAddition);
+        final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.saleAdditionClear);
 
         when(
           () => kHttpClient.delete(

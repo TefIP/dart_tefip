@@ -18,8 +18,6 @@ mixin _$SaleStartRequestModel {
   String? get customerName;
   String? get sellerName;
   String? get additionalInfo;
-  double? get discount;
-  double? get addition;
 
   /// Create a copy of SaleStartRequestModel
   /// with the given fields replaced by the non-null parameter values.
@@ -44,21 +42,17 @@ mixin _$SaleStartRequestModel {
             (identical(other.sellerName, sellerName) ||
                 other.sellerName == sellerName) &&
             (identical(other.additionalInfo, additionalInfo) ||
-                other.additionalInfo == additionalInfo) &&
-            (identical(other.discount, discount) ||
-                other.discount == discount) &&
-            (identical(other.addition, addition) ||
-                other.addition == addition));
+                other.additionalInfo == additionalInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, customerDocument, customerName,
-      sellerName, additionalInfo, discount, addition);
+  int get hashCode => Object.hash(
+      runtimeType, customerDocument, customerName, sellerName, additionalInfo);
 
   @override
   String toString() {
-    return 'SaleStartRequestModel(customerDocument: $customerDocument, customerName: $customerName, sellerName: $sellerName, additionalInfo: $additionalInfo, discount: $discount, addition: $addition)';
+    return 'SaleStartRequestModel(customerDocument: $customerDocument, customerName: $customerName, sellerName: $sellerName, additionalInfo: $additionalInfo)';
   }
 }
 
@@ -72,9 +66,7 @@ abstract mixin class $SaleStartRequestModelCopyWith<$Res> {
       {String? customerDocument,
       String? customerName,
       String? sellerName,
-      String? additionalInfo,
-      double? discount,
-      double? addition});
+      String? additionalInfo});
 }
 
 /// @nodoc
@@ -94,8 +86,6 @@ class _$SaleStartRequestModelCopyWithImpl<$Res>
     Object? customerName = freezed,
     Object? sellerName = freezed,
     Object? additionalInfo = freezed,
-    Object? discount = freezed,
-    Object? addition = freezed,
   }) {
     return _then(_self.copyWith(
       customerDocument: freezed == customerDocument
@@ -114,14 +104,6 @@ class _$SaleStartRequestModelCopyWithImpl<$Res>
           ? _self.additionalInfo
           : additionalInfo // ignore: cast_nullable_to_non_nullable
               as String?,
-      discount: freezed == discount
-          ? _self.discount
-          : discount // ignore: cast_nullable_to_non_nullable
-              as double?,
-      addition: freezed == addition
-          ? _self.addition
-          : addition // ignore: cast_nullable_to_non_nullable
-              as double?,
     ));
   }
 }
@@ -219,26 +201,16 @@ extension SaleStartRequestModelPatterns on SaleStartRequestModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            String? customerDocument,
-            String? customerName,
-            String? sellerName,
-            String? additionalInfo,
-            double? discount,
-            double? addition)?
+    TResult Function(String? customerDocument, String? customerName,
+            String? sellerName, String? additionalInfo)?
         $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
       case _SaleStartRequestModel() when $default != null:
-        return $default(
-            _that.customerDocument,
-            _that.customerName,
-            _that.sellerName,
-            _that.additionalInfo,
-            _that.discount,
-            _that.addition);
+        return $default(_that.customerDocument, _that.customerName,
+            _that.sellerName, _that.additionalInfo);
       case _:
         return orElse();
     }
@@ -259,25 +231,15 @@ extension SaleStartRequestModelPatterns on SaleStartRequestModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            String? customerDocument,
-            String? customerName,
-            String? sellerName,
-            String? additionalInfo,
-            double? discount,
-            double? addition)
+    TResult Function(String? customerDocument, String? customerName,
+            String? sellerName, String? additionalInfo)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _SaleStartRequestModel():
-        return $default(
-            _that.customerDocument,
-            _that.customerName,
-            _that.sellerName,
-            _that.additionalInfo,
-            _that.discount,
-            _that.addition);
+        return $default(_that.customerDocument, _that.customerName,
+            _that.sellerName, _that.additionalInfo);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -297,25 +259,15 @@ extension SaleStartRequestModelPatterns on SaleStartRequestModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            String? customerDocument,
-            String? customerName,
-            String? sellerName,
-            String? additionalInfo,
-            double? discount,
-            double? addition)?
+    TResult? Function(String? customerDocument, String? customerName,
+            String? sellerName, String? additionalInfo)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _SaleStartRequestModel() when $default != null:
-        return $default(
-            _that.customerDocument,
-            _that.customerName,
-            _that.sellerName,
-            _that.additionalInfo,
-            _that.discount,
-            _that.addition);
+        return $default(_that.customerDocument, _that.customerName,
+            _that.sellerName, _that.additionalInfo);
       case _:
         return null;
     }
@@ -329,9 +281,7 @@ class _SaleStartRequestModel implements SaleStartRequestModel {
       {this.customerDocument,
       this.customerName,
       this.sellerName,
-      this.additionalInfo,
-      this.discount,
-      this.addition});
+      this.additionalInfo});
   factory _SaleStartRequestModel.fromJson(Map<String, dynamic> json) =>
       _$SaleStartRequestModelFromJson(json);
 
@@ -343,10 +293,6 @@ class _SaleStartRequestModel implements SaleStartRequestModel {
   final String? sellerName;
   @override
   final String? additionalInfo;
-  @override
-  final double? discount;
-  @override
-  final double? addition;
 
   /// Create a copy of SaleStartRequestModel
   /// with the given fields replaced by the non-null parameter values.
@@ -376,21 +322,17 @@ class _SaleStartRequestModel implements SaleStartRequestModel {
             (identical(other.sellerName, sellerName) ||
                 other.sellerName == sellerName) &&
             (identical(other.additionalInfo, additionalInfo) ||
-                other.additionalInfo == additionalInfo) &&
-            (identical(other.discount, discount) ||
-                other.discount == discount) &&
-            (identical(other.addition, addition) ||
-                other.addition == addition));
+                other.additionalInfo == additionalInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, customerDocument, customerName,
-      sellerName, additionalInfo, discount, addition);
+  int get hashCode => Object.hash(
+      runtimeType, customerDocument, customerName, sellerName, additionalInfo);
 
   @override
   String toString() {
-    return 'SaleStartRequestModel(customerDocument: $customerDocument, customerName: $customerName, sellerName: $sellerName, additionalInfo: $additionalInfo, discount: $discount, addition: $addition)';
+    return 'SaleStartRequestModel(customerDocument: $customerDocument, customerName: $customerName, sellerName: $sellerName, additionalInfo: $additionalInfo)';
   }
 }
 
@@ -406,9 +348,7 @@ abstract mixin class _$SaleStartRequestModelCopyWith<$Res>
       {String? customerDocument,
       String? customerName,
       String? sellerName,
-      String? additionalInfo,
-      double? discount,
-      double? addition});
+      String? additionalInfo});
 }
 
 /// @nodoc
@@ -428,8 +368,6 @@ class __$SaleStartRequestModelCopyWithImpl<$Res>
     Object? customerName = freezed,
     Object? sellerName = freezed,
     Object? additionalInfo = freezed,
-    Object? discount = freezed,
-    Object? addition = freezed,
   }) {
     return _then(_SaleStartRequestModel(
       customerDocument: freezed == customerDocument
@@ -448,14 +386,6 @@ class __$SaleStartRequestModelCopyWithImpl<$Res>
           ? _self.additionalInfo
           : additionalInfo // ignore: cast_nullable_to_non_nullable
               as String?,
-      discount: freezed == discount
-          ? _self.discount
-          : discount // ignore: cast_nullable_to_non_nullable
-              as double?,
-      addition: freezed == addition
-          ? _self.addition
-          : addition // ignore: cast_nullable_to_non_nullable
-              as double?,
     ));
   }
 }

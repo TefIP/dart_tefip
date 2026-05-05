@@ -39,7 +39,7 @@ interface class TefIPLog implements EndpointInterface {
       if (dateFrom != null) 'dateFrom': dateFrom.toIso8601String(),
       if (dateTo != null) 'dateTo': dateTo.toIso8601String(),
       if (limit != null) 'limit': limit.toString(),
-      if (search != null) 'search': search,
+      'search': ?search,
       if (includeDetails != null) 'includeDetails': includeDetails.toString(),
     };
   }
