@@ -1,3 +1,19 @@
+## 1.2.2
+
+### Fixed
+- Removed `discount: double?` and `addition: double?` from `SaleStartRequestModel` — use `saleDiscount` and `saleAddition` endpoints instead
+- `saleDiscount.clear()` was calling `DELETE /sale/discount` instead of `DELETE /sale/discount/clear`
+- `saleAddition.clear()` was calling `DELETE /sale/addition` instead of `DELETE /sale/addition/clear`
+
+### Added
+- `TefIPEndpoints.saleDiscountClear` — constant for `DELETE /sale/discount/clear`
+- `TefIPEndpoints.saleAdditionClear` — constant for `DELETE /sale/addition/clear`
+
+### Documentation
+- README: added missing `saleDiscount.patch()` and `saleDiscount.delete()` examples
+- README: added full `saleAddition` CRUD examples (`post`, `patch`, `delete`, `clear`)
+- README: added Logs section (`getAll`, `stream`, `downloadZip`)
+
 ## 1.2.1
 
 ### Added
