@@ -63,6 +63,7 @@
 * Print text, images, or XML documents
 * Ask user input through terminal questions
 * Manage sales: items, payments, finalization, and cancellation
+* Send local push notifications to the terminal device
 * Restart terminals (returns 403 on non-Android/iOS devices by business rules)
 
 The SDK uses a consistent exception handling pattern:
@@ -206,7 +207,10 @@ Start a sale:
 
 ```dart
 await tefIP.sale.post(
-  request: SaleStartRequestModel(...),
+  request: SaleStartRequestModel(
+    customerName: 'João Silva',
+    total: 99.90, // optional — displayed on the sale screen
+  ),
 );
 ```
 
@@ -466,6 +470,19 @@ Download logs as ZIP archive:
 final zipBytes = await tefIP.log.downloadZip();
 ```
 
+### Notification
+
+Send a local push notification to the terminal device:
+
+```dart
+await tefIP.notification.post(
+  request: NotificationRequestModel(
+    title: 'Sale completed',
+    message: 'Your order has been processed successfully.',
+  ),
+);
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
@@ -483,6 +500,7 @@ final zipBytes = await tefIP.log.downloadZip();
 * ✅ Cancel terminal input
 * ✅ Restart terminal (Android/iOS only)
 * ✅ Log retrieval, filtering, download, and real-time streaming
+* ✅ Local push notification to the terminal device
 * ✅ Consistent exception handling (`TefIPRequestException`, `TefIPUnexpectedException`)
 * ✅ Async operations
 
