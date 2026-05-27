@@ -1,3 +1,24 @@
+## 1.3.0
+
+### Added
+- `notification` endpoint — `POST /notification` via `tefip.notification.post(request: NotificationRequestModel(...))`
+- `NotificationRequestModel` with fields `title` and `message`
+- `TefIPTransactionType.money` — tPag code `'01'`
+- `TefIPSalePaymentType.money` — tPag code `'01'`
+- `SaleStartRequestModel.total` — optional total amount displayed on the sale screen
+- `SaleCouponModel.discounts` and `SaleCouponModel.additions` — lists of applied discounts and additions
+
+### Changed
+- `TefIPSalePaymentType` now uses numeric tPag codes (`'01'`, `'03'`, `'04'`, `'05'`, `'17'`, `'99'`) instead of string names (`'credit'`, `'debit'`, etc.) — existing JSON serialization is affected
+- `SaleMutationResponseModel` removed — sale mutation endpoints now return the correct model directly:
+  - `saleItem.post/patch` → `SaleItemModel`
+  - `saleItem.delete/cancel` → `SaleCouponModel`
+  - `salePayment.post/patch` → `SalePaymentModel`
+  - `salePayment.delete` → `SaleCouponModel`
+  - `saleDiscount.post/patch` → `SaleDiscountModel`
+  - `saleAddition.post/patch` → `SaleAdditionModel`
+  - `sale.post/patch` → `SaleCouponModel`
+
 ## 1.2.2
 
 ### Fixed
