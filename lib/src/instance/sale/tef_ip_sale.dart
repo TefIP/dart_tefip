@@ -11,7 +11,7 @@ import 'package:meta/meta.dart';
 
 /// Endpoint responsible for managing a sale on the terminal display.
 ///
-/// Performs HTTP `GET`, `POST`, and `PATCH` requests to `/sale`.
+/// Performs HTTP `GET`, `POST`, `PATCH`, and `DELETE` requests to `/sale`.
 ///
 /// Errors:
 /// - [TefIPRequestException] for request failures.
@@ -19,7 +19,6 @@ import 'package:meta/meta.dart';
 @immutable
 @protected
 interface class TefIPSale implements EndpointInterface {
-  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.sale;
 
@@ -47,18 +46,18 @@ interface class TefIPSale implements EndpointInterface {
   /// Starts a new sale on the terminal display.
   ///
   /// - [request] model with the sale data.
-  Future<SuccessResponseModel> post({
+  Future<SaleCouponModel> post({
     required SaleStartRequestModel request,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.post<SuccessResponseModel>(
+      return await TefIPNetworkingClient.post<SaleCouponModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: jsonEncode(request.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SuccessResponseModel.fromJson(json),
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -72,18 +71,18 @@ interface class TefIPSale implements EndpointInterface {
   /// Updates the active sale data on the terminal display.
   ///
   /// - [request] model with the updated sale data.
-  Future<SuccessResponseModel> patch({
+  Future<SaleCouponModel> patch({
     required SaleStartRequestModel request,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.patch<SuccessResponseModel>(
+      return await TefIPNetworkingClient.patch<SaleCouponModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: jsonEncode(request.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SuccessResponseModel.fromJson(json),
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);

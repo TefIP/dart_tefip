@@ -11,6 +11,7 @@ void main() {
         expect(model.customerName, isNull);
         expect(model.sellerName, isNull);
         expect(model.additionalInfo, isNull);
+        expect(model.total, isNull);
       });
 
       test('full model is parsed correctly', () {
@@ -19,12 +20,19 @@ void main() {
           'customerName': 'João Silva',
           'sellerName': 'Maria',
           'additionalInfo': 'Mesa 12',
+          'total': 99.9,
         });
 
         expect(model.customerDocument, equals('123.456.789-00'));
         expect(model.customerName, equals('João Silva'));
         expect(model.sellerName, equals('Maria'));
         expect(model.additionalInfo, equals('Mesa 12'));
+        expect(model.total, equals(99.9));
+      });
+
+      test('total accepts integer value', () {
+        final model = SaleStartRequestModel.fromJson({'total': 100});
+        expect(model.total, equals(100));
       });
     });
 
@@ -35,12 +43,14 @@ void main() {
 
         expect(json['customerDocument'], isNull);
         expect(json['customerName'], isNull);
+        expect(json['total'], isNull);
       });
 
       test('round-trip preserves data', () {
         const model = SaleStartRequestModel(
           customerDocument: '000.000.000-00',
           customerName: 'Cliente Test',
+          total: 150.0,
         );
         final json = model.toJson();
         final restored = SaleStartRequestModel.fromJson(json);

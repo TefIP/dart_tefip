@@ -145,24 +145,24 @@ Complete reference of every getter on `TefIP.instance`:
 | `transaction` | GET | `/transaction/{referenceId}` | — | `TransactionModel` |
 | `reversal` | POST | `/transaction/{referenceId}/reversal` | — | `TransactionResponseModel` |
 | `sale` | GET | `/sale` | — | `SaleCouponModel` |
-| `sale` | POST | `/sale` | `SaleStartRequestModel` | `SuccessResponseModel` |
-| `sale` | PATCH | `/sale` | `SaleStartRequestModel` | `SuccessResponseModel` |
+| `sale` | POST | `/sale` | `SaleStartRequestModel` | `SaleCouponModel` |
+| `sale` | PATCH | `/sale` | `SaleStartRequestModel` | `SaleCouponModel` |
 | `sale` (clear) | DELETE | `/sale/clear` | — | `SaleCouponModel` |
-| `saleItem` | POST | `/sale/item` | `SaleItemModel` | `SaleMutationResponseModel` |
-| `saleItem` | PATCH | `/sale/item/{itemId}` | `SaleItemModel` | `SaleMutationResponseModel` |
-| `saleItem` | DELETE | `/sale/item/{itemId}` | — | `SaleMutationResponseModel` |
-| `saleItem` (cancel) | POST | `/sale/item/{itemId}/cancel` | — | `SaleMutationResponseModel` |
-| `saleItem` (clear) | DELETE | `/sale/item/clear` | — | `SuccessResponseModel` |
-| `salePayment` | POST | `/sale/payment` | `SalePaymentModel` | `SaleMutationResponseModel` |
-| `salePayment` | PATCH | `/sale/payment/{paymentId}` | `SalePaymentModel` | `SaleMutationResponseModel` |
-| `salePayment` | DELETE | `/sale/payment/{paymentId}` | — | `SaleMutationResponseModel` |
+| `saleItem` | POST | `/sale/item` | `SaleItemModel` | `SaleItemModel` |
+| `saleItem` | PATCH | `/sale/item/{itemId}` | `SaleItemModel` | `SaleItemModel` |
+| `saleItem` | DELETE | `/sale/item/{itemId}` | — | `SaleCouponModel` |
+| `saleItem` (cancel) | POST | `/sale/item/{itemId}/cancel` | — | `SaleCouponModel` |
+| `saleItem` (clear) | DELETE | `/sale/item/clear` | — | `SaleCouponModel` |
+| `salePayment` | POST | `/sale/payment` | `SalePaymentModel` | `SalePaymentModel` |
+| `salePayment` | PATCH | `/sale/payment/{paymentId}` | `SalePaymentModel` | `SalePaymentModel` |
+| `salePayment` | DELETE | `/sale/payment/{paymentId}` | — | `SaleCouponModel` |
 | `salePayment` (clear) | DELETE | `/sale/payment/clear` | — | `SaleCouponModel` |
-| `saleDiscount` | POST | `/sale/discount` | `SaleDiscountModel` | `SaleCouponModel` |
-| `saleDiscount` | PATCH | `/sale/discount/{discountId}` | `SaleDiscountModel` | `SaleCouponModel` |
+| `saleDiscount` | POST | `/sale/discount` | `SaleDiscountModel` | `SaleDiscountModel` |
+| `saleDiscount` | PATCH | `/sale/discount/{discountId}` | `SaleDiscountModel` | `SaleDiscountModel` |
 | `saleDiscount` | DELETE | `/sale/discount/{discountId}` | — | `SaleCouponModel` |
 | `saleDiscount` (clear) | DELETE | `/sale/discount/clear` | — | `SaleCouponModel` |
-| `saleAddition` | POST | `/sale/addition` | `SaleAdditionModel` | `SaleCouponModel` |
-| `saleAddition` | PATCH | `/sale/addition/{additionId}` | `SaleAdditionModel` | `SaleCouponModel` |
+| `saleAddition` | POST | `/sale/addition` | `SaleAdditionModel` | `SaleAdditionModel` |
+| `saleAddition` | PATCH | `/sale/addition/{additionId}` | `SaleAdditionModel` | `SaleAdditionModel` |
 | `saleAddition` | DELETE | `/sale/addition/{additionId}` | — | `SaleCouponModel` |
 | `saleAddition` (clear) | DELETE | `/sale/addition/clear` | — | `SaleCouponModel` |
 | `saleFinalize` | POST | `/sale/finalize` | `SaleActionRequestModel?` | `SuccessResponseModel` |
@@ -170,6 +170,7 @@ Complete reference of every getter on `TefIP.instance`:
 | `log` | GET | `/logs` | filter query params | `List<LogModel>` |
 | `log` (zip) | GET | `/logs/zip/download` | filter query params | `Uint8List` |
 | `log` (stream) | GET | `/logs/stream` | — | `Stream<LogModel>` (SSE) |
+| `notification` | POST | `/notification` | `NotificationRequestModel` | `SuccessResponseModel` |
 
 ---
 
@@ -195,7 +196,7 @@ Complete lifecycle of a sale session:
 ```
 
 Notes:
-- `POST /sale` returns `SuccessResponseModel` (no `saleId` in response)
+- `POST /sale` returns `SaleCouponModel` (active sale snapshot with items, payments, discounts, additions, and summary)
 - `SaleStartRequestModel` has no `id` field — the backend manages sale identity internally
 - `SalePaymentModel.type` uses the `tPag` JSON key (mapped via `@JsonKey(name: 'tPag')`)
 - `SaleActionRequestModel` on finalize/cancel controls the result screen shown to the customer
@@ -210,6 +211,7 @@ Notes:
 
 | Value | tPag code |
 |-------|-----------|
+| `money` | `01` |
 | `credit` | `03` |
 | `debit` | `04` |
 | `pix` | `17` |
@@ -245,7 +247,52 @@ Notes:
 
 ---
 
-## Transaction Models
+## Model Reference
+
+### `SuccessResponseModel` — generic success response
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `message` | `String` | Confirmation message returned by the service |
+
+### `StatusModel` — terminal runtime status (GET /status, POST /restart)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | `String` | Current service state (e.g. `running`, `stopped`) |
+| `uptimeSeconds` | `int` | Seconds since the service started |
+| `startedAt` | `String` | ISO-8601 timestamp of when the service started |
+
+### `InfoModel` — terminal application info (GET /info)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `appName` | `String` | Application name running on the terminal |
+| `version` | `String` | Semantic version of the application |
+| `build` | `String` | Internal build number or identifier |
+| `platform` | `String` | OS/platform identifier (e.g. `android`, `windows`) |
+| `locale` | `String` | Device locale (e.g. `pt-BR`) |
+| `timeZone` | `String` | Device time zone identifier |
+| `mode` | `String` | Execution mode (e.g. `production`, `homologation`) |
+| `isActive` | `bool` | Whether the terminal is active |
+| `isBusy` | `bool` | Whether the terminal is currently processing an operation |
+
+### `SaleActionRequestModel` — optional finalize/cancel display config
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `message` | `String?` | Message shown on the display after finalize/cancel |
+| `showMessage` | `bool` | Whether to show the message. Default: `true` |
+| `showCloseButton` | `bool` | Whether to show the close button. Default: `true` |
+| `buttonCloseText` | `String?` | Label for the close button |
+| `messageInterval` | `int` | Duration the message is displayed, in milliseconds. Default: `3000` |
+
+### `AskSingleQuestionRequestModel` — single question request (POST /ask)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `parameters` | `AskParametersModel` | Global UI settings for the interaction |
+| `question` | `AskQuestionModel` | The question to display on the terminal |
 
 ### `LogModel` — fields (GET /logs, SSE stream events)
 
@@ -349,6 +396,7 @@ Mirrors `dj_pay_interface.TransactionResponse`:
 | `customerName` | `String?` | Customer name shown on display |
 | `sellerName` | `String?` | Seller name shown on display |
 | `additionalInfo` | `String?` | Supplementary information |
+| `total` | `num?` | Optional total amount to display on the sale screen |
 
 ### `SaleDiscountModel` — fields (POST /sale/discount, PATCH /sale/discount/{id})
 
@@ -386,7 +434,16 @@ Mirrors `dj_pay_interface.TransactionResponse`:
 | `sale` | `SaleStartRequestModel` | Sale metadata |
 | `items` | `List<SaleItemModel>` | Items in the sale. Default: `[]` |
 | `payments` | `List<SalePaymentModel>` | Payments in the sale. Default: `[]` |
+| `discounts` | `List<SaleDiscountModel>` | Discount coupons applied to the sale. Default: `[]` |
+| `additions` | `List<SaleAdditionModel>` | Surcharge additions applied to the sale. Default: `[]` |
 | `summary` | `SaleSummaryModel` | Computed totals |
+
+### `NotificationRequestModel` — fields (POST /notification)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | `String` | Notification title shown on the device |
+| `message` | `String` | Notification body text |
 
 ---
 
@@ -422,7 +479,7 @@ Network `ClientException` (e.g. connection refused) is caught and re-thrown as `
 - Tests: `test/src/instance/<group>/` and `test/src/core/`
 - Mocks: `testing/mocks/` (project root — **not** inside `test/`)
   - `testing/mocks/models/` — model fixture constants (e.g. `kSalePayment`, `kSaleStartRequest`, `kSaleItem`)
-  - `testing/mocks/shared/` — shared fixtures (`kSuccessResponse`, `kBaseUrl`, `kUsername`, `kPassword`, `kSuccessResponse`)
+  - `testing/mocks/shared/` — shared fixtures (`kSuccessResponse`, `kBaseUrl`, `kUsername`, `kPassword`)
   - `testing/mocks/networking/` — `MockHttpClient` (extends `Mock implements http.Client`)
 
 ### Standard test pattern

@@ -7,19 +7,21 @@ part of 'sale_start_request_model.dart';
 // **************************************************************************
 
 _SaleStartRequestModel _$SaleStartRequestModelFromJson(
-        Map<String, dynamic> json) =>
-    _SaleStartRequestModel(
-      customerDocument: json['customerDocument'] as String?,
-      customerName: json['customerName'] as String?,
-      sellerName: json['sellerName'] as String?,
-      additionalInfo: json['additionalInfo'] as String?,
-    );
+  Map<String, dynamic> json,
+) => _SaleStartRequestModel(
+  customerDocument: json['customerDocument'] as String?,
+  customerName: json['customerName'] as String?,
+  sellerName: json['sellerName'] as String?,
+  additionalInfo: json['additionalInfo'] as String?,
+  total: json['total'] as num?,
+);
 
 Map<String, dynamic> _$SaleStartRequestModelToJson(
-        _SaleStartRequestModel instance) =>
-    <String, dynamic>{
-      'customerDocument': instance.customerDocument,
-      'customerName': instance.customerName,
-      'sellerName': instance.sellerName,
-      'additionalInfo': instance.additionalInfo,
-    };
+  _SaleStartRequestModel instance,
+) => <String, dynamic>{
+  'customerDocument': instance.customerDocument,
+  'customerName': instance.customerName,
+  'sellerName': instance.sellerName,
+  'additionalInfo': instance.additionalInfo,
+  'total': instance.total,
+};

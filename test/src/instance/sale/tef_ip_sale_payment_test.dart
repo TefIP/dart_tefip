@@ -8,9 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-import '../../../../testing/mocks/models/sale_mutation_response_model_mock.dart';
-import '../../../../testing/mocks/models/sale_payment_model_mock.dart';
 import '../../../../testing/mocks/models/sale_coupon_model_mock.dart';
+import '../../../../testing/mocks/models/sale_payment_model_mock.dart';
 import '../../../../testing/mocks/networking/tef_ip_networking_client_test.dart';
 import '../../../../testing/mocks/shared/uri_mock.dart';
 
@@ -33,30 +32,23 @@ void main() {
     });
 
     group('post', () {
-      test('should return SaleMutationResponseModel on success', () async {
+      test('should return SalePaymentModel on success', () async {
         final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.salePayment);
 
         when(
-          () => kHttpClient.post(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
-        ).thenAnswer(
-          (_) async => http.Response(
-            jsonEncode(kSaleMutationResponse.toJson()),
-            200,
-          ),
-        );
+          () => kHttpClient.post(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
+        ).thenAnswer((_) async => http.Response.bytes(
+              utf8.encode(jsonEncode(kSalePayment.toJson())),
+              200,
+            ));
 
-        final result = await salePayment.post(
-          payment: kSalePayment,
-          client: kHttpClient,
-        );
+        final result =
+            await salePayment.post(payment: kSalePayment, client: kHttpClient);
 
-        expect(result, equals(kSaleMutationResponse));
-
+        expect(result, equals(kSalePayment));
         verify(
           () => kHttpClient.post(
             Uri.parse(expectedUrl),
@@ -68,14 +60,11 @@ void main() {
 
       test('should throw TefIPRequestException on ClientException', () {
         when(
-          () => kHttpClient.post(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
+          () => kHttpClient.post(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
         ).thenThrow(httpError);
-
         expect(
           () => salePayment.post(payment: kSalePayment, client: kHttpClient),
           throwsA(isA<TefIPRequestException>()),
@@ -84,14 +73,11 @@ void main() {
 
       test('should rethrow TefIPRequestException', () {
         when(
-          () => kHttpClient.post(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
+          () => kHttpClient.post(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
         ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
-
         expect(
           () => salePayment.post(payment: kSalePayment, client: kHttpClient),
           throwsA(isA<TefIPRequestException>()),
@@ -100,14 +86,11 @@ void main() {
 
       test('should throw TefIPUnexpectedException on unknown error', () {
         when(
-          () => kHttpClient.post(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
+          () => kHttpClient.post(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
         ).thenThrow(Exception());
-
         expect(
           () => salePayment.post(payment: kSalePayment, client: kHttpClient),
           throwsA(isA<TefIPUnexpectedException>()),
@@ -116,33 +99,26 @@ void main() {
     });
 
     group('patch', () {
-      test('should return SaleMutationResponseModel on success', () async {
+      test('should return SalePaymentModel on success', () async {
         final expectedUrl = TefIpUrlBuilder.build(
-          TefIPEndpoints.salePaymentById(kSalePaymentId),
-        );
+            TefIPEndpoints.salePaymentById(kSalePaymentId));
 
         when(
-          () => kHttpClient.patch(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
-        ).thenAnswer(
-          (_) async => http.Response(
-            jsonEncode(kSaleMutationResponse.toJson()),
-            200,
-          ),
-        );
+          () => kHttpClient.patch(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
+        ).thenAnswer((_) async => http.Response.bytes(
+              utf8.encode(jsonEncode(kSalePayment.toJson())),
+              200,
+            ));
 
         final result = await salePayment.patch(
-          paymentId: kSalePaymentId,
-          payment: kSalePayment,
-          client: kHttpClient,
-        );
+            paymentId: kSalePaymentId,
+            payment: kSalePayment,
+            client: kHttpClient);
 
-        expect(result, equals(kSaleMutationResponse));
-
+        expect(result, equals(kSalePayment));
         verify(
           () => kHttpClient.patch(
             Uri.parse(expectedUrl),
@@ -154,92 +130,72 @@ void main() {
 
       test('should throw TefIPRequestException on ClientException', () {
         when(
-          () => kHttpClient.patch(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
+          () => kHttpClient.patch(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
         ).thenThrow(httpError);
-
         expect(
           () => salePayment.patch(
-            paymentId: kSalePaymentId,
-            payment: kSalePayment,
-            client: kHttpClient,
-          ),
+              paymentId: kSalePaymentId,
+              payment: kSalePayment,
+              client: kHttpClient),
           throwsA(isA<TefIPRequestException>()),
         );
       });
 
       test('should rethrow TefIPRequestException', () {
         when(
-          () => kHttpClient.patch(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
+          () => kHttpClient.patch(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
         ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
-
         expect(
           () => salePayment.patch(
-            paymentId: kSalePaymentId,
-            payment: kSalePayment,
-            client: kHttpClient,
-          ),
+              paymentId: kSalePaymentId,
+              payment: kSalePayment,
+              client: kHttpClient),
           throwsA(isA<TefIPRequestException>()),
         );
       });
 
       test('should throw TefIPUnexpectedException on unknown error', () {
         when(
-          () => kHttpClient.patch(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
+          () => kHttpClient.patch(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
         ).thenThrow(Exception());
-
         expect(
           () => salePayment.patch(
-            paymentId: kSalePaymentId,
-            payment: kSalePayment,
-            client: kHttpClient,
-          ),
+              paymentId: kSalePaymentId,
+              payment: kSalePayment,
+              client: kHttpClient),
           throwsA(isA<TefIPUnexpectedException>()),
         );
       });
     });
 
     group('delete', () {
-      test('should return SaleMutationResponseModel on success', () async {
+      test('should return SaleCouponModel on success', () async {
         final expectedUrl = TefIpUrlBuilder.build(
-          TefIPEndpoints.salePaymentById(kSalePaymentId),
-        );
+            TefIPEndpoints.salePaymentById(kSalePaymentId));
 
         when(
-          () => kHttpClient.delete(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
-        ).thenAnswer(
-          (_) async => http.Response(
-            jsonEncode(kSaleMutationResponse.toJson()),
-            200,
-          ),
-        );
+          () => kHttpClient.delete(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
+        ).thenAnswer((_) async => http.Response.bytes(
+              utf8.encode(jsonEncode(kSaleCoupon.toJson())),
+              200,
+            ));
 
         final result = await salePayment.delete(
-          paymentId: kSalePaymentId,
-          client: kHttpClient,
-        );
+            paymentId: kSalePaymentId, client: kHttpClient);
 
-        expect(result, equals(kSaleMutationResponse));
-
+        expect(result, equals(kSaleCoupon));
         verify(
           () => kHttpClient.delete(
             Uri.parse(expectedUrl),
@@ -250,57 +206,42 @@ void main() {
 
       test('should throw TefIPRequestException on ClientException', () {
         when(
-          () => kHttpClient.delete(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
+          () => kHttpClient.delete(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
         ).thenThrow(httpError);
-
         expect(
           () => salePayment.delete(
-            paymentId: kSalePaymentId,
-            client: kHttpClient,
-          ),
+              paymentId: kSalePaymentId, client: kHttpClient),
           throwsA(isA<TefIPRequestException>()),
         );
       });
 
       test('should rethrow TefIPRequestException', () {
         when(
-          () => kHttpClient.delete(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
+          () => kHttpClient.delete(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
         ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
-
         expect(
           () => salePayment.delete(
-            paymentId: kSalePaymentId,
-            client: kHttpClient,
-          ),
+              paymentId: kSalePaymentId, client: kHttpClient),
           throwsA(isA<TefIPRequestException>()),
         );
       });
 
       test('should throw TefIPUnexpectedException on unknown error', () {
         when(
-          () => kHttpClient.delete(
-            any(),
-            headers: any(named: 'headers'),
-            body: any(named: 'body'),
-            encoding: any(named: 'encoding'),
-          ),
+          () => kHttpClient.delete(any(),
+              headers: any(named: 'headers'),
+              body: any(named: 'body'),
+              encoding: any(named: 'encoding')),
         ).thenThrow(Exception());
-
         expect(
           () => salePayment.delete(
-            paymentId: kSalePaymentId,
-            client: kHttpClient,
-          ),
+              paymentId: kSalePaymentId, client: kHttpClient),
           throwsA(isA<TefIPUnexpectedException>()),
         );
       });
@@ -311,38 +252,24 @@ void main() {
         final expectedUrl =
             TefIpUrlBuilder.build(TefIPEndpoints.salePaymentClear);
 
-        when(
-          () => kHttpClient.delete(
-            any(),
-            headers: any(named: 'headers'),
-          ),
-        ).thenAnswer(
-          (_) async => http.Response.bytes(
-            utf8.encode(jsonEncode(kSaleCoupon.toJson())),
-            200,
-          ),
-        );
+        when(() => kHttpClient.delete(any(), headers: any(named: 'headers')))
+            .thenAnswer((_) async => http.Response.bytes(
+                  utf8.encode(jsonEncode(kSaleCoupon.toJson())),
+                  200,
+                ));
 
         final result = await salePayment.clear(client: kHttpClient);
 
         expect(result, equals(kSaleCoupon));
-
         verify(
           () => kHttpClient.delete(
-            Uri.parse(expectedUrl),
-            headers: any(named: 'headers'),
-          ),
+              Uri.parse(expectedUrl), headers: any(named: 'headers')),
         ).called(1);
       });
 
       test('should throw TefIPRequestException on ClientException', () {
-        when(
-          () => kHttpClient.delete(
-            any(),
-            headers: any(named: 'headers'),
-          ),
-        ).thenThrow(httpError);
-
+        when(() => kHttpClient.delete(any(), headers: any(named: 'headers')))
+            .thenThrow(httpError);
         expect(
           () => salePayment.clear(client: kHttpClient),
           throwsA(isA<TefIPRequestException>()),
@@ -350,13 +277,9 @@ void main() {
       });
 
       test('should rethrow TefIPRequestException', () {
-        when(
-          () => kHttpClient.delete(
-            any(),
-            headers: any(named: 'headers'),
-          ),
-        ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
-
+        when(() => kHttpClient.delete(any(), headers: any(named: 'headers')))
+            .thenThrow(
+                TefIPRequestException(message: 'fail', statusCode: 400));
         expect(
           () => salePayment.clear(client: kHttpClient),
           throwsA(isA<TefIPRequestException>()),
@@ -364,13 +287,8 @@ void main() {
       });
 
       test('should throw TefIPUnexpectedException on unknown error', () {
-        when(
-          () => kHttpClient.delete(
-            any(),
-            headers: any(named: 'headers'),
-          ),
-        ).thenThrow(Exception());
-
+        when(() => kHttpClient.delete(any(), headers: any(named: 'headers')))
+            .thenThrow(Exception());
         expect(
           () => salePayment.clear(client: kHttpClient),
           throwsA(isA<TefIPUnexpectedException>()),

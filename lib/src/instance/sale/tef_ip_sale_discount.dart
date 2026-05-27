@@ -19,25 +19,24 @@ import 'package:meta/meta.dart';
 @immutable
 @protected
 interface class TefIPSaleDiscount implements EndpointInterface {
-  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.saleDiscount;
 
-  /// Adds a discount coupon to the active sale.
+  /// Adds a discount coupon. Returns the created discount.
   ///
   /// - [discount]: model with the discount data.
-  Future<SaleCouponModel> post({
+  Future<SaleDiscountModel> post({
     required SaleDiscountModel discount,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.post<SaleCouponModel>(
+      return await TefIPNetworkingClient.post<SaleDiscountModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: jsonEncode(discount.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleCouponModel.fromJson(json),
+        onSuccess: (json) => SaleDiscountModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -48,22 +47,23 @@ interface class TefIPSaleDiscount implements EndpointInterface {
     }
   }
 
-  /// Updates an existing discount by [discountId].
+  /// Updates an existing discount. Returns the updated discount.
   ///
+  /// - [discountId]: ID of the discount to update.
   /// - [discount]: model with the updated discount data.
-  Future<SaleCouponModel> patch({
+  Future<SaleDiscountModel> patch({
     required String discountId,
     required SaleDiscountModel discount,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.patch<SaleCouponModel>(
+      return await TefIPNetworkingClient.patch<SaleDiscountModel>(
         url: TefIpUrlBuilder.build(TefIPEndpoints.saleDiscountById(discountId)),
         body: jsonEncode(discount.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleCouponModel.fromJson(json),
+        onSuccess: (json) => SaleDiscountModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -74,7 +74,7 @@ interface class TefIPSaleDiscount implements EndpointInterface {
     }
   }
 
-  /// Removes a discount by [discountId].
+  /// Removes a discount. Returns the updated sale coupon.
   Future<SaleCouponModel> delete({
     required String discountId,
     http.Client? client,

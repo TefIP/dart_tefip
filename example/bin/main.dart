@@ -18,11 +18,13 @@ void main(List<String> arguments) async {
   final transactions = await tefIP.transaction.getAll();
   print(transactions);
 
-  // Retrieve a specific transaction
-  final transaction = await tefIP.transaction.get(
-    referenceId: transactions.first.referenceId!,
-  );
-  print(transaction);
+  if (transactions.isNotEmpty) {
+    // Retrieve a specific transaction
+    final transaction = await tefIP.transaction.get(
+      referenceId: transactions.first.referenceId!,
+    );
+    print(transaction);
+  }
 
   // Create a new transaction
   final referenceId = DateTime.now().toIso8601String();
@@ -165,17 +167,19 @@ void main(List<String> arguments) async {
       customerName: 'Joao da Silva',
       sellerName: 'Maria Souza',
       additionalInfo: 'Mesa 12',
+      total: 150.0,
     ),
   );
   print(saleResult);
 
   // Get a sale
-
   final coupon = await tefIP.sale.get();
 
   print(coupon.sale);
   print(coupon.items);
   print(coupon.payments);
+  print(coupon.discounts);
+  print(coupon.additions);
   print(coupon.summary);
 
   // Update a sale
@@ -184,6 +188,7 @@ void main(List<String> arguments) async {
       customerName: 'João',
       sellerName: 'Maria',
       additionalInfo: 'Mesa 07',
+      total: 120.0,
     ),
   );
   print(saleUpdateResult);
@@ -272,9 +277,53 @@ void main(List<String> arguments) async {
   );
   print(addDiscountResult);
 
+  // Update a sale discount
+  final updateDiscountResult = await tefIP.saleDiscount.patch(
+    discountId: 'DESC-001',
+    discount: SaleDiscountModel(
+      id: 'DESC-001',
+      description: 'Desconto VIP Atualizado',
+      value: 15.0,
+    ),
+  );
+  print(updateDiscountResult);
+
+  // Remove a sale discount
+  final deleteDiscountResult = await tefIP.saleDiscount.delete(
+    discountId: 'DESC-001',
+  );
+  print(deleteDiscountResult);
+
   // Clear sale discounts
   final clearDiscountsResult = await tefIP.saleDiscount.clear();
   print(clearDiscountsResult);
+
+  // Add a sale addition
+  final addAdditionResult = await tefIP.saleAddition.post(
+    addition: SaleAdditionModel(
+      id: 'TAXA-001',
+      description: 'Taxa de serviço',
+      value: 5.0,
+    ),
+  );
+  print(addAdditionResult);
+
+  // Update a sale addition
+  final updateAdditionResult = await tefIP.saleAddition.patch(
+    additionId: 'TAXA-001',
+    addition: SaleAdditionModel(
+      id: 'TAXA-001',
+      description: 'Taxa de serviço Atualizada',
+      value: 8.0,
+    ),
+  );
+  print(updateAdditionResult);
+
+  // Remove a sale addition
+  final deleteAdditionResult = await tefIP.saleAddition.delete(
+    additionId: 'TAXA-001',
+  );
+  print(deleteAdditionResult);
 
   // Clear sale additions
   final clearAdditionsResult = await tefIP.saleAddition.clear();
@@ -345,6 +394,15 @@ void main(List<String> arguments) async {
   await Future.delayed(const Duration(seconds: 5));
   await subscription.cancel();
   print('Stream closed. Received ${logEvents.length} events.');
+
+  // Send a local push notification to the terminal
+  final notificationResult = await tefIP.notification.post(
+    request: NotificationRequestModel(
+      title: 'Venda finalizada',
+      message: 'Seu pedido foi processado com sucesso!',
+    ),
+  );
+  print(notificationResult);
 
   // Restart the terminal (will throw 403 for non-Android/iOS)
   try {

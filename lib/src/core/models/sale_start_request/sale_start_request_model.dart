@@ -10,6 +10,7 @@ part 'sale_start_request_model.g.dart';
 /// - [customerName]: Customer name shown on the display.
 /// - [sellerName]: Seller name shown on the display.
 /// - [additionalInfo]: Supplementary information shown on the display.
+/// - [total]: Optional total amount to display on the sale screen.
 @freezed
 abstract class SaleStartRequestModel with _$SaleStartRequestModel {
   const factory SaleStartRequestModel({
@@ -17,6 +18,7 @@ abstract class SaleStartRequestModel with _$SaleStartRequestModel {
     String? customerName,
     String? sellerName,
     String? additionalInfo,
+    num? total,
   }) = _SaleStartRequestModel;
 
   factory SaleStartRequestModel.fromJson(

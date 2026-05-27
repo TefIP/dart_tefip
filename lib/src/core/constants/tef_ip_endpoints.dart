@@ -133,4 +133,7 @@ abstract final class TefIPEndpoints {
 
   /// Endpoint used to stream logs in real time via SSE.
   static final String logsStream = '/logs/stream';
+
+  /// Endpoint used to trigger a local push notification on the terminal device.
+  static final String notification = '/notification';
 }

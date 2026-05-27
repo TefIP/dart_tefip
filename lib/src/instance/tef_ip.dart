@@ -23,6 +23,7 @@ import 'package:dart_tefip/src/instance/sale/tef_ip_sale_item.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_payment.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_addition.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_discount.dart';
+import 'package:dart_tefip/src/instance/notification/tef_ip_notification.dart';
 import 'package:dart_tefip/src/instance/status/tef_ip_status.dart';
 import 'package:dart_tefip/src/instance/transaction/tef_ip_transaction.dart';
 import 'package:meta/meta.dart';
@@ -212,4 +213,9 @@ final class TefIP extends TefIPClientBase {
   ///
   /// Used to query, download, and stream application logs.
   TefIPLog get log => TefIPLog();
+
+  /// Provides access to the Notification endpoint.
+  ///
+  /// Used to trigger a local push notification on the terminal device.
+  TefIPNotification get notification => TefIPNotification();
 }

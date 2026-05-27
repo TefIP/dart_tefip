@@ -11,6 +11,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 /// - [pix]: PIX transaction (`17`).
 /// - [unknown]: Fallback value when the transaction type is not recognized (`99`).
 enum TefIPTransactionType {
+  @JsonValue('01')
+  money('01'),
+
   /// Credit card transaction.
   @JsonValue('03')
   credit('03'),

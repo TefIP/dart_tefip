@@ -19,25 +19,24 @@ import 'package:meta/meta.dart';
 @immutable
 @protected
 interface class TefIPSaleAddition implements EndpointInterface {
-  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.saleAddition;
 
-  /// Adds a surcharge addition to the active sale.
+  /// Adds a surcharge addition. Returns the created addition.
   ///
   /// - [addition]: model with the addition data.
-  Future<SaleCouponModel> post({
+  Future<SaleAdditionModel> post({
     required SaleAdditionModel addition,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.post<SaleCouponModel>(
+      return await TefIPNetworkingClient.post<SaleAdditionModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: jsonEncode(addition.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleCouponModel.fromJson(json),
+        onSuccess: (json) => SaleAdditionModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -48,22 +47,23 @@ interface class TefIPSaleAddition implements EndpointInterface {
     }
   }
 
-  /// Updates an existing addition by [additionId].
+  /// Updates an existing addition. Returns the updated addition.
   ///
+  /// - [additionId]: ID of the addition to update.
   /// - [addition]: model with the updated addition data.
-  Future<SaleCouponModel> patch({
+  Future<SaleAdditionModel> patch({
     required String additionId,
     required SaleAdditionModel addition,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.patch<SaleCouponModel>(
+      return await TefIPNetworkingClient.patch<SaleAdditionModel>(
         url: TefIpUrlBuilder.build(TefIPEndpoints.saleAdditionById(additionId)),
         body: jsonEncode(addition.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleCouponModel.fromJson(json),
+        onSuccess: (json) => SaleAdditionModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -74,7 +74,7 @@ interface class TefIPSaleAddition implements EndpointInterface {
     }
   }
 
-  /// Removes an addition by [additionId].
+  /// Removes an addition. Returns the updated sale coupon.
   Future<SaleCouponModel> delete({
     required String additionId,
     http.Client? client,

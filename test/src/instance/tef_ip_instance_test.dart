@@ -20,6 +20,7 @@ import 'package:dart_tefip/src/instance/sale/tef_ip_sale_addition.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_discount.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_item.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale_payment.dart';
+import 'package:dart_tefip/src/instance/notification/tef_ip_notification.dart';
 import 'package:dart_tefip/src/instance/status/tef_ip_status.dart';
 import 'package:dart_tefip/src/instance/transaction/tef_ip_transaction.dart';
 import 'package:test/test.dart';
@@ -147,6 +148,10 @@ void main() {
 
       test('should return TefIPTransaction', () {
         expect(tefip.transaction, isA<TefIPTransaction>());
+      });
+
+      test('should return TefIPNotification', () {
+        expect(tefip.notification, isA<TefIPNotification>());
       });
     });
   });

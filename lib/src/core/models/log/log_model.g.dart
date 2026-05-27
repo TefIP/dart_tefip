@@ -7,24 +7,24 @@ part of 'log_model.dart';
 // **************************************************************************
 
 _LogModel _$LogModelFromJson(Map<String, dynamic> json) => _LogModel(
-      id: (json['id'] as num).toInt(),
-      level: $enumDecode(_$TefIPLogLevelEnumMap, json['level']),
-      source: $enumDecode(_$TefIPLogSourceEnumMap, json['source']),
-      message: json['message'] as String,
-      details: json['details'] as String?,
-      createdAt: const TefIPUnixDateTimeConverter()
-          .fromJson((json['createdAt'] as num?)?.toInt()),
-    );
+  id: (json['id'] as num).toInt(),
+  level: $enumDecode(_$TefIPLogLevelEnumMap, json['level']),
+  source: $enumDecode(_$TefIPLogSourceEnumMap, json['source']),
+  message: json['message'] as String,
+  details: json['details'] as String?,
+  createdAt: json['createdAt'] == null
+      ? null
+      : DateTime.parse(json['createdAt'] as String),
+);
 
 Map<String, dynamic> _$LogModelToJson(_LogModel instance) => <String, dynamic>{
-      'id': instance.id,
-      'level': _$TefIPLogLevelEnumMap[instance.level]!,
-      'source': _$TefIPLogSourceEnumMap[instance.source]!,
-      'message': instance.message,
-      'details': instance.details,
-      'createdAt':
-          const TefIPUnixDateTimeConverter().toJson(instance.createdAt),
-    };
+  'id': instance.id,
+  'level': _$TefIPLogLevelEnumMap[instance.level]!,
+  'source': _$TefIPLogSourceEnumMap[instance.source]!,
+  'message': instance.message,
+  'details': instance.details,
+  'createdAt': instance.createdAt?.toIso8601String(),
+};
 
 const _$TefIPLogLevelEnumMap = {
   TefIPLogLevel.fatal: 'fatal',

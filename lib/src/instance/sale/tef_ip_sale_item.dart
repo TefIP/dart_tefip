@@ -19,25 +19,24 @@ import 'package:meta/meta.dart';
 @immutable
 @protected
 interface class TefIPSaleItem implements EndpointInterface {
-  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.saleItem;
 
-  /// Adds a new item to the current sale.
+  /// Adds a new item to the current sale. Returns the updated item.
   ///
   /// - [item] model of the item to be added.
-  Future<SaleMutationResponseModel> post({
+  Future<SaleItemModel> post({
     required SaleItemModel item,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.post<SaleMutationResponseModel>(
+      return await TefIPNetworkingClient.post<SaleItemModel>(
         url: TefIpUrlBuilder.build(endpoint),
         body: jsonEncode(item.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleMutationResponseModel.fromJson(json),
+        onSuccess: (json) => SaleItemModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -48,23 +47,23 @@ interface class TefIPSaleItem implements EndpointInterface {
     }
   }
 
-  /// Updates an existing item in the current sale.
+  /// Updates an existing item. Returns the updated item.
   ///
   /// - [itemId] ID of the item to be updated.
   /// - [item] model with updated data.
-  Future<SaleMutationResponseModel> patch({
+  Future<SaleItemModel> patch({
     required String itemId,
     required SaleItemModel item,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.patch<SaleMutationResponseModel>(
+      return await TefIPNetworkingClient.patch<SaleItemModel>(
         url: TefIpUrlBuilder.build(TefIPEndpoints.saleItemById(itemId)),
         body: jsonEncode(item.toJson()),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleMutationResponseModel.fromJson(json),
+        onSuccess: (json) => SaleItemModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -75,20 +74,20 @@ interface class TefIPSaleItem implements EndpointInterface {
     }
   }
 
-  /// Removes an item from the current sale.
+  /// Removes an item from the current sale. Returns the updated sale coupon.
   ///
   /// - [itemId] ID of the item to be removed.
-  Future<SaleMutationResponseModel> delete({
+  Future<SaleCouponModel> delete({
     required String itemId,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.delete<SaleMutationResponseModel>(
+      return await TefIPNetworkingClient.delete<SaleCouponModel>(
         url: TefIpUrlBuilder.build(TefIPEndpoints.saleItemById(itemId)),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleMutationResponseModel.fromJson(json),
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -99,17 +98,17 @@ interface class TefIPSaleItem implements EndpointInterface {
     }
   }
 
-  /// Removes all items from the current sale at once.
-  Future<SuccessResponseModel> clear({
+  /// Removes all items from the current sale. Returns the updated sale coupon.
+  Future<SaleCouponModel> clear({
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.delete<SuccessResponseModel>(
+      return await TefIPNetworkingClient.delete<SaleCouponModel>(
         url: TefIpUrlBuilder.build(TefIPEndpoints.saleItemClear),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SuccessResponseModel.fromJson(json),
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);
@@ -120,20 +119,20 @@ interface class TefIPSaleItem implements EndpointInterface {
     }
   }
 
-  /// Cancels an item in the current sale (marks it as canceled on the display).
+  /// Cancels an item in the current sale. Returns the updated sale coupon.
   ///
   /// - [itemId] ID of the item to be canceled.
-  Future<SaleMutationResponseModel> cancel({
+  Future<SaleCouponModel> cancel({
     required String itemId,
     http.Client? client,
     Duration? timeout,
   }) async {
     try {
-      return await TefIPNetworkingClient.post<SaleMutationResponseModel>(
+      return await TefIPNetworkingClient.post<SaleCouponModel>(
         url: TefIpUrlBuilder.build(TefIPEndpoints.saleItemCancel(itemId)),
         client: client,
         timeout: timeout,
-        onSuccess: (json) => SaleMutationResponseModel.fromJson(json),
+        onSuccess: (json) => SaleCouponModel.fromJson(json),
       );
     } on ClientException catch (e) {
       throw TefIPRequestException(message: e.message, statusCode: -1);

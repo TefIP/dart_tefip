@@ -9,7 +9,8 @@ part of 'sale_payment_model.dart';
 _SalePaymentModel _$SalePaymentModelFromJson(Map<String, dynamic> json) =>
     _SalePaymentModel(
       id: json['id'] as String?,
-      type: $enumDecodeNullable(_$TefIPSalePaymentTypeEnumMap, json['tPag']) ??
+      type:
+          $enumDecodeNullable(_$TefIPSalePaymentTypeEnumMap, json['tPag']) ??
           TefIPSalePaymentType.unknown,
       description: json['description'] as String?,
       value: (json['value'] as num).toDouble(),
@@ -26,15 +27,15 @@ Map<String, dynamic> _$SalePaymentModelToJson(_SalePaymentModel instance) =>
     };
 
 const _$TefIPSalePaymentTypeEnumMap = {
-  TefIPSalePaymentType.credit: 'credit',
-  TefIPSalePaymentType.debit: 'debit',
-  TefIPSalePaymentType.pix: 'pix',
-  TefIPSalePaymentType.money: 'money',
-  TefIPSalePaymentType.voucher: 'voucher',
-  TefIPSalePaymentType.gift: 'gift',
-  TefIPSalePaymentType.veroWallet: 'veroWallet',
-  TefIPSalePaymentType.unknown: 'unknown',
-  TefIPSalePaymentType.adm: 'adm',
-  TefIPSalePaymentType.cancel: 'cancel',
-  TefIPSalePaymentType.cancelDigitalWallet: 'cancelDigitalWallet',
+  TefIPSalePaymentType.money: '01',
+  TefIPSalePaymentType.credit: '03',
+  TefIPSalePaymentType.debit: '04',
+  TefIPSalePaymentType.gift: '05',
+  TefIPSalePaymentType.veroWallet: '17',
+  TefIPSalePaymentType.pix: '17',
+  TefIPSalePaymentType.unknown: '99',
+  TefIPSalePaymentType.voucher: '99',
+  TefIPSalePaymentType.adm: '99',
+  TefIPSalePaymentType.cancel: '99',
+  TefIPSalePaymentType.cancelDigitalWallet: '99',
 };
