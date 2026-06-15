@@ -15,7 +15,7 @@ import '../utils/http/http_client_default.dart'
 
 /// Internal HTTP client for all SDK network operations.
 ///
-/// Provides static [get] and [post] methods that handle:
+/// Provides static [get], [getBytes], [post], [patch], [delete], and [stream] methods that handle:
 /// - Header injection via [TefIPHeadersBuilder]
 /// - Optional per-request timeout (falls back to [TefIPConfigs.requestsTimeOut];
 ///   if both are `null`, the request waits indefinitely)

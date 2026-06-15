@@ -14,10 +14,6 @@ import 'package:meta/meta.dart';
 /// Performs an HTTP `POST` request to `/display/text`
 /// with a JSON body and returns a [SuccessResponseModel].
 ///
-/// Parameters:
-/// - [displayTextRequest]: Model containing the text content
-///   and display configuration.
-///
 /// Errors:
 /// - [TefIPRequestException] for request failures.
 /// - [TefIPUnexpectedException] for unexpected errors.
@@ -29,6 +25,8 @@ interface class TefIPDisplayText implements EndpointInterface {
   String get endpoint => TefIPEndpoints.displayText;
 
   /// Sends formatted text data to be rendered on the terminal display.
+  ///
+  /// - [displayTextRequest]: Model containing the text content and display configuration.
   Future<SuccessResponseModel> post({
     required DisplayTextRequestModel displayTextRequest,
     http.Client? client,

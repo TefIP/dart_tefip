@@ -9,10 +9,10 @@ import 'package:meta/meta.dart';
 import '../../core/builders/urls/tef_ip_url_builder.dart';
 import 'package:http/http.dart' as http;
 
-/// Endpoint responsible for sending interactive questions
+/// Endpoint responsible for sending a form with multiple questions
 /// to the terminal.
 ///
-/// Performs an HTTP `POST` request to `/ask`
+/// Performs an HTTP `POST` request to `/ask/form`
 /// and returns a [List<AnswerModel>].
 ///
 /// Errors:
@@ -25,7 +25,7 @@ interface class TefIPAskForm implements EndpointInterface {
   @override
   String get endpoint => TefIPEndpoints.askForm;
 
-  /// Sends a question to the terminal.
+  /// Sends a multi-question form to the terminal.
   Future<List<AnswerModel>> post({
     required AskFormRequestModel form,
     http.Client? client,

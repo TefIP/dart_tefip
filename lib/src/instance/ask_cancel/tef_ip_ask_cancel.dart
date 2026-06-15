@@ -7,10 +7,10 @@ import 'package:meta/meta.dart';
 import '../../core/builders/urls/tef_ip_url_builder.dart';
 import 'package:http/http.dart' as http;
 
-/// Endpoint responsible for sending interactive questions
-/// to the terminal.
+/// Endpoint responsible for canceling an ongoing interactive question
+/// or form on the terminal.
 ///
-/// Performs an HTTP `POST` request to `/ask`
+/// Performs an HTTP `POST` request to `/ask/cancel`
 /// and returns a [SuccessResponseModel].
 ///
 /// Errors:
@@ -23,7 +23,7 @@ interface class TefIPAskCancel implements EndpointInterface {
   @override
   String get endpoint => TefIPEndpoints.askCancel;
 
-  /// Sends a question to the terminal.
+  /// Cancels the current interactive question or form on the terminal.
   Future<SuccessResponseModel> post({
     http.Client? client,
   }) async {

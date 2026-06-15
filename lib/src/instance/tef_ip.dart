@@ -66,6 +66,7 @@ final class TefIP extends TefIPClientBase {
     TefIPConfigs.baseUrl = baseUrl;
   }
 
+  /// Returns the base URL configured for all API requests.
   static String get baseUrl => TefIPConfigs.baseUrl;
 
   /// Returns the configured username used for authentication.

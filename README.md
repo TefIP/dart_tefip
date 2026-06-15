@@ -34,22 +34,14 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#platform-support">Platform Support</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#how-to-use">How to Use</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
-
----
-
-## Platform Support
-
-| Android | iOS | Web | macOS | Windows | Linux |
-|:-------:|:---:|:---:|:-----:|:-------:|:-----:|
-| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ---
 
@@ -79,6 +71,16 @@ The goal is to centralize communication with TEF IP devices with minimal boilerp
 
 ---
 
+## Platform Support
+
+| Android | iOS | Web | macOS | Windows | Linux |
+|:-------:|:---:|:---:|:-----:|:-------:|:-----:|
+| ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
 ## Getting Started
 
 Add `dart_tefip` to your project:
@@ -94,18 +96,22 @@ Or using Dart Pub:
 dart pub add dart_tefip
 ```
 
+Requires Dart SDK `>=3.8.0`.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
 ## How to Use
 
-Initialize the terminal instance and configure the connection:
+Configure the connection and initialize the instance:
 
 ```dart
 TefIP.baseUrl = "http://localhost:8080";
 TefIP.username = "admin";
 TefIP.password = "1234";
+
+final tefIP = TefIP.instance;
 ```
 
 ### Timeout
@@ -114,19 +120,17 @@ By default, requests wait indefinitely — suitable for TEF IP terminals that
 may take an unpredictable amount of time to respond (e.g., waiting for payment
 confirmation on the physical terminal).
 
-To apply a global timeout:
+To apply a per-call timeout, pass a `timeout` to any endpoint method that accepts it:
 
 ```dart
-TefIP.requestsTimeOut = const Duration(minutes: 2);
-```
-
-You can also pass a per-call timeout to individual endpoint methods that
-support it.
-
-Initialize the terminal instance:
-
-```dart
-final tefIP = TefIP.instance;
+final result = await tefIP.transaction.post(
+  transactionRequest: TransactionRequestModel(
+    referenceId: '12345',
+    type: TefIPTransactionType.pix,
+    amount: 100.00,
+  ),
+  timeout: const Duration(minutes: 2),
+);
 ```
 
 ### Error Handling
@@ -212,6 +216,12 @@ await tefIP.sale.post(
     total: 99.90, // optional — displayed on the sale screen
   ),
 );
+```
+
+Get the current active sale state:
+
+```dart
+final coupon = await tefIP.sale.get();
 ```
 
 Update an active sale:
@@ -346,12 +356,28 @@ Finalize the sale:
 
 ```dart
 await tefIP.saleFinalize.post();
+
+// Optional: control what the terminal displays after finalization
+await tefIP.saleFinalize.post(
+  params: SaleActionRequestModel(
+    message: 'Obrigado!',
+    messageInterval: 3000,
+  ),
+);
 ```
 
 Cancel the sale:
 
 ```dart
 await tefIP.saleCancel.post();
+
+// Optional: control what the terminal displays after cancellation
+await tefIP.saleCancel.post(
+  params: SaleActionRequestModel(
+    message: 'Venda cancelada.',
+    messageInterval: 3000,
+  ),
+);
 ```
 
 ### Printing
@@ -398,11 +424,13 @@ final displayClearResult = await tefIP.displayClear.post();
 final displayPopResult = await tefIP.displayPop.post();
 ```
 
+### Ask
+
 Ask for user input (single question):
 
 ```dart
 final askResult = await tefIP.ask.post(
-  askRequest: AskSingleQuestionRequestModel(
+  questionRequest: AskSingleQuestionRequestModel(
     question: AskQuestionModel(type: TefIPQuestionType.cpfOrcnpj),
     parameters: AskParametersModel(),
   ),
@@ -413,10 +441,10 @@ Ask for user input (multiple questions form):
 
 ```dart
 final askFormResult = await tefIP.askForm.post(
-  askFormRequest: AskFormRequestModel(
+  form: AskFormRequestModel(
     questions: [
       AskQuestionModel(type: TefIPQuestionType.cpfOrcnpj),
-      AskQuestionModel(type: TefIPQuestionType.customString),
+      AskQuestionModel(type: TefIPQuestionType.text),
     ],
     parameters: AskParametersModel(),
   ),
@@ -502,7 +530,6 @@ await tefIP.notification.post(
 * ✅ Log retrieval, filtering, download, and real-time streaming
 * ✅ Local push notification to the terminal device
 * ✅ Consistent exception handling (`TefIPRequestException`, `TefIPUnexpectedException`)
-* ✅ Async operations
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

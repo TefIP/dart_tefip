@@ -19,6 +19,7 @@ import 'package:meta/meta.dart';
 @immutable
 @protected
 interface class TefIPSale implements EndpointInterface {
+  /// Fixed endpoint path.
   @override
   String get endpoint => TefIPEndpoints.sale;
 
