@@ -15,6 +15,7 @@ _TransactionResponseModel _$TransactionResponseModelFromJson(
   cAut: json['cAut'] as String? ?? null,
   tBand: json['tBand'] as String? ?? null,
   tPag: json['tPag'] as String? ?? null,
+  acquirer: json['acquirer'] as String? ?? null,
   message: json['message'] as String? ?? null,
   details: json['details'] as Map<String, dynamic>? ?? null,
 );
@@ -28,6 +29,7 @@ Map<String, dynamic> _$TransactionResponseModelToJson(
   'cAut': instance.cAut,
   'tBand': instance.tBand,
   'tPag': instance.tPag,
+  'acquirer': instance.acquirer,
   'message': instance.message,
   'details': instance.details,
 };

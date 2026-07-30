@@ -12,9 +12,9 @@ _LogModel _$LogModelFromJson(Map<String, dynamic> json) => _LogModel(
   source: $enumDecode(_$TefIPLogSourceEnumMap, json['source']),
   message: json['message'] as String,
   details: json['details'] as String?,
-  createdAt: json['createdAt'] == null
-      ? null
-      : DateTime.parse(json['createdAt'] as String),
+  createdAt: const TefIPUnixDateTimeConverter().fromJson(
+    (json['createdAt'] as num?)?.toInt(),
+  ),
 );
 
 Map<String, dynamic> _$LogModelToJson(_LogModel instance) => <String, dynamic>{
@@ -23,7 +23,7 @@ Map<String, dynamic> _$LogModelToJson(_LogModel instance) => <String, dynamic>{
   'source': _$TefIPLogSourceEnumMap[instance.source]!,
   'message': instance.message,
   'details': instance.details,
-  'createdAt': instance.createdAt?.toIso8601String(),
+  'createdAt': const TefIPUnixDateTimeConverter().toJson(instance.createdAt),
 };
 
 const _$TefIPLogLevelEnumMap = {

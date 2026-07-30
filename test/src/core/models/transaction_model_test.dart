@@ -72,6 +72,12 @@ void main() {
           'amount': 99.9,
           'installments': 3,
           'nsu': 'NSU-999',
+          'cnpj': '05481336000137',
+          'cAut': 'AUTH-1',
+          'tBand': 'Visa',
+          'tPag': '03',
+          'txid': 'pix-123',
+          'acquirer': 'Stone',
           'createdAt': 1700000000,
           'paymentDetails': {'brand': 'visa'},
         });
@@ -82,7 +88,21 @@ void main() {
         expect(model.amount, equals(99.9));
         expect(model.installments, equals(3));
         expect(model.nsu, equals('NSU-999'));
+        expect(model.cnpj, equals('05481336000137'));
+        expect(model.cAut, equals('AUTH-1'));
+        expect(model.tBand, equals('Visa'));
+        expect(model.tPag, equals('03'));
+        expect(model.txid, equals('pix-123'));
+        expect(model.acquirer, equals('Stone'));
         expect(model.paymentDetails, equals({'brand': 'visa'}));
+
+        final json = model.toJson();
+        expect(json['cnpj'], equals('05481336000137'));
+        expect(json['cAut'], equals('AUTH-1'));
+        expect(json['tBand'], equals('Visa'));
+        expect(json['tPag'], equals('03'));
+        expect(json['txid'], equals('pix-123'));
+        expect(json['acquirer'], equals('Stone'));
       });
     });
 

@@ -129,7 +129,7 @@ Complete reference of every getter on `TefIP.instance`:
 | `ask` | POST | `/ask` | `AskSingleQuestionRequestModel` | `AnswerModel` |
 | `askForm` | POST | `/ask/form` | `AskFormRequestModel` | `List<AnswerModel>` |
 | `askCancel` | POST | `/ask/cancel` | — | `SuccessResponseModel` |
-| `displayImage` | POST | `/display/image` | `Uint8List` (octet-stream) | `SuccessResponseModel` |
+| `displayImage` | POST | `/display/image` | `Uint8List` (octet-stream); optional `showCloseButton` query | `SuccessResponseModel` |
 | `displayText` | POST | `/display/text` | `DisplayTextRequestModel` | `SuccessResponseModel` |
 | `displayCarousel` | POST | `/display/carousel` | `DisplayCarouselRequestModel` | `SuccessResponseModel` |
 | `displayClear` | POST | `/display/clear` | — | `SuccessResponseModel` |
@@ -137,6 +137,7 @@ Complete reference of every getter on `TefIP.instance`:
 | `printImage` | POST | `/print/image` | `Uint8List` (octet-stream) | `SuccessResponseModel` |
 | `printText` | POST | `/print/text` | `List<Map<String,dynamic>>` | `SuccessResponseModel` |
 | `printXml` | POST | `/print/xml` | `String` (raw XML) | `SuccessResponseModel` |
+| `printAcbr` | POST | `/print/acbr` | `String` (raw ACBr content, `text/plain`) | `SuccessResponseModel` |
 | `status` | GET | `/status` | — | `StatusModel` |
 | `info` | GET | `/info` | — | `InfoModel` |
 | `restart` | POST | `/restart` | — | `StatusModel` |
@@ -171,6 +172,17 @@ Complete reference of every getter on `TefIP.instance`:
 | `log` (zip) | GET | `/logs/zip/download` | filter query params | `Uint8List` |
 | `log` (stream) | GET | `/logs/stream` | — | `Stream<LogModel>` (SSE) |
 | `notification` | POST | `/notification` | `NotificationRequestModel` | `SuccessResponseModel` |
+
+---
+
+### Display and printing details
+
+- `displayImage.post(imageData: ..., showCloseButton: false)` sends the
+  `showCloseButton=false` query parameter; omitting it keeps the default `true`.
+- `DisplayCarouselRequestModel.images` accepts base64-encoded images and
+  HTTP(S) image URLs, including a mixture of both sources in one carousel.
+- `printAcbr.post(content: ...)` sends raw ACBr content to `/print/acbr` with
+  `Content-Type: text/plain`.
 
 ---
 
@@ -328,8 +340,12 @@ Notes:
 | `amount` | `double` | Transaction amount. Default: `0.0` |
 | `installments` | `int` | Number of installments. Default: `1` |
 | `nsu` | `String?` | NSU returned by the acquirer |
+| `cnpj` | `String?` | Acquirer/issuer CNPJ |
 | `txid` | `String?` | PIX transaction ID. Present only when `type == pix`; null for credit/debit |
 | `cAut` | `String?` | Acquirer authorization code. Present for credit/debit; **null for PIX** |
+| `tBand` | `String?` | Card brand (e.g. Visa, Master) |
+| `tPag` | `String?` | Payment type code returned by the acquirer |
+| `acquirer` | `String?` | Name of the acquirer that processed the transaction |
 | `createdAt` | `DateTime?` | Creation timestamp (Unix → DateTime) |
 | `updatedAt` | `DateTime?` | Update timestamp (Unix → DateTime) |
 | `paymentDetails` | `Map<String,dynamic>?` | Payment metadata |
@@ -358,6 +374,7 @@ Mirrors `dj_pay_interface.TransactionResponse`:
 | `cAut` | `String?` | Authorization code. Present for credit/debit; **null for PIX** |
 | `tBand` | `String?` | Card brand (e.g. Visa, Master) |
 | `tPag` | `String?` | Payment type code returned by the acquirer |
+| `acquirer` | `String?` | Name of the acquirer that processed the transaction |
 | `message` | `String?` | Informational message |
 | `details` | `Map<String,dynamic>?` | Additional structured data |
 

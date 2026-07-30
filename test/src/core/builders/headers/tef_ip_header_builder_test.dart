@@ -49,7 +49,10 @@ void main() {
         final headers = TefIPHeadersBuilder.build();
 
         expect(headers['Content-Type'], 'application/json');
-        expect(headers['Authorization'], 'Basic ${base64Encode(utf8.encode('$kUsername:$kPassword'))}');
+        expect(
+          headers['Authorization'],
+          'Basic ${base64Encode(utf8.encode('$kUsername:$kPassword'))}',
+        );
       });
 
       test('should include global headers', () {

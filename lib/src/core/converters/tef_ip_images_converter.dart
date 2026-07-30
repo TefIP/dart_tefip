@@ -3,6 +3,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 /// Custom JSON converter used to normalize image list responses
 /// returned by the TEF IP API.
 ///
+/// Each image is either a base64-encoded PNG/JPG or an HTTP(S) URL.
+/// Both source formats may be mixed in the same ordered list.
+/// Source detection and image loading are handled by the TEF IP server.
+///
 /// Some API responses may return images in different structures:
 /// - A flat list of strings:
 ///   `["base64Image1", "base64Image2"]`

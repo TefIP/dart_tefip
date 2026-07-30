@@ -27,7 +27,6 @@ void main() {
       registerFallbackValue(<String, String>{});
     });
 
-    
     test('should return TransactionResponseModel on success', () async {
       final expectedUrl = TefIpUrlBuilder.build(
         TefIPEndpoints.reversal(kReferenceId),

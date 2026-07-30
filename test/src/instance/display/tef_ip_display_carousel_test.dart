@@ -59,6 +59,54 @@ void main() {
       ).called(1);
     });
 
+    test(
+      'sends mixed URL and base64 slides without rewriting sources',
+      () async {
+        final request = DisplayCarouselRequestModel(
+          images: [
+            'https://cdn.example.com/banner.png',
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB',
+          ],
+          backgroundColor: 'white',
+        );
+        final response = http.Response(
+          jsonEncode(kSuccessResponse.toJson()),
+          200,
+        );
+
+        when(
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenAnswer((_) async => response);
+
+        await displayCarousel.post(
+          displayCarouselRequest: request,
+          client: kHttpClient,
+        );
+
+        verify(
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: jsonEncode({
+              'images': [
+                'https://cdn.example.com/banner.png',
+                'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB',
+              ],
+              'intervalMs': 3000,
+              'transition': 'fade',
+              'backgroundColor': 'white',
+              'showCloseButton': false,
+            }),
+          ),
+        ).called(1);
+      },
+    );
+
     test('should throw TefIPRequestException on ClientException', () async {
       when(
         () => kHttpClient.post(

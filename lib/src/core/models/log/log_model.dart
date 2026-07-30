@@ -1,3 +1,4 @@
+import 'package:dart_tefip/src/core/converters/tef_ip_unix_datetime_converter.dart';
 import 'package:dart_tefip/src/core/enums/tef_ip_log_level.dart';
 import 'package:dart_tefip/src/core/enums/tef_ip_log_source.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -22,7 +23,7 @@ abstract class LogModel with _$LogModel {
     required TefIPLogSource source,
     required String message,
     String? details,
-    DateTime? createdAt,
+    @TefIPUnixDateTimeConverter() DateTime? createdAt,
   }) = _LogModel;
 
   factory LogModel.fromJson(Map<String, dynamic> json) =>

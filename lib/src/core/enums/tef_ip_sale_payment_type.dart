@@ -21,13 +21,13 @@ enum TefIPSalePaymentType {
   @JsonValue('05')
   gift('05'),
 
-  /// Vero digital wallet payment.
-  @JsonValue('17')
-  veroWallet('17'),
-
   /// PIX instant payment.
   @JsonValue('17')
   pix('17'),
+
+  /// Vero digital wallet payment.
+  @JsonValue('17')
+  veroWallet('17'),
 
   /// Unknown payment type (fallback).
   @JsonValue('99')

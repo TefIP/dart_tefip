@@ -197,6 +197,9 @@ print(postTransaction.txid); // e.g. "abc123txid"
 
 // Credit/debit — access the authorization code
 print(postTransaction.cAut); // e.g. "123456"
+
+// All transaction types — access the acquirer that processed the payment
+print(postTransaction.acquirer); // e.g. "Cielo"
 ```
 
 Perform a reversal:
@@ -402,6 +405,14 @@ Print XML:
 final result = await tefIP.printXml.post(xml: await _xmlFromPath('assets/example.xml'));
 ```
 
+Print ACBr content:
+
+```dart
+await TefIP.instance.printAcbr.post(
+  content: '</ce><n>TEF IP</n>',
+);
+```
+
 ### Display
 
 Display images, carousels, or text:
@@ -409,6 +420,7 @@ Display images, carousels, or text:
 ```dart
 final displayImageResult = await tefIP.displayImage.post(
   imageData: await _imageFromPathToBytes('assets/example_display.png'),
+  showCloseButton: false,
 );
 
 final displayTextResult = await tefIP.displayText.post(
@@ -423,6 +435,9 @@ final displayClearResult = await tefIP.displayClear.post();
 
 final displayPopResult = await tefIP.displayPop.post();
 ```
+
+For a carousel, `DisplayCarouselRequestModel.images` accepts both base64
+strings and HTTP(S) image URLs.
 
 ### Ask
 
@@ -475,6 +490,9 @@ Get all logs:
 final logs = await tefIP.log.getAll();
 ```
 
+Log timestamps received as Unix values are converted to `DateTime` on
+`LogModel.createdAt`.
+
 With filters:
 
 ```dart
@@ -523,7 +541,7 @@ await tefIP.notification.post(
 * ✅ Sale discount and addition management
 * ✅ Terminal info and status queries
 * ✅ Display text, image, and carousel
-* ✅ Printing: text, images, XML
+* ✅ Printing: text, images, XML, and ACBr content
 * ✅ Question endpoint for terminal input (single and form)
 * ✅ Cancel terminal input
 * ✅ Restart terminal (Android/iOS only)

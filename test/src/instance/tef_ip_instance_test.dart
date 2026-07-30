@@ -11,6 +11,7 @@ import 'package:dart_tefip/src/instance/info/tef_ip_info.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_image.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_text.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_xml.dart';
+import 'package:dart_tefip/src/instance/print/tef_ip_print_acbr.dart';
 import 'package:dart_tefip/src/instance/restart/tef_ip_restart.dart';
 import 'package:dart_tefip/src/instance/reversal/tef_ip_reversal.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale.dart';
@@ -104,6 +105,10 @@ void main() {
 
       test('should return TefIPPrintXml', () {
         expect(tefip.printXml, isA<TefIPPrintXml>());
+      });
+
+      test('should return TefIPPrintAcbr', () {
+        expect(tefip.printAcbr, isA<TefIPPrintAcbr>());
       });
 
       test('should return TefIPRestart', () {

@@ -27,11 +27,15 @@ part 'transaction_model.g.dart';
 /// - [installments]: Number of installments.
 ///   Default: `1`.
 /// - [nsu]: Unique sequential number returned by the acquirer.
-/// - [txid]: PIX transaction ID returned by the acquirer.
-///   Only present when [type] is [TefIPTransactionType.pix]; null for other types.
+/// - [cnpj]: CNPJ of the acquirer/card issuer returned by the terminal.
 /// - [cAut]: Authorization code returned by the acquirer.
 ///   Present for credit/debit transactions.
 ///   Null when [type] is [TefIPTransactionType.pix].
+/// - [tBand]: Card brand/flag returned by the acquirer (e.g. Visa, Master).
+/// - [tPag]: Payment type code string returned by the acquirer.
+/// - [txid]: PIX transaction ID returned by the acquirer.
+///   Only present when [type] is [TefIPTransactionType.pix]; null for other types.
+/// - [acquirer]: Name of the acquirer that processed the transaction.
 /// - [createdAt]: Creation timestamp.
 ///   Uses [TefIPUnixDateTimeConverter] (Unix → DateTime).
 /// - [updatedAt]: Last update timestamp.
@@ -56,8 +60,12 @@ abstract class TransactionModel with _$TransactionModel {
     @Default(0.0) double amount,
     @Default(1) int installments,
     String? nsu,
-    String? txid,
+    String? cnpj,
     String? cAut,
+    String? tBand,
+    String? tPag,
+    String? txid,
+    String? acquirer,
 
     @TefIPUnixDateTimeConverter() DateTime? createdAt,
     @TefIPUnixDateTimeConverter() DateTime? updatedAt,

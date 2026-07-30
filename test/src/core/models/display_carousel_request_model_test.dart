@@ -5,19 +5,40 @@ import 'package:test/test.dart';
 void main() {
   group('DisplayCarouselRequestModel', () {
     group('defaults', () {
-      test('intervalMs, transition and showCloseButton have correct defaults', () {
-        final model = DisplayCarouselRequestModel(
-          images: ['img1'],
-          backgroundColor: 'white',
-        );
+      test(
+        'intervalMs, transition and showCloseButton have correct defaults',
+        () {
+          final model = DisplayCarouselRequestModel(
+            images: ['img1'],
+            backgroundColor: 'white',
+          );
 
-        expect(model.intervalMs, equals(3000));
-        expect(model.transition, equals(TefIPCarouselTransition.fade));
-        expect(model.showCloseButton, isFalse);
-      });
+          expect(model.intervalMs, equals(3000));
+          expect(model.transition, equals(TefIPCarouselTransition.fade));
+          expect(model.showCloseButton, isFalse);
+        },
+      );
     });
 
     group('fromJson', () {
+      test('preserves mixed URL and base64 image sources', () {
+        final model = DisplayCarouselRequestModel.fromJson({
+          'images': [
+            'https://cdn.example.com/banner.png',
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB',
+          ],
+          'backgroundColor': 'white',
+        });
+
+        expect(
+          model.images,
+          equals([
+            'https://cdn.example.com/banner.png',
+            'iVBORw0KGgoAAAANSUhEUgAAAAEAAAAB',
+          ]),
+        );
+      });
+
       test('parses flat list of images', () {
         final model = DisplayCarouselRequestModel.fromJson({
           'images': ['base64img1', 'base64img2'],
@@ -62,6 +83,24 @@ void main() {
     });
 
     group('toJson', () {
+      test('serializes URL image sources as a flat list', () {
+        final model = DisplayCarouselRequestModel(
+          images: [
+            'https://cdn.example.com/banner-1.png',
+            'http://cdn.example.com/banner-2.jpg',
+          ],
+          backgroundColor: 'black',
+        );
+
+        expect(
+          model.toJson()['images'],
+          equals([
+            'https://cdn.example.com/banner-1.png',
+            'http://cdn.example.com/banner-2.jpg',
+          ]),
+        );
+      });
+
       test('serializes images as flat list', () {
         final model = DisplayCarouselRequestModel(
           images: ['img1', 'img2'],
@@ -80,8 +119,7 @@ void main() {
           backgroundColor: 'blue',
           showCloseButton: true,
         );
-        final restored =
-            DisplayCarouselRequestModel.fromJson(model.toJson());
+        final restored = DisplayCarouselRequestModel.fromJson(model.toJson());
 
         expect(restored, equals(model));
       });

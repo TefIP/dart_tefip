@@ -6,4 +6,3 @@ export 'tef_ip_question_type.dart';
 export 'tef_ip_sale_payment_type.dart';
 export 'tef_ip_transaction_type.dart';
 export 'tef_ip_transaction_status.dart';
-

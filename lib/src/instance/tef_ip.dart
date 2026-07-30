@@ -14,6 +14,7 @@ import 'package:dart_tefip/src/instance/log/tef_ip_log.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_image.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_text.dart';
 import 'package:dart_tefip/src/instance/print/tef_ip_print_xml.dart';
+import 'package:dart_tefip/src/instance/print/tef_ip_print_acbr.dart';
 import 'package:dart_tefip/src/instance/restart/tef_ip_restart.dart';
 import 'package:dart_tefip/src/instance/reversal/tef_ip_reversal.dart';
 import 'package:dart_tefip/src/instance/sale/tef_ip_sale.dart';
@@ -29,7 +30,6 @@ import 'package:dart_tefip/src/instance/transaction/tef_ip_transaction.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-
 /// The main class of the package. It is a singleton class,
 /// responsible for configuring and providing access to all TEF IP API endpoints.
 ///
@@ -154,6 +154,11 @@ final class TefIP extends TefIPClientBase {
   ///
   /// Used to print structured content in XML format.
   TefIPPrintXml get printXml => TefIPPrintXml();
+
+  /// Provides access to the Print ACBr endpoint.
+  ///
+  /// Used to print raw content in ACBr format.
+  TefIPPrintAcbr get printAcbr => TefIPPrintAcbr();
 
   /// Provides access to the Restart endpoint.
   ///

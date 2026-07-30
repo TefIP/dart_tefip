@@ -23,7 +23,8 @@ mixin _$TransactionResponseModel {
 /// Null for PIX transactions.
  String? get cAut;/// Card brand/flag returned by the acquirer (e.g. Visa, Master).
  String? get tBand;/// Payment type code string returned by the acquirer.
- String? get tPag; String? get message; Map<String, dynamic>? get details;
+ String? get tPag;/// Name of the acquirer that processed the transaction.
+ String? get acquirer; String? get message; Map<String, dynamic>? get details;
 /// Create a copy of TransactionResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -36,16 +37,16 @@ $TransactionResponseModelCopyWith<TransactionResponseModel> get copyWith => _$Tr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionResponseModel&&(identical(other.nsu, nsu) || other.nsu == nsu)&&(identical(other.cnpj, cnpj) || other.cnpj == cnpj)&&(identical(other.txid, txid) || other.txid == txid)&&(identical(other.cAut, cAut) || other.cAut == cAut)&&(identical(other.tBand, tBand) || other.tBand == tBand)&&(identical(other.tPag, tPag) || other.tPag == tPag)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.details, details));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionResponseModel&&(identical(other.nsu, nsu) || other.nsu == nsu)&&(identical(other.cnpj, cnpj) || other.cnpj == cnpj)&&(identical(other.txid, txid) || other.txid == txid)&&(identical(other.cAut, cAut) || other.cAut == cAut)&&(identical(other.tBand, tBand) || other.tBand == tBand)&&(identical(other.tPag, tPag) || other.tPag == tPag)&&(identical(other.acquirer, acquirer) || other.acquirer == acquirer)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other.details, details));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,nsu,cnpj,txid,cAut,tBand,tPag,message,const DeepCollectionEquality().hash(details));
+int get hashCode => Object.hash(runtimeType,nsu,cnpj,txid,cAut,tBand,tPag,acquirer,message,const DeepCollectionEquality().hash(details));
 
 @override
 String toString() {
-  return 'TransactionResponseModel(nsu: $nsu, cnpj: $cnpj, txid: $txid, cAut: $cAut, tBand: $tBand, tPag: $tPag, message: $message, details: $details)';
+  return 'TransactionResponseModel(nsu: $nsu, cnpj: $cnpj, txid: $txid, cAut: $cAut, tBand: $tBand, tPag: $tPag, acquirer: $acquirer, message: $message, details: $details)';
 }
 
 
@@ -56,7 +57,7 @@ abstract mixin class $TransactionResponseModelCopyWith<$Res>  {
   factory $TransactionResponseModelCopyWith(TransactionResponseModel value, $Res Function(TransactionResponseModel) _then) = _$TransactionResponseModelCopyWithImpl;
 @useResult
 $Res call({
- String? nsu, String? cnpj, String? txid, String? cAut, String? tBand, String? tPag, String? message, Map<String, dynamic>? details
+ String? nsu, String? cnpj, String? txid, String? cAut, String? tBand, String? tPag, String? acquirer, String? message, Map<String, dynamic>? details
 });
 
 
@@ -73,7 +74,7 @@ class _$TransactionResponseModelCopyWithImpl<$Res>
 
 /// Create a copy of TransactionResponseModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? nsu = freezed,Object? cnpj = freezed,Object? txid = freezed,Object? cAut = freezed,Object? tBand = freezed,Object? tPag = freezed,Object? message = freezed,Object? details = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? nsu = freezed,Object? cnpj = freezed,Object? txid = freezed,Object? cAut = freezed,Object? tBand = freezed,Object? tPag = freezed,Object? acquirer = freezed,Object? message = freezed,Object? details = freezed,}) {
   return _then(_self.copyWith(
 nsu: freezed == nsu ? _self.nsu : nsu // ignore: cast_nullable_to_non_nullable
 as String?,cnpj: freezed == cnpj ? _self.cnpj : cnpj // ignore: cast_nullable_to_non_nullable
@@ -81,6 +82,7 @@ as String?,txid: freezed == txid ? _self.txid : txid // ignore: cast_nullable_to
 as String?,cAut: freezed == cAut ? _self.cAut : cAut // ignore: cast_nullable_to_non_nullable
 as String?,tBand: freezed == tBand ? _self.tBand : tBand // ignore: cast_nullable_to_non_nullable
 as String?,tPag: freezed == tPag ? _self.tPag : tPag // ignore: cast_nullable_to_non_nullable
+as String?,acquirer: freezed == acquirer ? _self.acquirer : acquirer // ignore: cast_nullable_to_non_nullable
 as String?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,details: freezed == details ? _self.details : details // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,
@@ -168,10 +170,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? nsu,  String? cnpj,  String? txid,  String? cAut,  String? tBand,  String? tPag,  String? message,  Map<String, dynamic>? details)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? nsu,  String? cnpj,  String? txid,  String? cAut,  String? tBand,  String? tPag,  String? acquirer,  String? message,  Map<String, dynamic>? details)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransactionResponseModel() when $default != null:
-return $default(_that.nsu,_that.cnpj,_that.txid,_that.cAut,_that.tBand,_that.tPag,_that.message,_that.details);case _:
+return $default(_that.nsu,_that.cnpj,_that.txid,_that.cAut,_that.tBand,_that.tPag,_that.acquirer,_that.message,_that.details);case _:
   return orElse();
 
 }
@@ -189,10 +191,10 @@ return $default(_that.nsu,_that.cnpj,_that.txid,_that.cAut,_that.tBand,_that.tPa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? nsu,  String? cnpj,  String? txid,  String? cAut,  String? tBand,  String? tPag,  String? message,  Map<String, dynamic>? details)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? nsu,  String? cnpj,  String? txid,  String? cAut,  String? tBand,  String? tPag,  String? acquirer,  String? message,  Map<String, dynamic>? details)  $default,) {final _that = this;
 switch (_that) {
 case _TransactionResponseModel():
-return $default(_that.nsu,_that.cnpj,_that.txid,_that.cAut,_that.tBand,_that.tPag,_that.message,_that.details);case _:
+return $default(_that.nsu,_that.cnpj,_that.txid,_that.cAut,_that.tBand,_that.tPag,_that.acquirer,_that.message,_that.details);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -209,10 +211,10 @@ return $default(_that.nsu,_that.cnpj,_that.txid,_that.cAut,_that.tBand,_that.tPa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? nsu,  String? cnpj,  String? txid,  String? cAut,  String? tBand,  String? tPag,  String? message,  Map<String, dynamic>? details)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? nsu,  String? cnpj,  String? txid,  String? cAut,  String? tBand,  String? tPag,  String? acquirer,  String? message,  Map<String, dynamic>? details)?  $default,) {final _that = this;
 switch (_that) {
 case _TransactionResponseModel() when $default != null:
-return $default(_that.nsu,_that.cnpj,_that.txid,_that.cAut,_that.tBand,_that.tPag,_that.message,_that.details);case _:
+return $default(_that.nsu,_that.cnpj,_that.txid,_that.cAut,_that.tBand,_that.tPag,_that.acquirer,_that.message,_that.details);case _:
   return null;
 
 }
@@ -224,7 +226,7 @@ return $default(_that.nsu,_that.cnpj,_that.txid,_that.cAut,_that.tBand,_that.tPa
 @JsonSerializable()
 
 class _TransactionResponseModel implements TransactionResponseModel {
-  const _TransactionResponseModel({this.nsu = null, this.cnpj = null, this.txid = null, this.cAut = null, this.tBand = null, this.tPag = null, this.message = null, final  Map<String, dynamic>? details = null}): _details = details;
+  const _TransactionResponseModel({this.nsu = null, this.cnpj = null, this.txid = null, this.cAut = null, this.tBand = null, this.tPag = null, this.acquirer = null, this.message = null, final  Map<String, dynamic>? details = null}): _details = details;
   factory _TransactionResponseModel.fromJson(Map<String, dynamic> json) => _$TransactionResponseModelFromJson(json);
 
 @override@JsonKey() final  String? nsu;
@@ -241,6 +243,8 @@ class _TransactionResponseModel implements TransactionResponseModel {
 @override@JsonKey() final  String? tBand;
 /// Payment type code string returned by the acquirer.
 @override@JsonKey() final  String? tPag;
+/// Name of the acquirer that processed the transaction.
+@override@JsonKey() final  String? acquirer;
 @override@JsonKey() final  String? message;
  final  Map<String, dynamic>? _details;
 @override@JsonKey() Map<String, dynamic>? get details {
@@ -265,16 +269,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionResponseModel&&(identical(other.nsu, nsu) || other.nsu == nsu)&&(identical(other.cnpj, cnpj) || other.cnpj == cnpj)&&(identical(other.txid, txid) || other.txid == txid)&&(identical(other.cAut, cAut) || other.cAut == cAut)&&(identical(other.tBand, tBand) || other.tBand == tBand)&&(identical(other.tPag, tPag) || other.tPag == tPag)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._details, _details));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionResponseModel&&(identical(other.nsu, nsu) || other.nsu == nsu)&&(identical(other.cnpj, cnpj) || other.cnpj == cnpj)&&(identical(other.txid, txid) || other.txid == txid)&&(identical(other.cAut, cAut) || other.cAut == cAut)&&(identical(other.tBand, tBand) || other.tBand == tBand)&&(identical(other.tPag, tPag) || other.tPag == tPag)&&(identical(other.acquirer, acquirer) || other.acquirer == acquirer)&&(identical(other.message, message) || other.message == message)&&const DeepCollectionEquality().equals(other._details, _details));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,nsu,cnpj,txid,cAut,tBand,tPag,message,const DeepCollectionEquality().hash(_details));
+int get hashCode => Object.hash(runtimeType,nsu,cnpj,txid,cAut,tBand,tPag,acquirer,message,const DeepCollectionEquality().hash(_details));
 
 @override
 String toString() {
-  return 'TransactionResponseModel(nsu: $nsu, cnpj: $cnpj, txid: $txid, cAut: $cAut, tBand: $tBand, tPag: $tPag, message: $message, details: $details)';
+  return 'TransactionResponseModel(nsu: $nsu, cnpj: $cnpj, txid: $txid, cAut: $cAut, tBand: $tBand, tPag: $tPag, acquirer: $acquirer, message: $message, details: $details)';
 }
 
 
@@ -285,7 +289,7 @@ abstract mixin class _$TransactionResponseModelCopyWith<$Res> implements $Transa
   factory _$TransactionResponseModelCopyWith(_TransactionResponseModel value, $Res Function(_TransactionResponseModel) _then) = __$TransactionResponseModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? nsu, String? cnpj, String? txid, String? cAut, String? tBand, String? tPag, String? message, Map<String, dynamic>? details
+ String? nsu, String? cnpj, String? txid, String? cAut, String? tBand, String? tPag, String? acquirer, String? message, Map<String, dynamic>? details
 });
 
 
@@ -302,7 +306,7 @@ class __$TransactionResponseModelCopyWithImpl<$Res>
 
 /// Create a copy of TransactionResponseModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? nsu = freezed,Object? cnpj = freezed,Object? txid = freezed,Object? cAut = freezed,Object? tBand = freezed,Object? tPag = freezed,Object? message = freezed,Object? details = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? nsu = freezed,Object? cnpj = freezed,Object? txid = freezed,Object? cAut = freezed,Object? tBand = freezed,Object? tPag = freezed,Object? acquirer = freezed,Object? message = freezed,Object? details = freezed,}) {
   return _then(_TransactionResponseModel(
 nsu: freezed == nsu ? _self.nsu : nsu // ignore: cast_nullable_to_non_nullable
 as String?,cnpj: freezed == cnpj ? _self.cnpj : cnpj // ignore: cast_nullable_to_non_nullable
@@ -310,6 +314,7 @@ as String?,txid: freezed == txid ? _self.txid : txid // ignore: cast_nullable_to
 as String?,cAut: freezed == cAut ? _self.cAut : cAut // ignore: cast_nullable_to_non_nullable
 as String?,tBand: freezed == tBand ? _self.tBand : tBand // ignore: cast_nullable_to_non_nullable
 as String?,tPag: freezed == tPag ? _self.tPag : tPag // ignore: cast_nullable_to_non_nullable
+as String?,acquirer: freezed == acquirer ? _self.acquirer : acquirer // ignore: cast_nullable_to_non_nullable
 as String?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,details: freezed == details ? _self._details : details // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,

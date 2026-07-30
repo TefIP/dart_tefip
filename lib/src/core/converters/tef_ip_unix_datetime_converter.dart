@@ -12,8 +12,7 @@ import 'package:json_annotation/json_annotation.dart';
 ///
 /// Serialization always converts the [DateTime] value to
 /// a Unix timestamp in seconds (UTC).
-class TefIPUnixDateTimeConverter
-    implements JsonConverter<DateTime?, int?> {
+class TefIPUnixDateTimeConverter implements JsonConverter<DateTime?, int?> {
   /// Creates a constant instance of [TefIPUnixDateTimeConverter].
   const TefIPUnixDateTimeConverter();
 

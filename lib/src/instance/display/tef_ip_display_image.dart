@@ -16,6 +16,7 @@ import 'package:meta/meta.dart';
 ///
 /// Parameters:
 /// - [imageData]: Raw bytes of the image to be displayed.
+/// - [showCloseButton]: Whether to show the close button. Defaults to `true`.
 ///
 /// Errors:
 /// - [TefIPRequestException] for request failures.
@@ -27,14 +28,24 @@ interface class TefIPDisplayImage implements EndpointInterface {
   @override
   String get endpoint => TefIPEndpoints.displayImage;
 
+  String _buildRequestUrl({required bool showCloseButton}) {
+    final url = Uri.parse(TefIpUrlBuilder.build(endpoint));
+    if (showCloseButton) return url.toString();
+
+    return url
+        .replace(queryParameters: {'showCloseButton': 'false'})
+        .toString();
+  }
+
   /// Sends a binary image to be rendered on the terminal display.
   Future<SuccessResponseModel> post({
     required Uint8List imageData,
+    bool showCloseButton = true,
     http.Client? client,
   }) async {
     try {
       return await TefIPNetworkingClient.post<SuccessResponseModel>(
-        url: TefIpUrlBuilder.build(endpoint),
+        url: _buildRequestUrl(showCloseButton: showCloseButton),
         body: imageData,
         headers: {'Content-Type': 'application/octet-stream'},
         client: client,

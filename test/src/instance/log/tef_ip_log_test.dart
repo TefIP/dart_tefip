@@ -284,29 +284,33 @@ void main() {
         );
       });
 
-      test('should throw TefIPRequestException on ClientException from send',
-          () async {
-        when(
-          () => kHttpClient.send(any()),
-        ).thenThrow(http.ClientException('Connection refused'));
+      test(
+        'should throw TefIPRequestException on ClientException from send',
+        () async {
+          when(
+            () => kHttpClient.send(any()),
+          ).thenThrow(http.ClientException('Connection refused'));
 
-        expect(
-          () => log.stream(client: kHttpClient).toList(),
-          throwsA(isA<TefIPRequestException>()),
-        );
-      });
+          expect(
+            () => log.stream(client: kHttpClient).toList(),
+            throwsA(isA<TefIPRequestException>()),
+          );
+        },
+      );
 
-      test('should throw TefIPUnexpectedException on unknown error from send',
-          () async {
-        when(
-          () => kHttpClient.send(any()),
-        ).thenThrow(Exception('Unknown error'));
+      test(
+        'should throw TefIPUnexpectedException on unknown error from send',
+        () async {
+          when(
+            () => kHttpClient.send(any()),
+          ).thenThrow(Exception('Unknown error'));
 
-        expect(
-          () => log.stream(client: kHttpClient).toList(),
-          throwsA(isA<TefIPUnexpectedException>()),
-        );
-      });
+          expect(
+            () => log.stream(client: kHttpClient).toList(),
+            throwsA(isA<TefIPUnexpectedException>()),
+          );
+        },
+      );
     });
   });
 }

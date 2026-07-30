@@ -29,8 +29,7 @@ void main() {
     });
 
     test('should return SuccessResponseModel on success', () async {
-      final expectedUrl =
-          TefIpUrlBuilder.build(TefIPEndpoints.displayText);
+      final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.displayText);
 
       final successJson = kSuccessResponse.toJson();
       final response = http.Response(jsonEncode(successJson), 200);
@@ -79,8 +78,7 @@ void main() {
     });
 
     test('should rethrow TefIPRequestException', () async {
-      final errorResponse =
-          http.Response('{"message":"Bad request"}', 400);
+      final errorResponse = http.Response('{"message":"Bad request"}', 400);
 
       when(
         () => kHttpClient.post(

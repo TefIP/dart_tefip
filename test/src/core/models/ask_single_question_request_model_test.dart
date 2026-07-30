@@ -39,8 +39,7 @@ void main() {
           parameters: const AskParametersModel(showCancelButton: true),
           question: const AskQuestionModel(id: 3, question: 'CPF?'),
         );
-        final restored =
-            AskSingleQuestionRequestModel.fromJson(model.toJson());
+        final restored = AskSingleQuestionRequestModel.fromJson(model.toJson());
 
         expect(restored, equals(model));
       });

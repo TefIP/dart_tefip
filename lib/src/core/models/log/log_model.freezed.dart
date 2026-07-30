@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LogModel {
 
- int get id; TefIPLogLevel get level; TefIPLogSource get source; String get message; String? get details; DateTime? get createdAt;
+ int get id; TefIPLogLevel get level; TefIPLogSource get source; String get message; String? get details;@TefIPUnixDateTimeConverter() DateTime? get createdAt;
 /// Create a copy of LogModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $LogModelCopyWith<$Res>  {
   factory $LogModelCopyWith(LogModel value, $Res Function(LogModel) _then) = _$LogModelCopyWithImpl;
 @useResult
 $Res call({
- int id, TefIPLogLevel level, TefIPLogSource source, String message, String? details, DateTime? createdAt
+ int id, TefIPLogLevel level, TefIPLogSource source, String message, String? details,@TefIPUnixDateTimeConverter() DateTime? createdAt
 });
 
 
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  TefIPLogLevel level,  TefIPLogSource source,  String message,  String? details,  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  TefIPLogLevel level,  TefIPLogSource source,  String message,  String? details, @TefIPUnixDateTimeConverter()  DateTime? createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LogModel() when $default != null:
 return $default(_that.id,_that.level,_that.source,_that.message,_that.details,_that.createdAt);case _:
@@ -179,7 +179,7 @@ return $default(_that.id,_that.level,_that.source,_that.message,_that.details,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  TefIPLogLevel level,  TefIPLogSource source,  String message,  String? details,  DateTime? createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  TefIPLogLevel level,  TefIPLogSource source,  String message,  String? details, @TefIPUnixDateTimeConverter()  DateTime? createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _LogModel():
 return $default(_that.id,_that.level,_that.source,_that.message,_that.details,_that.createdAt);case _:
@@ -199,7 +199,7 @@ return $default(_that.id,_that.level,_that.source,_that.message,_that.details,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  TefIPLogLevel level,  TefIPLogSource source,  String message,  String? details,  DateTime? createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  TefIPLogLevel level,  TefIPLogSource source,  String message,  String? details, @TefIPUnixDateTimeConverter()  DateTime? createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _LogModel() when $default != null:
 return $default(_that.id,_that.level,_that.source,_that.message,_that.details,_that.createdAt);case _:
@@ -214,7 +214,7 @@ return $default(_that.id,_that.level,_that.source,_that.message,_that.details,_t
 @JsonSerializable()
 
 class _LogModel implements LogModel {
-  const _LogModel({required this.id, required this.level, required this.source, required this.message, this.details, this.createdAt});
+  const _LogModel({required this.id, required this.level, required this.source, required this.message, this.details, @TefIPUnixDateTimeConverter() this.createdAt});
   factory _LogModel.fromJson(Map<String, dynamic> json) => _$LogModelFromJson(json);
 
 @override final  int id;
@@ -222,7 +222,7 @@ class _LogModel implements LogModel {
 @override final  TefIPLogSource source;
 @override final  String message;
 @override final  String? details;
-@override final  DateTime? createdAt;
+@override@TefIPUnixDateTimeConverter() final  DateTime? createdAt;
 
 /// Create a copy of LogModel
 /// with the given fields replaced by the non-null parameter values.
@@ -257,7 +257,7 @@ abstract mixin class _$LogModelCopyWith<$Res> implements $LogModelCopyWith<$Res>
   factory _$LogModelCopyWith(_LogModel value, $Res Function(_LogModel) _then) = __$LogModelCopyWithImpl;
 @override @useResult
 $Res call({
- int id, TefIPLogLevel level, TefIPLogSource source, String message, String? details, DateTime? createdAt
+ int id, TefIPLogLevel level, TefIPLogSource source, String message, String? details,@TefIPUnixDateTimeConverter() DateTime? createdAt
 });
 
 

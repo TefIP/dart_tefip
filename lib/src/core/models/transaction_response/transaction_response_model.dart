@@ -19,6 +19,7 @@ part 'transaction_response_model.g.dart';
 ///   Null for PIX transactions.
 /// - [tBand]: Card brand/flag returned by the acquirer (e.g. Visa, Master).
 /// - [tPag]: Payment type code string returned by the acquirer.
+/// - [acquirer]: Name of the acquirer that processed the transaction.
 /// - [message]: Informational or status message related to the transaction.
 /// - [details]: Additional structured response data.
 ///
@@ -49,6 +50,9 @@ abstract class TransactionResponseModel with _$TransactionResponseModel {
 
     /// Payment type code string returned by the acquirer.
     @Default(null) String? tPag,
+
+    /// Name of the acquirer that processed the transaction.
+    @Default(null) String? acquirer,
 
     @Default(null) String? message,
     @Default(null) Map<String, dynamic>? details,

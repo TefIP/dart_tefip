@@ -23,25 +23,46 @@ void main() {
 
     group('fromTPag', () {
       test('"03" returns credit', () {
-        expect(TefIPTransactionType.fromTPag('03'), equals(TefIPTransactionType.credit));
+        expect(
+          TefIPTransactionType.fromTPag('03'),
+          equals(TefIPTransactionType.credit),
+        );
       });
 
       test('"04" returns debit', () {
-        expect(TefIPTransactionType.fromTPag('04'), equals(TefIPTransactionType.debit));
+        expect(
+          TefIPTransactionType.fromTPag('04'),
+          equals(TefIPTransactionType.debit),
+        );
       });
 
       test('"17" returns pix', () {
-        expect(TefIPTransactionType.fromTPag('17'), equals(TefIPTransactionType.pix));
+        expect(
+          TefIPTransactionType.fromTPag('17'),
+          equals(TefIPTransactionType.pix),
+        );
       });
 
       test('"99" returns unknown', () {
-        expect(TefIPTransactionType.fromTPag('99'), equals(TefIPTransactionType.unknown));
+        expect(
+          TefIPTransactionType.fromTPag('99'),
+          equals(TefIPTransactionType.unknown),
+        );
       });
 
       test('unrecognized value returns unknown', () {
-        expect(TefIPTransactionType.fromTPag('INVALID'), equals(TefIPTransactionType.unknown));
-        expect(TefIPTransactionType.fromTPag(''), equals(TefIPTransactionType.unknown));
-        expect(TefIPTransactionType.fromTPag('00'), equals(TefIPTransactionType.unknown));
+        expect(
+          TefIPTransactionType.fromTPag('INVALID'),
+          equals(TefIPTransactionType.unknown),
+        );
+        expect(
+          TefIPTransactionType.fromTPag(''),
+          equals(TefIPTransactionType.unknown),
+        );
+        expect(
+          TefIPTransactionType.fromTPag('00'),
+          equals(TefIPTransactionType.unknown),
+        );
       });
 
       test('round-trip: fromTPag(tPag) returns original enum', () {
@@ -51,8 +72,8 @@ void main() {
       });
     });
 
-    test('has exactly 4 values', () {
-      expect(TefIPTransactionType.values.length, equals(4));
+    test('has exactly 5 values', () {
+      expect(TefIPTransactionType.values.length, equals(5));
     });
   });
 }

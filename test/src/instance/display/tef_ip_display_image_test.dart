@@ -3,12 +3,14 @@ import 'dart:typed_data';
 import 'package:dart_tefip/dart_tefip.dart';
 import 'package:dart_tefip/src/core/builders/urls/tef_ip_url_builder.dart';
 import 'package:dart_tefip/src/core/constants/tef_ip_endpoints.dart';
+import 'package:dart_tefip/src/instance/configs/tefip_configs.dart';
 import 'package:dart_tefip/src/instance/display/tef_ip_display_image.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 import '../../../../testing/mocks/networking/tef_ip_networking_client_test.dart';
+import '../../../../testing/mocks/shared/base_url_mock.dart';
 import '../../../../testing/mocks/shared/image_mock.dart';
 import '../../../../testing/mocks/shared/success_response_mock.dart';
 import '../../../../testing/mocks/shared/uri_mock.dart';
@@ -24,9 +26,14 @@ void main() {
     });
 
     setUpAll(() {
+      TefIP.baseUrl = kBaseUrl;
       registerFallbackValue(UriMock());
       registerFallbackValue(<String, String>{});
       registerFallbackValue(Uint8List(0));
+    });
+
+    tearDownAll(() {
+      TefIPConfigs.baseUrl = null;
     });
 
     test('should return SuccessResponseModel on success', () async {
@@ -53,6 +60,36 @@ void main() {
       verify(
         () => kHttpClient.post(
           Uri.parse(expectedUrl),
+          headers: {'Content-Type': 'application/octet-stream'},
+          body: kImage,
+        ),
+      ).called(1);
+    });
+
+    test('should omit close button from display image', () async {
+      final response = http.Response(
+        jsonEncode(kSuccessResponse.toJson()),
+        200,
+      );
+
+      when(
+        () => kHttpClient.post(
+          any(),
+          headers: any(named: 'headers'),
+          body: any(named: 'body'),
+          encoding: any(named: 'encoding'),
+        ),
+      ).thenAnswer((_) async => response);
+
+      await displayImage.post(
+        imageData: kImage,
+        showCloseButton: false,
+        client: kHttpClient,
+      );
+
+      verify(
+        () => kHttpClient.post(
+          Uri.parse('$kBaseUrl/display/image?showCloseButton=false'),
           headers: {'Content-Type': 'application/octet-stream'},
           body: kImage,
         ),

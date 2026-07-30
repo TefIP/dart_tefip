@@ -52,6 +52,9 @@ abstract final class TefIPEndpoints {
   /// Endpoint used to print XML content.
   static final String printXml = '/print/xml';
 
+  /// Endpoint used to print ACBr content.
+  static final String printAcbr = '/print/acbr';
+
   /// Endpoint used to restart the terminal application or device.
   static final String restart = '/restart';
 

@@ -368,9 +368,10 @@ abstract class TefIPNetworkingClient {
         );
       }
 
-      await for (final line in response.stream
-          .transform(utf8.decoder)
-          .transform(const LineSplitter())) {
+      await for (final line
+          in response.stream
+              .transform(utf8.decoder)
+              .transform(const LineSplitter())) {
         if (line.startsWith('data: ')) {
           final json = jsonDecode(line.substring(6));
           if (json is Map<String, dynamic>) {

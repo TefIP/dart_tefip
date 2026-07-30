@@ -33,8 +33,7 @@ void main() {
 
     group('post', () {
       test('should return SuccessResponseModel on success', () async {
-        final expectedUrl =
-            TefIpUrlBuilder.build(TefIPEndpoints.notification);
+        final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.notification);
 
         when(
           () => kHttpClient.post(

@@ -48,9 +48,9 @@ abstract class TefIpUrlBuilder {
   }) {
     final baseUrl = TefIPConfigs.baseUrl;
 
-    
-    final String path =
-        param == null ? '$baseUrl$endpoint' : '$baseUrl$endpoint/$param';
+    final String path = param == null
+        ? '$baseUrl$endpoint'
+        : '$baseUrl$endpoint/$param';
 
     if (queryParams == null || queryParams.isEmpty) return path;
     return Uri.parse(path).replace(queryParameters: queryParams).toString();

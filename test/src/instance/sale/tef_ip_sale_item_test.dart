@@ -36,16 +36,23 @@ void main() {
         final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.saleItem);
 
         when(
-          () => kHttpClient.post(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
-        ).thenAnswer((_) async => http.Response.bytes(
-              utf8.encode(jsonEncode(kSaleItem.toJson())),
-              200,
-            ));
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenAnswer(
+          (_) async => http.Response.bytes(
+            utf8.encode(jsonEncode(kSaleItem.toJson())),
+            200,
+          ),
+        );
 
-        final result = await saleItem.post(item: kSaleItem, client: kHttpClient);
+        final result = await saleItem.post(
+          item: kSaleItem,
+          client: kHttpClient,
+        );
 
         expect(result, equals(kSaleItem));
         verify(
@@ -59,10 +66,12 @@ void main() {
 
       test('should throw TefIPRequestException on ClientException', () {
         when(
-          () => kHttpClient.post(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(httpError);
         expect(
           () => saleItem.post(item: kSaleItem, client: kHttpClient),
@@ -72,10 +81,12 @@ void main() {
 
       test('should rethrow TefIPRequestException', () {
         when(
-          () => kHttpClient.post(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
         expect(
           () => saleItem.post(item: kSaleItem, client: kHttpClient),
@@ -85,10 +96,12 @@ void main() {
 
       test('should throw TefIPUnexpectedException on unknown error', () {
         when(
-          () => kHttpClient.post(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(Exception());
         expect(
           () => saleItem.post(item: kSaleItem, client: kHttpClient),
@@ -99,21 +112,29 @@ void main() {
 
     group('patch', () {
       test('should return SaleItemModel on success', () async {
-        final expectedUrl =
-            TefIpUrlBuilder.build(TefIPEndpoints.saleItemById(kSaleItemId));
+        final expectedUrl = TefIpUrlBuilder.build(
+          TefIPEndpoints.saleItemById(kSaleItemId),
+        );
 
         when(
-          () => kHttpClient.patch(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
-        ).thenAnswer((_) async => http.Response.bytes(
-              utf8.encode(jsonEncode(kSaleItem.toJson())),
-              200,
-            ));
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenAnswer(
+          (_) async => http.Response.bytes(
+            utf8.encode(jsonEncode(kSaleItem.toJson())),
+            200,
+          ),
+        );
 
         final result = await saleItem.patch(
-            itemId: kSaleItemId, item: kSaleItem, client: kHttpClient);
+          itemId: kSaleItemId,
+          item: kSaleItem,
+          client: kHttpClient,
+        );
 
         expect(result, equals(kSaleItem));
         verify(
@@ -127,42 +148,57 @@ void main() {
 
       test('should throw TefIPRequestException on ClientException', () {
         when(
-          () => kHttpClient.patch(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(httpError);
         expect(
           () => saleItem.patch(
-              itemId: kSaleItemId, item: kSaleItem, client: kHttpClient),
+            itemId: kSaleItemId,
+            item: kSaleItem,
+            client: kHttpClient,
+          ),
           throwsA(isA<TefIPRequestException>()),
         );
       });
 
       test('should rethrow TefIPRequestException', () {
         when(
-          () => kHttpClient.patch(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
         expect(
           () => saleItem.patch(
-              itemId: kSaleItemId, item: kSaleItem, client: kHttpClient),
+            itemId: kSaleItemId,
+            item: kSaleItem,
+            client: kHttpClient,
+          ),
           throwsA(isA<TefIPRequestException>()),
         );
       });
 
       test('should throw TefIPUnexpectedException on unknown error', () {
         when(
-          () => kHttpClient.patch(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.patch(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(Exception());
         expect(
           () => saleItem.patch(
-              itemId: kSaleItemId, item: kSaleItem, client: kHttpClient),
+            itemId: kSaleItemId,
+            item: kSaleItem,
+            client: kHttpClient,
+          ),
           throwsA(isA<TefIPUnexpectedException>()),
         );
       });
@@ -170,21 +206,28 @@ void main() {
 
     group('delete', () {
       test('should return SaleCouponModel on success', () async {
-        final expectedUrl =
-            TefIpUrlBuilder.build(TefIPEndpoints.saleItemById(kSaleItemId));
+        final expectedUrl = TefIpUrlBuilder.build(
+          TefIPEndpoints.saleItemById(kSaleItemId),
+        );
 
         when(
-          () => kHttpClient.delete(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
-        ).thenAnswer((_) async => http.Response.bytes(
-              utf8.encode(jsonEncode(kSaleCoupon.toJson())),
-              200,
-            ));
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenAnswer(
+          (_) async => http.Response.bytes(
+            utf8.encode(jsonEncode(kSaleCoupon.toJson())),
+            200,
+          ),
+        );
 
-        final result =
-            await saleItem.delete(itemId: kSaleItemId, client: kHttpClient);
+        final result = await saleItem.delete(
+          itemId: kSaleItemId,
+          client: kHttpClient,
+        );
 
         expect(result, equals(kSaleCoupon));
         verify(
@@ -197,10 +240,12 @@ void main() {
 
       test('should throw TefIPRequestException on ClientException', () {
         when(
-          () => kHttpClient.delete(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(httpError);
         expect(
           () => saleItem.delete(itemId: kSaleItemId, client: kHttpClient),
@@ -210,10 +255,12 @@ void main() {
 
       test('should rethrow TefIPRequestException', () {
         when(
-          () => kHttpClient.delete(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
         expect(
           () => saleItem.delete(itemId: kSaleItemId, client: kHttpClient),
@@ -223,10 +270,12 @@ void main() {
 
       test('should throw TefIPUnexpectedException on unknown error', () {
         when(
-          () => kHttpClient.delete(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(Exception());
         expect(
           () => saleItem.delete(itemId: kSaleItemId, client: kHttpClient),
@@ -237,18 +286,21 @@ void main() {
 
     group('clear', () {
       test('should return SaleCouponModel on success', () async {
-        final expectedUrl =
-            TefIpUrlBuilder.build(TefIPEndpoints.saleItemClear);
+        final expectedUrl = TefIpUrlBuilder.build(TefIPEndpoints.saleItemClear);
 
         when(
-          () => kHttpClient.delete(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
-        ).thenAnswer((_) async => http.Response.bytes(
-              utf8.encode(jsonEncode(kSaleCoupon.toJson())),
-              200,
-            ));
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenAnswer(
+          (_) async => http.Response.bytes(
+            utf8.encode(jsonEncode(kSaleCoupon.toJson())),
+            200,
+          ),
+        );
 
         final result = await saleItem.clear(client: kHttpClient);
 
@@ -263,10 +315,12 @@ void main() {
 
       test('should throw TefIPRequestException on ClientException', () {
         when(
-          () => kHttpClient.delete(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(httpError);
         expect(
           () => saleItem.clear(client: kHttpClient),
@@ -276,10 +330,12 @@ void main() {
 
       test('should rethrow TefIPRequestException', () {
         when(
-          () => kHttpClient.delete(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
         expect(
           () => saleItem.clear(client: kHttpClient),
@@ -289,10 +345,12 @@ void main() {
 
       test('should throw TefIPUnexpectedException on unknown error', () {
         when(
-          () => kHttpClient.delete(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.delete(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(Exception());
         expect(
           () => saleItem.clear(client: kHttpClient),
@@ -303,21 +361,28 @@ void main() {
 
     group('cancel', () {
       test('should return SaleCouponModel on success', () async {
-        final expectedUrl =
-            TefIpUrlBuilder.build(TefIPEndpoints.saleItemCancel(kSaleItemId));
+        final expectedUrl = TefIpUrlBuilder.build(
+          TefIPEndpoints.saleItemCancel(kSaleItemId),
+        );
 
         when(
-          () => kHttpClient.post(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
-        ).thenAnswer((_) async => http.Response.bytes(
-              utf8.encode(jsonEncode(kSaleCoupon.toJson())),
-              200,
-            ));
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
+        ).thenAnswer(
+          (_) async => http.Response.bytes(
+            utf8.encode(jsonEncode(kSaleCoupon.toJson())),
+            200,
+          ),
+        );
 
-        final result =
-            await saleItem.cancel(itemId: kSaleItemId, client: kHttpClient);
+        final result = await saleItem.cancel(
+          itemId: kSaleItemId,
+          client: kHttpClient,
+        );
 
         expect(result, equals(kSaleCoupon));
         verify(
@@ -330,10 +395,12 @@ void main() {
 
       test('should throw TefIPRequestException on ClientException', () {
         when(
-          () => kHttpClient.post(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(httpError);
         expect(
           () => saleItem.cancel(itemId: kSaleItemId, client: kHttpClient),
@@ -343,10 +410,12 @@ void main() {
 
       test('should rethrow TefIPRequestException', () {
         when(
-          () => kHttpClient.post(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(TefIPRequestException(message: 'fail', statusCode: 400));
         expect(
           () => saleItem.cancel(itemId: kSaleItemId, client: kHttpClient),
@@ -356,10 +425,12 @@ void main() {
 
       test('should throw TefIPUnexpectedException on unknown error', () {
         when(
-          () => kHttpClient.post(any(),
-              headers: any(named: 'headers'),
-              body: any(named: 'body'),
-              encoding: any(named: 'encoding')),
+          () => kHttpClient.post(
+            any(),
+            headers: any(named: 'headers'),
+            body: any(named: 'body'),
+            encoding: any(named: 'encoding'),
+          ),
         ).thenThrow(Exception());
         expect(
           () => saleItem.cancel(itemId: kSaleItemId, client: kHttpClient),

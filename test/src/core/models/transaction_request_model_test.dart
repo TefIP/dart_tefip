@@ -83,7 +83,9 @@ void main() {
 
     group('toJson', () {
       test('type is serialized as tPag key with numeric code', () {
-        const model = TransactionRequestModel(type: TefIPTransactionType.credit);
+        const model = TransactionRequestModel(
+          type: TefIPTransactionType.credit,
+        );
         final json = model.toJson();
 
         expect(json.containsKey('tPag'), isTrue);

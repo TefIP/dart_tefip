@@ -14,6 +14,8 @@ part 'display_carousel_request_model.g.dart';
 /// Fields:
 /// - [images]: List of images to be displayed in the carousel.
 ///   Uses [TefIPImagesConverter] to convert images to the expected format.
+///   Each image is either a base64-encoded PNG/JPG or an HTTP(S) URL.
+///   Both source formats may be mixed in the same ordered list.
 /// - [intervalMs]: Time interval in milliseconds between image transitions.
 ///   Default is `3000`.
 /// - [transition]: Transition animation between images.

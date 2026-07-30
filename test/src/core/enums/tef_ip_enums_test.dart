@@ -12,19 +12,22 @@ void main() {
     });
 
     test('contains all expected values', () {
-      expect(TefIPSalePaymentType.values, containsAll([
-        TefIPSalePaymentType.credit,
-        TefIPSalePaymentType.debit,
-        TefIPSalePaymentType.pix,
-        TefIPSalePaymentType.money,
-        TefIPSalePaymentType.voucher,
-        TefIPSalePaymentType.gift,
-        TefIPSalePaymentType.veroWallet,
-        TefIPSalePaymentType.unknown,
-        TefIPSalePaymentType.adm,
-        TefIPSalePaymentType.cancel,
-        TefIPSalePaymentType.cancelDigitalWallet,
-      ]));
+      expect(
+        TefIPSalePaymentType.values,
+        containsAll([
+          TefIPSalePaymentType.credit,
+          TefIPSalePaymentType.debit,
+          TefIPSalePaymentType.pix,
+          TefIPSalePaymentType.money,
+          TefIPSalePaymentType.voucher,
+          TefIPSalePaymentType.gift,
+          TefIPSalePaymentType.veroWallet,
+          TefIPSalePaymentType.unknown,
+          TefIPSalePaymentType.adm,
+          TefIPSalePaymentType.cancel,
+          TefIPSalePaymentType.cancelDigitalWallet,
+        ]),
+      );
     });
   });
 
@@ -34,12 +37,15 @@ void main() {
     });
 
     test('contains all expected values', () {
-      expect(TefIPTransactionStatus.values, containsAll([
-        TefIPTransactionStatus.pending,
-        TefIPTransactionStatus.paid,
-        TefIPTransactionStatus.cancelled,
-        TefIPTransactionStatus.unknown,
-      ]));
+      expect(
+        TefIPTransactionStatus.values,
+        containsAll([
+          TefIPTransactionStatus.pending,
+          TefIPTransactionStatus.paid,
+          TefIPTransactionStatus.cancelled,
+          TefIPTransactionStatus.unknown,
+        ]),
+      );
     });
   });
 
@@ -49,22 +55,25 @@ void main() {
     });
 
     test('contains all expected values', () {
-      expect(TefIPQuestionType.values, containsAll([
-        TefIPQuestionType.list,
-        TefIPQuestionType.button,
-        TefIPQuestionType.text,
-        TefIPQuestionType.phone,
-        TefIPQuestionType.number,
-        TefIPQuestionType.cpf,
-        TefIPQuestionType.cnpj,
-        TefIPQuestionType.cpfOrcnpj,
-        TefIPQuestionType.email,
-        TefIPQuestionType.cep,
-        TefIPQuestionType.date,
-        TefIPQuestionType.time,
-        TefIPQuestionType.money,
-        TefIPQuestionType.regex,
-      ]));
+      expect(
+        TefIPQuestionType.values,
+        containsAll([
+          TefIPQuestionType.list,
+          TefIPQuestionType.button,
+          TefIPQuestionType.text,
+          TefIPQuestionType.phone,
+          TefIPQuestionType.number,
+          TefIPQuestionType.cpf,
+          TefIPQuestionType.cnpj,
+          TefIPQuestionType.cpfOrcnpj,
+          TefIPQuestionType.email,
+          TefIPQuestionType.cep,
+          TefIPQuestionType.date,
+          TefIPQuestionType.time,
+          TefIPQuestionType.money,
+          TefIPQuestionType.regex,
+        ]),
+      );
     });
   });
 
@@ -74,11 +83,14 @@ void main() {
     });
 
     test('contains all expected values', () {
-      expect(TefIPCarouselTransition.values, containsAll([
-        TefIPCarouselTransition.fade,
-        TefIPCarouselTransition.slide,
-        TefIPCarouselTransition.none,
-      ]));
+      expect(
+        TefIPCarouselTransition.values,
+        containsAll([
+          TefIPCarouselTransition.fade,
+          TefIPCarouselTransition.slide,
+          TefIPCarouselTransition.none,
+        ]),
+      );
     });
   });
 
@@ -88,11 +100,14 @@ void main() {
     });
 
     test('contains all expected values', () {
-      expect(TefIPInstallmentType.values, containsAll([
-        TefIPInstallmentType.single,
-        TefIPInstallmentType.seller,
-        TefIPInstallmentType.buyer,
-      ]));
+      expect(
+        TefIPInstallmentType.values,
+        containsAll([
+          TefIPInstallmentType.single,
+          TefIPInstallmentType.seller,
+          TefIPInstallmentType.buyer,
+        ]),
+      );
     });
   });
 }

@@ -8,7 +8,7 @@ void main() {
       test('reads tPag field into type', () {
         final model = SalePaymentModel.fromJson({
           'id': 'PGTO-001',
-          'tPag': 'credit',
+          'tPag': '03',
           'value': 50.0,
         });
 
@@ -27,7 +27,7 @@ void main() {
       test('full model is parsed correctly', () {
         final model = SalePaymentModel.fromJson({
           'id': 'PGTO-001',
-          'tPag': 'pix',
+          'tPag': '17',
           'description': 'PIX payment',
           'value': 99.9,
           'additionalInfo': 'extra info',
@@ -61,16 +61,16 @@ void main() {
         final json = model.toJson();
 
         expect(json.containsKey('tPag'), isTrue);
-        expect(json['tPag'], equals('debit'));
+        expect(json['tPag'], equals('04'));
         expect(json.containsKey('type'), isFalse);
       });
 
       test('round-trip fromJson → toJson preserves tPag', () {
-        final original = {'id': 'PGTO-001', 'tPag': 'money', 'value': 15.0};
+        final original = {'id': 'PGTO-001', 'tPag': '01', 'value': 15.0};
         final model = SalePaymentModel.fromJson(original);
         final json = model.toJson();
 
-        expect(json['tPag'], equals('money'));
+        expect(json['tPag'], equals('01'));
       });
     });
 

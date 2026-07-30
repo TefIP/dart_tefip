@@ -69,6 +69,12 @@ void main(List<String> arguments) async {
   );
   print(printXmlResult);
 
+  // Print ACBr
+  final printAcbrResult = await tefIP.printAcbr.post(
+    content: await _xmlFromPath('assets/example_acbr.txt'),
+  );
+  print(printAcbrResult);
+
   // Display carousel
   final carouselImages = await Future.wait([
     _imageFromPathToBase64('assets/example_carousel1.jpeg'),
@@ -96,6 +102,13 @@ void main(List<String> arguments) async {
     imageData: await _imageFromPathToBytes('assets/example_display.png'),
   );
   print(displayImageResult);
+
+  // Display a single image without the close button
+  final displayImageNoCloseButtonResult = await tefIP.displayImage.post(
+    imageData: await _imageFromPathToBytes('assets/example_display.png'),
+    showCloseButton: false,
+  );
+  print(displayImageNoCloseButtonResult);
 
   // Display text
   final displayTextResult = await tefIP.displayText.post(
