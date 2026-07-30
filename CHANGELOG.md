@@ -1,3 +1,16 @@
+## 1.4.0
+
+### Added
+- `printAcbr` endpoint — `POST /print/acbr` via `tefip.printAcbr.post(content: '...')`, sends raw ACBr content as `text/plain`
+- `displayImage.post(showCloseButton: ...)` — optional query parameter to hide the close button; defaults to `true` (unchanged behavior)
+- `DisplayCarouselRequestModel.images` accepts HTTP(S) image URLs in addition to base64 strings, including a mixture of both in the same carousel
+- `TransactionResponseModel.acquirer` — name of the acquirer that processed the transaction
+- `TransactionModel.cnpj`, `.tBand`, `.tPag`, `.acquirer` — persisted acquirer metadata fields
+
+### Fixed
+- `LogModel.createdAt` now parses Unix timestamps (seconds or milliseconds) instead of failing on `DateTime.parse`
+- `TefIPSalePaymentType.pix` now resolves before `veroWallet` when decoding tPag `'17'`, matching the backend's canonical order
+
 ## 1.3.0
 
 ### Added
@@ -11,13 +24,13 @@
 ### Changed
 - `TefIPSalePaymentType` now uses numeric tPag codes (`'01'`, `'03'`, `'04'`, `'05'`, `'17'`, `'99'`) instead of string names (`'credit'`, `'debit'`, etc.) — existing JSON serialization is affected
 - `SaleMutationResponseModel` removed — sale mutation endpoints now return the correct model directly:
-  - `saleItem.post/patch` → `SaleItemModel`
-  - `saleItem.delete/cancel` → `SaleCouponModel`
-  - `salePayment.post/patch` → `SalePaymentModel`
-  - `salePayment.delete` → `SaleCouponModel`
-  - `saleDiscount.post/patch` → `SaleDiscountModel`
-  - `saleAddition.post/patch` → `SaleAdditionModel`
-  - `sale.post/patch` → `SaleCouponModel`
+  - `saleItem.post/patch` to `SaleItemModel`
+  - `saleItem.delete/cancel` to `SaleCouponModel`
+  - `salePayment.post/patch` to `SalePaymentModel`
+  - `salePayment.delete` to `SaleCouponModel`
+  - `saleDiscount.post/patch` to `SaleDiscountModel`
+  - `saleAddition.post/patch` to `SaleAdditionModel`
+  - `sale.post/patch` to `SaleCouponModel`
 
 ## 1.2.2
 
