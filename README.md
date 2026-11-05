@@ -49,7 +49,7 @@
 
 `dart_tefip` is a Dart SDK for interacting with TEF IP payment terminals. It provides a structured way to:
 
-* Perform transactions (`pix`, `credit`, `debit`) and reversals
+* Perform transactions (`pix`, `credit`, `debit`, `money`, and food, meal and fuel vouchers: `voucherFood`, `voucherMeal`, `voucherFuel`) and reversals
 * Query transaction status and terminal info
 * Display text, images, and carousels on the terminal
 * Print text, images, or XML documents
@@ -535,7 +535,7 @@ await tefIP.notification.post(
 
 ## Features
 
-* ✅ Transaction management (pix, debit, credit)
+* ✅ Transaction management (pix, debit, credit, money, food/meal/fuel vouchers)
 * ✅ Reversal support
 * ✅ Sale management (items, payments, finalize, cancel)
 * ✅ Sale discount and addition management
