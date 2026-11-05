@@ -1,3 +1,10 @@
+## 1.5.0
+
+### Added
+- `TefIPTransactionType.voucherFood` — tPag code `'10'` (Vale Alimentação, NFC-e)
+- `TefIPTransactionType.voucherMeal` — tPag code `'11'` (Vale Refeição, NFC-e)
+- `TefIPTransactionType.voucherFuel` — tPag code `'13'` (Vale Combustível, NFC-e)
+
 ## 1.4.0
 
 ### Added
