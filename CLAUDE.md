@@ -227,6 +227,9 @@ Notes:
 | `credit` | `03` |
 | `debit` | `04` |
 | `pix` | `17` |
+| `voucherFood` | `10` |
+| `voucherMeal` | `11` |
+| `voucherFuel` | `13` |
 | `unknown` | `99` |
 
 ### `TefIPSalePaymentType` — sale display payment type
