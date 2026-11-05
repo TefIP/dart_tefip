@@ -16,6 +16,18 @@ void main() {
         expect(TefIPTransactionType.pix.tPag, equals('17'));
       });
 
+      test('voucherFood has tPag "10"', () {
+        expect(TefIPTransactionType.voucherFood.tPag, equals('10'));
+      });
+
+      test('voucherMeal has tPag "11"', () {
+        expect(TefIPTransactionType.voucherMeal.tPag, equals('11'));
+      });
+
+      test('voucherFuel has tPag "13"', () {
+        expect(TefIPTransactionType.voucherFuel.tPag, equals('13'));
+      });
+
       test('unknown has tPag "99"', () {
         expect(TefIPTransactionType.unknown.tPag, equals('99'));
       });
@@ -40,6 +52,27 @@ void main() {
         expect(
           TefIPTransactionType.fromTPag('17'),
           equals(TefIPTransactionType.pix),
+        );
+      });
+
+      test('"10" returns voucherFood', () {
+        expect(
+          TefIPTransactionType.fromTPag('10'),
+          equals(TefIPTransactionType.voucherFood),
+        );
+      });
+
+      test('"11" returns voucherMeal', () {
+        expect(
+          TefIPTransactionType.fromTPag('11'),
+          equals(TefIPTransactionType.voucherMeal),
+        );
+      });
+
+      test('"13" returns voucherFuel', () {
+        expect(
+          TefIPTransactionType.fromTPag('13'),
+          equals(TefIPTransactionType.voucherFuel),
         );
       });
 
@@ -72,8 +105,8 @@ void main() {
       });
     });
 
-    test('has exactly 5 values', () {
-      expect(TefIPTransactionType.values.length, equals(5));
+    test('has exactly 8 values', () {
+      expect(TefIPTransactionType.values.length, equals(8));
     });
   });
 }

@@ -40,6 +40,9 @@ const _$TefIPTransactionTypeEnumMap = {
   TefIPTransactionType.credit: '03',
   TefIPTransactionType.debit: '04',
   TefIPTransactionType.pix: '17',
+  TefIPTransactionType.voucherFood: '10',
+  TefIPTransactionType.voucherMeal: '11',
+  TefIPTransactionType.voucherFuel: '13',
   TefIPTransactionType.unknown: '99',
 };
 

@@ -38,6 +38,29 @@ void main() {
       });
     });
 
+    group('toJson', () {
+      test('serializes voucher types to their NFC-e tPag codes', () {
+        expect(
+          const TransactionRequestModel(
+            type: TefIPTransactionType.voucherFood,
+          ).toJson()['tPag'],
+          equals('10'),
+        );
+        expect(
+          const TransactionRequestModel(
+            type: TefIPTransactionType.voucherMeal,
+          ).toJson()['tPag'],
+          equals('11'),
+        );
+        expect(
+          const TransactionRequestModel(
+            type: TefIPTransactionType.voucherFuel,
+          ).toJson()['tPag'],
+          equals('13'),
+        );
+      });
+    });
+
     group('fromJson', () {
       test('parses tPag codes correctly', () {
         expect(

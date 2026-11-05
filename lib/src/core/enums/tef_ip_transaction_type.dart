@@ -9,6 +9,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 /// - [credit]: Credit card transaction (`03`).
 /// - [debit]: Debit card transaction (`04`).
 /// - [pix]: PIX transaction (`17`).
+/// - [voucherFood]: Food voucher transaction (`10`).
+/// - [voucherMeal]: Meal voucher transaction (`11`).
+/// - [voucherFuel]: Fuel voucher transaction (`13`).
 /// - [unknown]: Fallback value when the transaction type is not recognized (`99`).
 enum TefIPTransactionType {
   @JsonValue('01')
@@ -25,6 +28,18 @@ enum TefIPTransactionType {
   /// PIX transaction.
   @JsonValue('17')
   pix('17'),
+
+  /// Food voucher transaction (NFC-e tPag `10`).
+  @JsonValue('10')
+  voucherFood('10'),
+
+  /// Meal voucher transaction (NFC-e tPag `11`).
+  @JsonValue('11')
+  voucherMeal('11'),
+
+  /// Fuel voucher transaction (NFC-e tPag `13`).
+  @JsonValue('13')
+  voucherFuel('13'),
 
   /// Unknown or unsupported transaction type.
   @JsonValue('99')
